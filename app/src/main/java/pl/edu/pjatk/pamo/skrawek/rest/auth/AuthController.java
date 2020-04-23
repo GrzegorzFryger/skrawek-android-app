@@ -30,7 +30,7 @@ public class AuthController implements Callback<LoginResponse> {
         if (response.isSuccessful()) {
             LoginResponse body = response.body();
             Log.i(TAG, "User authorized successfully");
-            sessionManager.saveAuthToken(requireNonNull(body).getToken());
+            sessionManager.saveAuthToken("Bearer " + requireNonNull(body).getToken());
         } else {
             Log.e(TAG, "Failed to authorize user: " + response.message());
         }

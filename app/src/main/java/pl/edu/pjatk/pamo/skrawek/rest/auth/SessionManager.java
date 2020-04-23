@@ -1,28 +1,19 @@
 package pl.edu.pjatk.pamo.skrawek.rest.auth;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-
-import pl.edu.pjatk.pamo.skrawek.R;
+import static pl.edu.pjatk.pamo.skrawek.MyApplication.addProperty;
+import static pl.edu.pjatk.pamo.skrawek.MyApplication.getProperty;
 
 public class SessionManager {
     private static final String USER_TOKEN = "user_token";
 
-    private final SharedPreferences preferences;
-
-    public SessionManager(Context context) {
-        this.preferences = context.getSharedPreferences(
-                context.getString(R.string.app_name), Context.MODE_PRIVATE);
+    public SessionManager() {
     }
 
     public void saveAuthToken(String token) {
-        Editor editor = preferences.edit();
-        editor.putString(USER_TOKEN, token);
-        editor.apply();
+        addProperty(USER_TOKEN, token);
     }
 
     public String getAuthToken() {
-        return preferences.getString(USER_TOKEN, "");
+        return getProperty(USER_TOKEN, "");
     }
 }

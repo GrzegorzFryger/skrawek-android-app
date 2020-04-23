@@ -7,7 +7,6 @@ import java.util.UUID;
 
 import javax.inject.Inject;
 
-import pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager;
 import pl.edu.pjatk.pamo.skrawek.rest.model.Balance;
 import pl.edu.pjatk.pamo.skrawek.rest.service.FinancesService;
 import retrofit2.Call;
@@ -20,19 +19,18 @@ public class BalanceController implements Callback<Balance> {
     private static final String TAG = "BalanceController";
 
     private final FinancesService financesService;
-    private final SessionManager sessionManager;
 
     @Inject
-    public BalanceController(FinancesService financesService, SessionManager sessionManager) {
+    public BalanceController(FinancesService financesService) {
         this.financesService = financesService;
-        this.sessionManager = sessionManager;
     }
 
     @Override
     public void onResponse(Call<Balance> call, Response<Balance> response) {
         if (response.isSuccessful()) {
             Balance balance = response.body();
-            Log.i(TAG, Objects.requireNonNull(balance).toString());
+            Log.i(TAG, "Retrieved balance: " +
+                    Objects.requireNonNull(balance).getBalance().toString());
         } else {
             Log.e(TAG, response.message());
         }
@@ -44,7 +42,7 @@ public class BalanceController implements Callback<Balance> {
     }
 
     public void getBalanceForChild(UUID childId) {
-        Call<Balance> call = financesService.getBalanceForChild(childId, sessionManager.getAuthToken());
+        Call<Balance> call = financesService.getBalanceForChild(childId);
         Log.i(TAG, "Calling endpoint: " + GET_BALANCE_FOR_ALL_CHILD);
         call.enqueue(this);
     }
