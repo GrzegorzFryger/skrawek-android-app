@@ -1,8 +1,6 @@
-package pl.edu.pjatk.pamo.skrawek.rest;
+package pl.edu.pjatk.pamo.skrawek.rest.config;
 
-import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
@@ -11,6 +9,7 @@ import okhttp3.OkHttpClient;
 
 /**
  * This is initial solution - for now we will ignore security concerns and accept all SSL certificates
+ * TODO: Find more secure solution in future releases
  */
 public class UnsafeOkHttpClient {
     public static OkHttpClient getUnsafeOkHttpClient() {
@@ -19,11 +18,13 @@ public class UnsafeOkHttpClient {
             final TrustManager[] trustAllCerts = new TrustManager[]{
                     new X509TrustManager() {
                         @Override
-                        public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) {
+                        public void checkClientTrusted(java.security.cert.X509Certificate[] chain,
+                                                       String authType) {
                         }
 
                         @Override
-                        public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) {
+                        public void checkServerTrusted(java.security.cert.X509Certificate[] chain,
+                                                       String authType) {
                         }
 
                         @Override
@@ -42,15 +43,9 @@ public class UnsafeOkHttpClient {
 
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
             builder.sslSocketFactory(sslSocketFactory, (X509TrustManager) trustAllCerts[0]);
-            builder.hostnameVerifier(new HostnameVerifier() {
-                @Override
-                public boolean verify(String hostname, SSLSession session) {
-                    return true;
-                }
-            });
+            builder.hostnameVerifier((hostname, session) -> true);
 
-            OkHttpClient okHttpClient = builder.build();
-            return okHttpClient;
+            return builder.build();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
