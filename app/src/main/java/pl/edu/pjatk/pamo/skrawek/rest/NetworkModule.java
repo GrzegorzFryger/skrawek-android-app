@@ -3,6 +3,7 @@ package pl.edu.pjatk.pamo.skrawek.rest;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
+import pl.edu.pjatk.pamo.skrawek.rest.auth.AuthInterceptor;
 import pl.edu.pjatk.pamo.skrawek.rest.auth.AuthService;
 import pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager;
 import pl.edu.pjatk.pamo.skrawek.rest.config.UnsafeOkHttpClient;
@@ -10,7 +11,6 @@ import pl.edu.pjatk.pamo.skrawek.rest.service.FinancesService;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static pl.edu.pjatk.pamo.skrawek.MyApplication.getAppContext;
 import static pl.edu.pjatk.pamo.skrawek.rest.config.RequestMappings.BASE_URL;
 
 @Module
@@ -30,11 +30,16 @@ public class NetworkModule {
 
     @Provides
     public SessionManager sessionManager() {
-        return new SessionManager(getAppContext());
+        return new SessionManager();
+    }
+
+    private AuthInterceptor authInterceptor() {
+        return new AuthInterceptor(sessionManager());
     }
 
     private OkHttpClient initializeOkHttpClient() {
-        return new UnsafeOkHttpClient().getUnsafeOkHttpClient();
+        OkHttpClient httpClient = new UnsafeOkHttpClient().getUnsafeOkHttpClient(authInterceptor());
+        return httpClient;
     }
 
     private Retrofit buildRetrofit() {
