@@ -11,6 +11,11 @@ public class RequestMappings {
     public static final String BASE_URL = "https://10.0.2.2:8080/";
 
     /**
+     * Base URL for controllers related to <strong>AUTH mechanism</strong>
+     */
+    public static final String API_AUTH = "/api/authenticate";
+
+    /**
      * Base URL for controllers from REST API <strong>finances</strong> module
      */
     public static final String API_FINANCES = "/api/finances/";
