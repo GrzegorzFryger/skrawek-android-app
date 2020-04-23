@@ -18,12 +18,16 @@ import javax.inject.Inject;
 
 import pl.edu.pjatk.pamo.skrawek.MyApplication;
 import pl.edu.pjatk.pamo.skrawek.R;
+import pl.edu.pjatk.pamo.skrawek.rest.auth.AuthController;
 import pl.edu.pjatk.pamo.skrawek.rest.service.impl.BalanceController;
 
 public class HomeFragment extends Fragment {
 
     @Inject
     BalanceController balanceController;
+
+    @Inject
+    AuthController authController;
 
     private HomeViewModel homeViewModel;
 
@@ -42,7 +46,8 @@ public class HomeFragment extends Fragment {
 
         // Temporary code for testing
         ((MyApplication) getActivity().getApplicationContext()).appComponent.inject(this);
-        balanceController.start(UUID.fromString("0560d77d-e0db-4914-ae4a-4f39690ecb2d"));
+        authController.authorize("user3@test.com", "user03");
+        balanceController.getBalanceForChild(UUID.fromString("0560d77d-e0db-4914-ae4a-4f39690ecb2d"));
         return root;
     }
 }

@@ -12,7 +12,7 @@ import okhttp3.OkHttpClient;
  * TODO: Find more secure solution in future releases
  */
 public class UnsafeOkHttpClient {
-    public static OkHttpClient getUnsafeOkHttpClient() {
+    public OkHttpClient getUnsafeOkHttpClient() {
         try {
             // Create a trust manager that does not validate certificate chains
             final TrustManager[] trustAllCerts = new TrustManager[]{
