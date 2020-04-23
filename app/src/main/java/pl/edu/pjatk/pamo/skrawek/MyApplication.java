@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.res.Resources;
 
 public class MyApplication extends Application {
-    ApplicationComponent appComponent = DaggerApplicationComponent.create();
+    public ApplicationComponent appComponent = DaggerApplicationComponent.create();
 
     private static MyApplication mInstance;
     private static Resources res;

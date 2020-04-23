@@ -1,5 +1,7 @@
 package pl.edu.pjatk.pamo.skrawek.rest.service.impl;
 
+import android.util.Log;
+
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -11,6 +13,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class BalanceController implements Callback<Balance> {
+    private static final String TAG = "BalanceController";
     private final FinancesService financesService;
 
     @Inject
@@ -27,9 +30,9 @@ public class BalanceController implements Callback<Balance> {
     public void onResponse(Call<Balance> call, Response<Balance> response) {
         if (response.isSuccessful()) {
             Balance balance = response.body();
-            System.out.println(balance);
+            Log.i(TAG, balance.toString());
         } else {
-            System.out.println(response.errorBody());
+            Log.e(TAG, response.message());
         }
     }
 
