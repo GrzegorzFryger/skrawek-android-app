@@ -10,7 +10,16 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.UUID;
+
+import javax.inject.Inject;
+
+import pl.edu.pjatk.pamo.skrawek.rest.service.impl.BalanceController;
+
 public class MainActivity extends AppCompatActivity {
+
+    @Inject
+    BalanceController balanceController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-
+        // Temporary code for testing
+        ((MyApplication) getApplicationContext()).appComponent.inject(this);
+        balanceController.start(UUID.fromString("0560d77d-e0db-4914-ae4a-4f39690ecb2d"));
     }
 
 }
