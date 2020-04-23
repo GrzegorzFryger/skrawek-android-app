@@ -9,14 +9,13 @@ import pl.edu.pjatk.pamo.skrawek.rest.service.FinancesService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class BalanceController implements Callback<Balance> {
     private final FinancesService financesService;
 
     @Inject
-    public BalanceController(Retrofit retrofit) {
-        this.financesService = retrofit.create(FinancesService.class);
+    public BalanceController(FinancesService financesService) {
+        this.financesService = financesService;
     }
 
     public void start(UUID childId) {
