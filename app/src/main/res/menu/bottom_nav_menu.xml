@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home_black_24dp"
         android:title="@string/title_home" />
     <item
         android:id="@+id/navigation_finances"
-        android:icon="@drawable/icon_wallet"
+        android:icon="@drawable/baseline_account_balance_24"
         android:title="@string/title_finances" />
     <item
         android:id="@+id/navigation_absence"
-        android:icon="@drawable/icon_child_care"
+        android:icon="@drawable/baseline_face_24"
         android:title="@string/title_absence" />
     <item
         android:id="@+id/navigation_account"
-        android:icon="@drawable/icon_account"
+        android:icon="@drawable/baseline_person_24"
         android:title="@string/title_account" />
 </menu>
