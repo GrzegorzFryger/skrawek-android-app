@@ -6,14 +6,14 @@
         android:title="@string/title_home" />
     <item
         android:id="@+id/navigation_finances"
-        android:icon="@drawable/baseline_account_balance_24"
+        android:icon="@drawable/ic_baseline_account_balance_24"
         android:title="@string/title_finances" />
     <item
         android:id="@+id/navigation_absence"
-        android:icon="@drawable/baseline_face_24"
+        android:icon="@drawable/ic_baseline_face_24"
         android:title="@string/title_absence" />
     <item
         android:id="@+id/navigation_account"
-        android:icon="@drawable/baseline_person_24"
+        android:icon="@drawable/ic_baseline_person_24"
         android:title="@string/title_account" />
 </menu>
