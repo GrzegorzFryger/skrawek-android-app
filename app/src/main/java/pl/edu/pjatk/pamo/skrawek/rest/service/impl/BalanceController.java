@@ -13,8 +13,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static pl.edu.pjatk.pamo.skrawek.rest.service.FinancesService.GET_BALANCE_FOR_ALL_CHILD;
-
 public class BalanceController implements Callback<Balance> {
     private static final String TAG = "BalanceController";
 
@@ -43,7 +41,6 @@ public class BalanceController implements Callback<Balance> {
 
     public void getBalanceForChild(UUID childId) {
         Call<Balance> call = financesService.getBalanceForChild(childId);
-        Log.i(TAG, "Calling endpoint: " + GET_BALANCE_FOR_ALL_CHILD);
         call.enqueue(this);
     }
 }
