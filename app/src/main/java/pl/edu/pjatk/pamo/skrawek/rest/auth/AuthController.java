@@ -11,7 +11,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static java.util.Objects.requireNonNull;
-import static pl.edu.pjatk.pamo.skrawek.rest.config.RequestMappings.API_AUTH;
 
 public class AuthController implements Callback<LoginResponse> {
     private static final String TAG = "AuthController";
@@ -43,7 +42,6 @@ public class AuthController implements Callback<LoginResponse> {
 
     public void authorize(String username, String password) {
         LoginRequest request = new LoginRequest(username, password);
-        Log.i(TAG, "Calling endpoint: " + API_AUTH);
         Call<LoginResponse> call = authService.login(request);
         call.enqueue(this);
     }

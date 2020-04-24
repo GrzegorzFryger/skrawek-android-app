@@ -6,6 +6,7 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import pl.edu.pjatk.pamo.skrawek.rest.auth.AuthInterceptor;
 
 /**
@@ -46,6 +47,10 @@ public class UnsafeOkHttpClient {
             builder.sslSocketFactory(sslSocketFactory, (X509TrustManager) trustAllCerts[0]);
             builder.hostnameVerifier((hostname, session) -> true);
             builder.addInterceptor(authInterceptor);
+
+            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+            logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
+            builder.addInterceptor(logging);
 
             return builder.build();
         } catch (Exception e) {
