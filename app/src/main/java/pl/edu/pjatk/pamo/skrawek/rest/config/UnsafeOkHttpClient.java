@@ -6,13 +6,15 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import pl.edu.pjatk.pamo.skrawek.rest.auth.AuthInterceptor;
 
 /**
  * This is initial solution - for now we will ignore security concerns and accept all SSL certificates
  * TODO: Find more secure solution in future releases
  */
 public class UnsafeOkHttpClient {
-    public static OkHttpClient getUnsafeOkHttpClient() {
+    public OkHttpClient getUnsafeOkHttpClient(AuthInterceptor authInterceptor) {
         try {
             // Create a trust manager that does not validate certificate chains
             final TrustManager[] trustAllCerts = new TrustManager[]{
@@ -44,6 +46,11 @@ public class UnsafeOkHttpClient {
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
             builder.sslSocketFactory(sslSocketFactory, (X509TrustManager) trustAllCerts[0]);
             builder.hostnameVerifier((hostname, session) -> true);
+            builder.addInterceptor(authInterceptor);
+
+            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+            logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
+            builder.addInterceptor(logging);
 
             return builder.build();
         } catch (Exception e) {
