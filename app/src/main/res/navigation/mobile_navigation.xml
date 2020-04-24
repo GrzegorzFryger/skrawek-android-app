@@ -10,16 +10,20 @@
         android:name="pl.edu.pjatk.pamo.skrawek.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
-
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="pl.edu.pjatk.pamo.skrawek.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
-
+        android:id="@+id/navigation_finances"
+        android:name="pl.edu.pjatk.pamo.skrawek.ui.finances.FinancesFragment"
+        android:label="@string/title_finances"
+        tools:layout="@layout/finances_fragment" />
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="pl.edu.pjatk.pamo.skrawek.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_absence"
+        android:name="pl.edu.pjatk.pamo.skrawek.ui.absence.AbsenceFragment"
+        android:label="@string/title_absence"
+        tools:layout="@layout/absence_fragment" />
+    <fragment
+        android:id="@+id/navigation_account"
+        android:name="pl.edu.pjatk.pamo.skrawek.ui.account.AccountFragment"
+        android:label="@string/title_account"
+        tools:layout="@layout/account_fragment" />
+
 </navigation>
