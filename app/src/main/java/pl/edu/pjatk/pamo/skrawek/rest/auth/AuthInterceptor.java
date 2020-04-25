@@ -9,19 +9,18 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import static pl.edu.pjatk.pamo.skrawek.rest.auth.AuthConstants.AUTHORIZATION_HEADER;
+import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.getAuthToken;
 
 public class AuthInterceptor implements Interceptor {
-    private final SessionManager sessionManager;
 
-    public AuthInterceptor(SessionManager sessionManager) {
-        this.sessionManager = sessionManager;
+    public AuthInterceptor() {
     }
 
     @NotNull
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request.Builder requestBuilder = chain.request().newBuilder();
-        requestBuilder.addHeader(AUTHORIZATION_HEADER, sessionManager.getAuthToken());
+        requestBuilder.addHeader(AUTHORIZATION_HEADER, getAuthToken());
         return chain.proceed(requestBuilder.build());
     }
 }
