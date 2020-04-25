@@ -1,5 +1,7 @@
 package pl.edu.pjatk.pamo.skrawek.rest.auth;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 
 import okhttp3.Interceptor;
@@ -15,6 +17,7 @@ public class AuthInterceptor implements Interceptor {
         this.sessionManager = sessionManager;
     }
 
+    @NotNull
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request.Builder requestBuilder = chain.request().newBuilder();
