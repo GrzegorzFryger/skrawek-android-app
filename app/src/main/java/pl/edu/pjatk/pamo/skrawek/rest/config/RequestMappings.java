@@ -19,4 +19,9 @@ public class RequestMappings {
      * Base URL for controllers from REST API <strong>finances</strong> module
      */
     public static final String API_FINANCES = "/api/finances/";
+
+    /**
+     * Base URL for controllers from REST API <strong>Account</strong> module
+     */
+    public static final String API_ACCOUNT = "/api/account/";
 }
