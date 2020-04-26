@@ -1,5 +1,6 @@
 package pl.edu.pjatk.pamo.skrawek.rest.model.accounts;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -13,7 +14,7 @@ public class Account {
     private String phone;
     private AccountStatus status;
     private String email;
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 
     public UUID getId() {
         return id;
@@ -93,5 +94,21 @@ public class Account {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", city='" + city + '\'' +
+                ", streetNumber='" + streetNumber + '\'' +
+                ", phone='" + phone + '\'' +
+                ", status=" + status +
+                ", email='" + email + '\'' +
+                ", roles=" + roles +
+                '}';
     }
 }

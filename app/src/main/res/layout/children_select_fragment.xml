@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="vm"
+            type="pl.edu.pjatk.pamo.skrawek.ui.children.ChildrenSelectViewModel" />
+    </data>
+
+<FrameLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -31,7 +39,7 @@
             android:layout_width="185dp"
             android:layout_height="31dp"
             android:fontFamily="sans-serif-black"
-            android:text="@string/children_name_surname"
+            android:text="@{vm.guardian.name}"
             android:layout_marginStart="@dimen/text_margin"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -53,3 +61,4 @@
 
 </FrameLayout>
 
+</layout>
