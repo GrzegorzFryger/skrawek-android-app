@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import pl.edu.pjatk.pamo.skrawek.MainActivity;
+import pl.edu.pjatk.pamo.skrawek.R;
 import pl.edu.pjatk.pamo.skrawek.rest.auth.AuthService;
 import pl.edu.pjatk.pamo.skrawek.rest.model.auth.LoginRequest;
 import pl.edu.pjatk.pamo.skrawek.rest.model.auth.LoginResponse;
