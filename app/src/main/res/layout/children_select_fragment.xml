@@ -1,55 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.children.ChildrenSelect"
-    android:background="@color/colorPrimary">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <variable
+            name="vm"
+            type="pl.edu.pjatk.pamo.skrawek.ui.children.ChildrenSelectViewModel" />
+    </data>
+
+    <FrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:background="@drawable/rounded_children_select"
-        android:elevation="4dp"
-        android:paddingStart="@dimen/children_elements"
-        android:paddingEnd="@dimen/children_elements"
-        android:paddingTop="@dimen/children_elements">
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        tools:context=".ui.children.ChildrenSelect">
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="64dp"
-            android:layout_height="53dp"
-            android:src="@drawable/img_girl"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/children_image" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@drawable/rounded_children_select"
+            android:elevation="4dp"
+            android:paddingStart="@dimen/children_elements"
+            android:paddingTop="@dimen/children_elements"
+            android:paddingEnd="@dimen/children_elements">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="185dp"
-            android:layout_height="31dp"
-            android:fontFamily="sans-serif-black"
-            android:text="@string/children_name_surname"
-            android:layout_marginStart="@dimen/text_margin"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="64dp"
+                android:layout_height="53dp"
+                android:contentDescription="@string/children_image"
+                android:src="@drawable/img_girl"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="31dp"
-            android:layout_height="31dp"
-            android:src="@drawable/ic_baseline_arrow_drop_down_circle_24"
-            android:tint="@color/colorPrimaryDark"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/icon_select" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="185dp"
+                android:layout_height="31dp"
+                android:layout_marginStart="@dimen/text_margin"
+                android:fontFamily="sans-serif-black"
+                android:text="@{vm.guardian.name}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
+                android:contentDescription="@string/icon_select"
+                android:src="@drawable/ic_baseline_arrow_drop_down_circle_24"
+                android:tint="@color/colorPrimaryDark"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
+    </FrameLayout>
+
+</layout>
