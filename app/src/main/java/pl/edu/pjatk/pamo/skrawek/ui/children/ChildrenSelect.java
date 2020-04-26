@@ -9,13 +9,16 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import java.util.UUID;
 
 import pl.edu.pjatk.pamo.skrawek.R;
 import pl.edu.pjatk.pamo.skrawek.databinding.ChildrenSelectFragmentBinding;
+import pl.edu.pjatk.pamo.skrawek.ui.finances.FinancesFragment;
 
 public class ChildrenSelect extends Fragment {
 
@@ -41,7 +44,11 @@ public class ChildrenSelect extends Fragment {
         });
         mViewModel.getDataPublisher().postValue(UUID.fromString("26d506c9-c44a-4b58-a4a8-0e3209e96c84"));
 
-
+//        childrenSelectFragmentBinding.button2.setOnClickListener(new Button.OnClickListener() {
+//            public void onClick(View v) {
+//                confirmFireMissiles();
+//            }
+//        });
         return childrenSelectFragmentBinding.getRoot();
     }
 
@@ -50,4 +57,8 @@ public class ChildrenSelect extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
+    public void confirmFireMissiles() {
+        DialogFragment newFragment = new ChildernSelectDialog();
+        newFragment.show(getFragmentManager(), "missiles");
+    }
 }
