@@ -12,6 +12,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import java.util.UUID;
+
 import pl.edu.pjatk.pamo.skrawek.R;
 import pl.edu.pjatk.pamo.skrawek.databinding.ChildrenSelectFragmentBinding;
 
@@ -29,10 +31,17 @@ public class ChildrenSelect extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-       mViewModel = ViewModelProviders.of(this).get(ChildrenSelectViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(ChildrenSelectViewModel.class);
         childrenSelectFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.children_select_fragment, container, false);
         childrenSelectFragmentBinding.setVm(mViewModel);
         childrenSelectFragmentBinding.setLifecycleOwner(this);
+
+
+        mViewModel.getDataSubject().observe(getViewLifecycleOwner(), s -> {
+        });
+        mViewModel.getDataPublisher().postValue(UUID.fromString("26d506c9-c44a-4b58-a4a8-0e3209e96c84"));
+
+
         return childrenSelectFragmentBinding.getRoot();
     }
 
