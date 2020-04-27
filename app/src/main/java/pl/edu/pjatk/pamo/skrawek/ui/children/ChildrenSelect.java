@@ -17,11 +17,11 @@ import java.util.UUID;
 
 import pl.edu.pjatk.pamo.skrawek.R;
 import pl.edu.pjatk.pamo.skrawek.databinding.ChildrenSelectFragmentBinding;
+import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Child;
 
 public class ChildrenSelect extends Fragment  {
-
+    private String loggedUserId = "84187cf8-6547-49c0-be3d-00e9137b86bd";
     private ChildrenSelectViewModel mViewModel;
-    private Button button;
     private ChildrenSelectFragmentBinding childrenSelectFragmentBinding;
 
     public static ChildrenSelect newInstance() {
@@ -38,16 +38,7 @@ public class ChildrenSelect extends Fragment  {
         childrenSelectFragmentBinding.setLifecycleOwner(this);
 
 
-        mViewModel.getDataSubject().observe(getViewLifecycleOwner(), s -> {});
-
-
-        mViewModel.getDataPublisher().postValue(UUID.fromString("26d506c9-c44a-4b58-a4a8-0e3209e96c84"));
-        childrenSelectFragmentBinding.button.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                openChildrenSelectDialog();
-            }
-        });
-
+        childrenSelectFragmentBinding.iconMenuButton.setOnClickListener(v -> openChildrenSelectDialog());
         return childrenSelectFragmentBinding.getRoot();
     }
 
@@ -57,22 +48,10 @@ public class ChildrenSelect extends Fragment  {
     }
 
     public void openChildrenSelectDialog() {
-        ArrayList<String> tesData = new ArrayList<>();
-        tesData.add("Grzegorz");
-        tesData.add("Antoni");
-        tesData.add("Antoni");
-        tesData.add("Antoni");
-        tesData.add("Antoni");
-        tesData.add("Antoni");
-        tesData.add("Antoni");
-
-        ChildrenSelectDialog newFragment = ChildrenSelectDialog.newInstance(tesData);
-        newFragment.setListener(new ChildrenSelectDialog.OnSelectChildrenFromList() {
-            @Override
-            public void onSelectedChild(String item) {
-                System.out.println("on select item+ " + item);
-                newFragment.dismiss();
-            }
+        ChildrenSelectDialog newFragment = ChildrenSelectDialog.newInstance(this.loggedUserId);
+        newFragment.setListener(item -> {
+            this.mViewModel.getSelectedChild().setValue(item);
+            newFragment.dismiss();
         });
         newFragment.show(getFragmentManager(), "missiles");
     }

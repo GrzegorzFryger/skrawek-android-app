@@ -39,7 +39,7 @@
             android:layout_width="185dp"
             android:layout_height="31dp"
             android:fontFamily="sans-serif-black"
-            android:text="@{vm.guardian.name}"
+            android:text="@{vm.selectedChildNameAndSurname ?? vm.guardianLiveData}"
             android:layout_marginStart="@dimen/text_margin"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -47,24 +47,16 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/iconMenuButton"
             android:layout_width="31dp"
             android:layout_height="31dp"
-            android:src="@drawable/ic_baseline_arrow_drop_down_circle_24"
+            android:src="@drawable/baseline_menu_24"
             android:tint="@color/colorPrimaryDark"
+            android:layout_marginEnd="@dimen/children_dialog_elements"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:contentDescription="@string/icon_select" />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="203dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

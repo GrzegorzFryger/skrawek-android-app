@@ -14,21 +14,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
+import java.util.UUID;
 
 import pl.edu.pjatk.pamo.skrawek.R;
+import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Child;
 
 public class ChildrenSelectDialog extends DialogFragment {
 
-    private static final String CHILDREN_PARAM = "param1";
-    private ArrayList<String> children;
+    private static final String PARAM_GUARDIAN_ID = "GUARDIAN_ID";
+    private String guardianIdParam;
+
     private RecyclerView recyclerView;
     private OnSelectChildrenFromList listener;
+    private ChildrenSelectDialogViewModel mViewModel;
 
-    public static ChildrenSelectDialog newInstance(ArrayList<String> children) {
+    public static ChildrenSelectDialog newInstance(String guardianIdParam) {
         ChildrenSelectDialog childrenSelectDialog = new ChildrenSelectDialog();
         Bundle args = new Bundle();
-        args.putSerializable(CHILDREN_PARAM, children);
+        args.putSerializable(PARAM_GUARDIAN_ID, guardianIdParam);
         childrenSelectDialog.setArguments(args);
         return childrenSelectDialog;
     }
@@ -36,12 +39,17 @@ public class ChildrenSelectDialog extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        mViewModel = ViewModelProviders.of(this).get(ChildrenSelectDialogViewModel.class);
         View view = inflater.inflate(R.layout.children_select_dialog_fragment, container, false);
 
 
-        this.recyclerView = view.findViewById(R.id.list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        recyclerView.setAdapter(new ChildrenRecyclerViewAdapter(children, listener));
+        mViewModel.getGuardianLiveData().observe(this, guardian -> {
+            this.recyclerView = view.findViewById(R.id.list);
+            recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+            recyclerView.setAdapter(new ChildrenRecyclerViewAdapter(guardian.getChildren(), listener));
+        });
+
+        mViewModel.getGuardianIdPublisher().setValue(UUID.fromString(guardianIdParam));
 
         return view;
     }
@@ -49,6 +57,7 @@ public class ChildrenSelectDialog extends DialogFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
     }
 
     @Override
@@ -70,11 +79,11 @@ public class ChildrenSelectDialog extends DialogFragment {
     }
 
     private void assignParameterFromBundleContext() {
-        this.children = (ArrayList<String>) getArguments().getSerializable(CHILDREN_PARAM);
+        this.guardianIdParam = getArguments().getString(PARAM_GUARDIAN_ID);
     }
 
     public interface OnSelectChildrenFromList {
-        void onSelectedChild(String item);
+        void onSelectedChild(Child item);
     }
 
 }

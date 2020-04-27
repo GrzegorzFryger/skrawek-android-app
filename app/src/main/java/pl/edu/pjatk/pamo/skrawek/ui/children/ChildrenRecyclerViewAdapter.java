@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import pl.edu.pjatk.pamo.skrawek.R;
+import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Child;
 import pl.edu.pjatk.pamo.skrawek.ui.children.ChildrenSelectDialog.OnSelectChildrenFromList;
 
 
@@ -20,10 +21,10 @@ import java.util.List;
  */
 public class ChildrenRecyclerViewAdapter extends RecyclerView.Adapter<ChildrenRecyclerViewAdapter.ViewHolder> {
 
-    private final List<String> mValues;
+    private final List<Child> mValues;
     private final OnSelectChildrenFromList mListener;
 
-    public ChildrenRecyclerViewAdapter(List<String> items, OnSelectChildrenFromList listener) {
+    public ChildrenRecyclerViewAdapter(List<Child> items, OnSelectChildrenFromList listener) {
         mValues = items;
         mListener = listener;
     }
@@ -37,9 +38,10 @@ public class ChildrenRecyclerViewAdapter extends RecyclerView.Adapter<ChildrenRe
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
+        String fullName = mValues.get(position).getName() + " " + mValues.get(position).getSurname();
         holder.mItem = mValues.get(position);
-        holder.nameAndSurname.setText(mValues.get(position));
-        holder.peselNumber.setText(mValues.get(position));
+        holder.nameAndSurname.setText(fullName);
+        holder.peselNumber.setText(mValues.get(position).getPesel());
 
         holder.mView.setOnClickListener(v -> {
             if (null != mListener) {
@@ -57,7 +59,7 @@ public class ChildrenRecyclerViewAdapter extends RecyclerView.Adapter<ChildrenRe
         public final View mView;
         public final TextView nameAndSurname;
         public final TextView peselNumber;
-        public String mItem;
+        public Child mItem;
 
         public ViewHolder(View view) {
             super(view);
