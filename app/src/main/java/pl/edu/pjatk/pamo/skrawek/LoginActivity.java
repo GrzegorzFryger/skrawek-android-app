@@ -1,9 +1,12 @@
 package pl.edu.pjatk.pamo.skrawek;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
@@ -54,6 +57,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         accountService = ServiceGenerator.createService(AccountService.class);
         authService = ServiceGenerator.createService(AuthService.class);
+        this.setTransparentTitleBar(getWindow());
     }
 
     @Override
@@ -109,5 +113,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void navigateToMainFragment() {
         startActivity(new Intent(this, MainActivity.class));
+    }
+
+    protected void setTransparentTitleBar(Window window) {
+        window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_OVERSCAN);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.setStatusBarColor(Color.TRANSPARENT);
+
+        // set color icon to dark
+        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
     }
 }

@@ -50,7 +50,7 @@
             android:id="@+id/iconMenuButton"
             android:layout_width="31dp"
             android:layout_height="31dp"
-            android:src="@drawable/baseline_menu_24"
+            android:src="@drawable/ic_baseline_menu_24"
             android:tint="@color/colorPrimaryDark"
             android:layout_marginEnd="@dimen/children_dialog_elements"
             app:layout_constraintBottom_toBottomOf="parent"
