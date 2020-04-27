@@ -1,6 +1,7 @@
 package pl.edu.pjatk.pamo.skrawek.ui.children;
 
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
@@ -23,7 +24,7 @@ public class ChildrenSelectDialog extends DialogFragment {
 
     private static final String PARAM_GUARDIAN_ID = "GUARDIAN_ID";
     private String guardianIdParam;
-
+    private View view;
     private RecyclerView recyclerView;
     private OnSelectChildrenFromList listener;
     private ChildrenSelectDialogViewModel mViewModel;
@@ -39,9 +40,14 @@ public class ChildrenSelectDialog extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        mViewModel = ViewModelProviders.of(this).get(ChildrenSelectDialogViewModel.class);
-        View view = inflater.inflate(R.layout.children_select_dialog_fragment, container, false);
+        this.view = inflater.inflate(R.layout.children_select_dialog_fragment, container, false);
+        return view;
+    }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mViewModel = new ViewModelProvider(this).get(ChildrenSelectDialogViewModel.class);
 
         mViewModel.getGuardianLiveData().observe(this, guardian -> {
             this.recyclerView = view.findViewById(R.id.list);
@@ -50,14 +56,6 @@ public class ChildrenSelectDialog extends DialogFragment {
         });
 
         mViewModel.getGuardianIdPublisher().setValue(UUID.fromString(guardianIdParam));
-
-        return view;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
     }
 
     @Override
