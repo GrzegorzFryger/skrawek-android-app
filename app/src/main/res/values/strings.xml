@@ -14,4 +14,9 @@
     <string name="children_name_surname">Antoni Nowaczek</string>
     <string name="children_image">image for children</string>
     <string name="icon_select">icon to select</string>
+    <string name="child_list_name_surname">Antoni Nowakowski</string>
+    <string name="child_list_pesel">95081105694</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

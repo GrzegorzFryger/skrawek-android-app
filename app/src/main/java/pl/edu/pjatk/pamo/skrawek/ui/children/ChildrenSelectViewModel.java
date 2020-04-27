@@ -1,43 +1,42 @@
 package pl.edu.pjatk.pamo.skrawek.ui.children;
 
+import android.view.View;
+
+import androidx.databinding.BindingAdapter;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
 import java.util.UUID;
 
 import pl.edu.pjatk.pamo.skrawek.repository.GuardianRepository;
+import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Child;
 import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Guardian;
 
 public class ChildrenSelectViewModel extends ViewModel {
-    private MediatorLiveData<UUID> dataSubject = new MediatorLiveData<>();
-    private MutableLiveData<UUID> dataPublisher = new MutableLiveData<>();
-    private LiveData<Guardian> guardianLiveData = new MutableLiveData<>();
-    private GuardianRepository guardianRepository;
+    private String NAME_SURNAME_TEMPLATE = "%s  %s";
+    private String DEFAULT_MESSAGE = "Select children";
+    private MutableLiveData<Child> selectedChild = new MutableLiveData<>();
+
 
     public ChildrenSelectViewModel() {
-        this.guardianRepository = new GuardianRepository();
-
     }
 
-    public LiveData<Guardian> getGuardian() {
-        return  guardianLiveData;
-    }
-
-    public MediatorLiveData<UUID> getDataSubject() {
-        return dataSubject;
-
-    }
-
-    public MutableLiveData<UUID> getDataPublisher() {
-        return dataPublisher;
-    }
-
-    private void onPublishData() {
-        dataSubject.addSource(
-                dataPublisher,
-                s -> this.guardianLiveData = this.guardianRepository.getMutableLiveData(s)
+    public LiveData<String> getSelectedChildNameAndSurname() {
+        return Transformations.map(selectedChild, selectedChild ->
+                String.format(NAME_SURNAME_TEMPLATE, selectedChild.getName(), selectedChild.getSurname())
         );
     }
+
+    public MutableLiveData<Child> getSelectedChild() {
+        return selectedChild;
+    }
+
+    public LiveData<String> getGuardianLiveData() {
+       return new MutableLiveData<>(this.DEFAULT_MESSAGE);
+    }
+
+
+
 }

@@ -10,17 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 import pl.edu.pjatk.pamo.skrawek.R;
 import pl.edu.pjatk.pamo.skrawek.databinding.ChildrenSelectFragmentBinding;
+import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Child;
 
-public class ChildrenSelect extends Fragment {
-
+public class ChildrenSelect extends Fragment  {
+    private String loggedUserId = "84187cf8-6547-49c0-be3d-00e9137b86bd";
     private ChildrenSelectViewModel mViewModel;
-    private Button button;
     private ChildrenSelectFragmentBinding childrenSelectFragmentBinding;
 
     public static ChildrenSelect newInstance() {
@@ -37,17 +38,22 @@ public class ChildrenSelect extends Fragment {
         childrenSelectFragmentBinding.setLifecycleOwner(this);
 
 
-        mViewModel.getDataSubject().observe(getViewLifecycleOwner(), s -> {
-        });
-        mViewModel.getDataPublisher().postValue(UUID.fromString("26d506c9-c44a-4b58-a4a8-0e3209e96c84"));
-
-
+        childrenSelectFragmentBinding.iconMenuButton.setOnClickListener(v -> openChildrenSelectDialog());
         return childrenSelectFragmentBinding.getRoot();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+    }
+
+    public void openChildrenSelectDialog() {
+        ChildrenSelectDialog newFragment = ChildrenSelectDialog.newInstance(this.loggedUserId);
+        newFragment.setListener(item -> {
+            this.mViewModel.getSelectedChild().setValue(item);
+            newFragment.dismiss();
+        });
+        newFragment.show(getFragmentManager(), "missiles");
     }
 
 }

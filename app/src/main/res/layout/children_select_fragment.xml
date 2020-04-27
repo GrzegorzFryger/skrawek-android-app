@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
         <variable
@@ -8,8 +10,6 @@
     </data>
 
 <FrameLayout
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.children.ChildrenSelect"
@@ -39,7 +39,7 @@
             android:layout_width="185dp"
             android:layout_height="31dp"
             android:fontFamily="sans-serif-black"
-            android:text="@{vm.guardian.name}"
+            android:text="@{vm.selectedChildNameAndSurname ?? vm.guardianLiveData}"
             android:layout_marginStart="@dimen/text_margin"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -47,11 +47,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/iconMenuButton"
             android:layout_width="31dp"
             android:layout_height="31dp"
-            android:src="@drawable/ic_baseline_arrow_drop_down_circle_24"
+            android:src="@drawable/baseline_menu_24"
             android:tint="@color/colorPrimaryDark"
+            android:layout_marginEnd="@dimen/children_dialog_elements"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

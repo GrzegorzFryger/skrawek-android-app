@@ -1,19 +1,21 @@
 package pl.edu.pjatk.pamo.skrawek.rest.model.accounts;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Guardian extends Account {
-    private Set<Child> children = new HashSet<>();
+    private List<Child> children = new ArrayList<>();
 
     public Guardian() {
     }
 
-    public Set<Child> getChildren() {
+    public List<Child> getChildren() {
         return children;
     }
 
-    public void setChildren(Set<Child> children) {
+    public void setChildren(List<Child> children) {
         this.children = children;
     }
 
