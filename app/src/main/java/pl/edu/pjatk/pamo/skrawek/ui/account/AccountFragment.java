@@ -11,10 +11,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import pl.edu.pjatk.pamo.skrawek.R;
+import pl.edu.pjatk.pamo.skrawek.SharedViewModel;
 
 public class AccountFragment extends Fragment {
 
     private AccountViewModel mViewModel;
+    private SharedViewModel sharedViewModel;
 
     public static AccountFragment newInstance() {
         return new AccountFragment();
@@ -30,6 +32,7 @@ public class AccountFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(AccountViewModel.class);
+        this.sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
         // TODO: Use the ViewModel
     }
 

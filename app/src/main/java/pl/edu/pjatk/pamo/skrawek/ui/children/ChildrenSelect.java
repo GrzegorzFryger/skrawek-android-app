@@ -4,25 +4,22 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
-
-import java.util.ArrayList;
-import java.util.UUID;
+import androidx.lifecycle.ViewModelProvider;
 
 import pl.edu.pjatk.pamo.skrawek.R;
+import pl.edu.pjatk.pamo.skrawek.SharedViewModel;
 import pl.edu.pjatk.pamo.skrawek.databinding.ChildrenSelectFragmentBinding;
-import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Child;
 
 public class ChildrenSelect extends Fragment  {
     private String loggedUserId = "84187cf8-6547-49c0-be3d-00e9137b86bd";
-    private ChildrenSelectViewModel mViewModel;
+    private ChildrenSelectViewModel childrenSelectViewModel;
     private ChildrenSelectFragmentBinding childrenSelectFragmentBinding;
+    private SharedViewModel sharedViewModel;
 
     public static ChildrenSelect newInstance() {
         return new ChildrenSelect();
@@ -31,10 +28,9 @@ public class ChildrenSelect extends Fragment  {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
-        mViewModel = new ViewModelProvider(this).get(ChildrenSelectViewModel.class);
+        childrenSelectViewModel = new ViewModelProvider(this).get(ChildrenSelectViewModel.class);
         childrenSelectFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.children_select_fragment, container, false);
-        childrenSelectFragmentBinding.setVm(mViewModel);
+        childrenSelectFragmentBinding.setVm(childrenSelectViewModel);
         childrenSelectFragmentBinding.setLifecycleOwner(this);
 
 
@@ -45,12 +41,15 @@ public class ChildrenSelect extends Fragment  {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        this.sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
     }
 
     public void openChildrenSelectDialog() {
         ChildrenSelectDialog newFragment = ChildrenSelectDialog.newInstance(this.loggedUserId);
         newFragment.setListener(item -> {
-            this.mViewModel.getSelectedChild().setValue(item);
+            this.childrenSelectViewModel.getSelectedChild().setValue(item);
+            System.out.println("Select children childselect");
+            this.sharedViewModel.selectChild(item);
             newFragment.dismiss();
         });
         newFragment.show(getFragmentManager(), "missiles");

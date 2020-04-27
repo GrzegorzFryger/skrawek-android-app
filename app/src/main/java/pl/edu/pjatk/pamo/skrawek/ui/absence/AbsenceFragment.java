@@ -11,10 +11,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import pl.edu.pjatk.pamo.skrawek.R;
+import pl.edu.pjatk.pamo.skrawek.SharedViewModel;
 
 public class AbsenceFragment extends Fragment {
 
     private AbsenceViewModel mViewModel;
+    private SharedViewModel sharedViewModel;
 
     public static AbsenceFragment newInstance() {
         return new AbsenceFragment();
@@ -30,6 +32,7 @@ public class AbsenceFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(AbsenceViewModel.class);
+        this.sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
         // TODO: Use the ViewModel
     }
 

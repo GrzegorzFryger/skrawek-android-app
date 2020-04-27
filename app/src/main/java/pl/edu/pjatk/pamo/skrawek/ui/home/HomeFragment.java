@@ -13,11 +13,15 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import pl.edu.pjatk.pamo.skrawek.R;
+import pl.edu.pjatk.pamo.skrawek.SharedViewModel;
+import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Child;
+import pl.edu.pjatk.pamo.skrawek.ui.finances.FinancesViewModel;
 
 public class HomeFragment extends Fragment {
     private static final String TAG = "HomeFragment";
 
     private HomeViewModel homeViewModel;
+    private SharedViewModel sharedViewModel;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -36,5 +40,12 @@ public class HomeFragment extends Fragment {
         });
 
         return root;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        this.sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+        // TODO: Use the ViewModel
     }
 }
