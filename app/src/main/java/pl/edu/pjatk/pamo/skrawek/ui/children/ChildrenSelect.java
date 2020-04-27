@@ -28,6 +28,7 @@ public class ChildrenSelect extends Fragment  {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        childrenSelectViewModel = new ViewModelProvider(this).get(ChildrenSelectViewModel.class);
         childrenSelectFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.children_select_fragment, container, false);
         childrenSelectFragmentBinding.setVm(childrenSelectViewModel);
         childrenSelectFragmentBinding.setLifecycleOwner(this);
@@ -39,7 +40,6 @@ public class ChildrenSelect extends Fragment  {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
-        childrenSelectViewModel = new ViewModelProvider(this).get(ChildrenSelectViewModel.class);
     }
 
     public void openChildrenSelectDialog() {
