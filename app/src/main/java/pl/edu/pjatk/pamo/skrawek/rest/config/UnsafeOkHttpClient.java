@@ -8,7 +8,6 @@ import javax.net.ssl.X509TrustManager;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import pl.edu.pjatk.pamo.skrawek.rest.auth.AuthInterceptor;
-import pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager;
 
 /**
  * This is initial solution - for now we will ignore security concerns and accept all SSL certificates
@@ -44,7 +43,7 @@ public class UnsafeOkHttpClient {
         builder.addInterceptor(authInterceptor);
 
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         builder.addInterceptor(logging);
     }
 
