@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_marginStart="@dimen/children_dialog_elements_space"
+    android:layout_marginEnd="@dimen/children_dialog_elements_space"
+    android:layout_marginBottom="@dimen/children_dialog_elements_space"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/children_dialog_elements"
+        android:paddingEnd="@dimen/children_dialog_elements">
+
+        <ImageView
+            android:id="@+id/child_list_children_image"
+            android:layout_width="41dp"
+            android:layout_height="43dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/img_girl" />
+
+        <TextView
+            android:id="@+id/child_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/child_list_name_surname"
+            app:layout_constraintBottom_toTopOf="@+id/child_pesel"
+            app:layout_constraintStart_toStartOf="@+id/child_pesel" />
+
+        <TextView
+            android:id="@+id/child_pesel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/child_list_pesel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/child_list_children_image"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
+
