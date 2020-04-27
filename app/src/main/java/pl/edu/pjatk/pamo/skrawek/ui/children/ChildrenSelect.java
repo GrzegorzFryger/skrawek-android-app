@@ -31,7 +31,7 @@ public class ChildrenSelect extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        mViewModel = ViewModelProviders.of(this).get(ChildrenSelectViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(ChildrenSelectViewModel.class);
         childrenSelectFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.children_select_fragment, container, false);
         childrenSelectFragmentBinding.setVm(mViewModel);
         childrenSelectFragmentBinding.setLifecycleOwner(this);
