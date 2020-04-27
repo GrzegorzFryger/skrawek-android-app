@@ -31,4 +31,15 @@ public class ServiceGeneratorTest {
         assertNotNull(service);
     }
 
+    @Test
+    public void Should_CreateAccountService() {
+        //Given
+
+        //When
+        AccountService service = createService(AccountService.class);
+
+        //Then
+        assertNotNull(service);
+    }
+
 }
