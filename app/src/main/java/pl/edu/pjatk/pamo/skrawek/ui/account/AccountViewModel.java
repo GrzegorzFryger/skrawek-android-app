@@ -12,23 +12,20 @@ import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Account;
 
 public class AccountViewModel extends ViewModel {
     private String NAME_SURNAME_TEMPLATE = "%s %s";
-
     private final AccountRepository accountRepository;
-    private MutableLiveData<Account> accountMutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<String> emailAccount = new MutableLiveData<>();
 
     @Inject
     public AccountViewModel(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
 
-    public MutableLiveData<Account> saveAccountLiveData(String email) {
-        accountMutableLiveData = accountRepository.getMutableLiveData(email);
-        return accountMutableLiveData;
+    public MutableLiveData<String> getEmailAccount() {
+        return emailAccount;
     }
 
-    public LiveData<String> getAccountOwnerFullName() {
-        return Transformations.map(accountMutableLiveData, account ->
-                String.format(NAME_SURNAME_TEMPLATE, account.getName(), account.getSurname())
-        );
+
+    public LiveData<Account> getAccountOwnerFullName() {
+        return Transformations.switchMap(emailAccount, s -> this.accountRepository.getMutableLiveData(s));
     }
 }

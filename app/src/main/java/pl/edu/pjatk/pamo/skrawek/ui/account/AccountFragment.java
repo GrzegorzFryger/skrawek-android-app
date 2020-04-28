@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -16,6 +17,7 @@ import javax.inject.Inject;
 import pl.edu.pjatk.pamo.skrawek.MyApplication;
 import pl.edu.pjatk.pamo.skrawek.R;
 import pl.edu.pjatk.pamo.skrawek.SharedViewModel;
+import pl.edu.pjatk.pamo.skrawek.databinding.AccountFragmentBinding;
 import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
 
 import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.CITY;
@@ -33,6 +35,7 @@ public class AccountFragment extends Fragment {
     @Inject
     DaggerViewModelFactory viewModelFactory;
     private SharedViewModel sharedViewModel;
+    private AccountFragmentBinding accountFragmentBinding;
 
     public static AccountFragment newInstance() {
         return new AccountFragment();
@@ -42,19 +45,20 @@ public class AccountFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.account_fragment, container, false);
         ((MyApplication) getActivity().getApplication()).getAppComponent().inject(this);
         mViewModel = new ViewModelProvider(this, viewModelFactory).get(AccountViewModel.class);
-        fillFragmentWithData(view);
-        return view;
+
+        accountFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.account_fragment, container, false);
+        accountFragmentBinding.setVm(mViewModel);
+        accountFragmentBinding.setLifecycleOwner(this);
+
+        return accountFragmentBinding.getRoot();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(AccountViewModel.class);
         this.sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
-        // TODO: Use the ViewModel
     }
 
     private void fillFragmentWithData(View view) {
