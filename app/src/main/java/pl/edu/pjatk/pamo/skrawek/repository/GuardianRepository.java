@@ -1,17 +1,13 @@
 package pl.edu.pjatk.pamo.skrawek.repository;
 
-import android.app.Application;
-import android.util.Log;
-
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.UUID;
 
-import pl.edu.pjatk.pamo.skrawek.rest.auth.AuthService;
+import javax.inject.Inject;
+
 import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Guardian;
-import pl.edu.pjatk.pamo.skrawek.rest.model.auth.LoginResponse;
 import pl.edu.pjatk.pamo.skrawek.rest.service.GuardianService;
-import pl.edu.pjatk.pamo.skrawek.rest.service.ServiceGenerator;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -20,8 +16,9 @@ public class GuardianRepository {
     private final GuardianService guardianService;
     private MutableLiveData<Guardian> mutableLiveData = new MutableLiveData<>();
 
-    public GuardianRepository() {
-        this.guardianService = ServiceGenerator.createService(GuardianService.class);
+    @Inject
+    public GuardianRepository(GuardianService guardianService) {
+        this.guardianService = guardianService;
     }
 
     public MutableLiveData<Guardian> getMutableLiveData(UUID guardianId) {

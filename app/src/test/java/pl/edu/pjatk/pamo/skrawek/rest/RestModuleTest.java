@@ -3,6 +3,7 @@ package pl.edu.pjatk.pamo.skrawek.rest;
 import org.junit.Before;
 import org.junit.Test;
 
+import pl.edu.pjatk.pamo.skrawek.repository.GuardianRepository;
 import pl.edu.pjatk.pamo.skrawek.rest.auth.AuthService;
 import pl.edu.pjatk.pamo.skrawek.rest.service.AccountService;
 import pl.edu.pjatk.pamo.skrawek.rest.service.FinancesService;
@@ -64,5 +65,16 @@ public class RestModuleTest {
 
         //Then
         assertNotNull(result);
+    }
+
+    @Test
+    public void Should_CreateGuardianRepository() {
+        //Given
+
+        //When
+        GuardianRepository guardianRepository = restModule.guardianRepository();
+
+        //Then
+        assertNotNull(guardianRepository);
     }
 }
