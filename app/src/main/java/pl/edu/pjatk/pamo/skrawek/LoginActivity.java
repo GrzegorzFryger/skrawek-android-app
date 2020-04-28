@@ -29,7 +29,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static java.util.Objects.requireNonNull;
-import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.saveAccountData;
 import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.saveAuthToken;
 
 /**
@@ -56,6 +55,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.login_fragment);
 
         ((MyApplication) getApplication()).getAppComponent().inject(this);
+
         mViewModel = new ViewModelProvider(this, viewModelFactory).get(AccountViewModel.class);
 
         Button signInButton = findViewById(R.id.signInButton);
@@ -98,10 +98,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void getAccountDetails(String email) {
-        mViewModel.saveAccountLiveData(email).observe(this, account -> {
-            saveAccountData(account);
-            navigateToMainFragment();
-        });
+        this.mViewModel.getEmailAccount().setValue(email);
+        navigateToMainFragment();
     }
 
     private void navigateToMainFragment() {
