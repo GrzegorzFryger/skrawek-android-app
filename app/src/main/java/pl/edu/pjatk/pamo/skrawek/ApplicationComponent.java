@@ -17,4 +17,6 @@ public interface ApplicationComponent {
     void inject(ChildrenSelectDialog childrenSelectDialog);
 
     void inject(AccountFragment accountFragment);
+
+    void inject(MainActivity mainActivity);
 }

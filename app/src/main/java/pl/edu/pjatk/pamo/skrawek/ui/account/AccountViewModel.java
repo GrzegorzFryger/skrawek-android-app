@@ -13,19 +13,38 @@ import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Account;
 public class AccountViewModel extends ViewModel {
     private String NAME_SURNAME_TEMPLATE = "%s %s";
     private final AccountRepository accountRepository;
-    private MutableLiveData<String> emailAccount = new MutableLiveData<>();
+    private MutableLiveData<Account> selectedAccount = new MutableLiveData<>();
 
     @Inject
     public AccountViewModel(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
 
-    public MutableLiveData<String> getEmailAccount() {
-        return emailAccount;
+    public void initializeAccountData(String email) {
+        selectedAccount = accountRepository.getMutableLiveData(email);
     }
 
+    public LiveData<String> getAccountOwnerFullName() {
+        return Transformations.map(selectedAccount, account ->
+                String.format(NAME_SURNAME_TEMPLATE, account.getName(), account.getSurname())
+        );
+    }
 
-    public LiveData<Account> getAccountOwnerFullName() {
-        return Transformations.switchMap(emailAccount, s -> this.accountRepository.getMutableLiveData(s));
+    public LiveData<String> getCity() {
+        return Transformations.map(selectedAccount, account ->
+                String.format(NAME_SURNAME_TEMPLATE, account.getCity(), account.getPostalCode())
+        );
+    }
+
+    public LiveData<String> getStreetNumber() {
+        return Transformations.map(selectedAccount, Account::getStreetNumber);
+    }
+
+    public LiveData<String> getPhone() {
+        return Transformations.map(selectedAccount, Account::getPhone);
+    }
+
+    public LiveData<String> getStatus() {
+        return Transformations.map(selectedAccount, account -> account.getStatus().name());
     }
 }
