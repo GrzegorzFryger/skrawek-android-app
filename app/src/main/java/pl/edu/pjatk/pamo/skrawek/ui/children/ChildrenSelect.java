@@ -15,8 +15,10 @@ import pl.edu.pjatk.pamo.skrawek.R;
 import pl.edu.pjatk.pamo.skrawek.SharedViewModel;
 import pl.edu.pjatk.pamo.skrawek.databinding.ChildrenSelectFragmentBinding;
 
-public class ChildrenSelect extends Fragment  {
-    private String loggedUserId = "84187cf8-6547-49c0-be3d-00e9137b86bd";
+import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.getGuardianId;
+
+public class ChildrenSelect extends Fragment {
+    private String loggedUserId;
     private ChildrenSelectViewModel childrenSelectViewModel;
     private ChildrenSelectFragmentBinding childrenSelectFragmentBinding;
     private SharedViewModel sharedViewModel;
@@ -28,6 +30,7 @@ public class ChildrenSelect extends Fragment  {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        loggedUserId = getGuardianId().toString();
         childrenSelectViewModel = new ViewModelProvider(this).get(ChildrenSelectViewModel.class);
         childrenSelectFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.children_select_fragment, container, false);
         childrenSelectFragmentBinding.setVm(childrenSelectViewModel);
