@@ -1,18 +1,11 @@
 package pl.edu.pjatk.pamo.skrawek.ui.children;
 
-import android.view.View;
-
-import androidx.databinding.BindingAdapter;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
-import java.util.UUID;
-
-import pl.edu.pjatk.pamo.skrawek.repository.GuardianRepository;
 import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Child;
-import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Guardian;
 
 public class ChildrenSelectViewModel extends ViewModel {
     private String NAME_SURNAME_TEMPLATE = "%s  %s";
@@ -34,9 +27,8 @@ public class ChildrenSelectViewModel extends ViewModel {
     }
 
     public LiveData<String> getGuardianLiveData() {
-       return new MutableLiveData<>(this.DEFAULT_MESSAGE);
+        return new MutableLiveData<>(this.DEFAULT_MESSAGE);
     }
-
 
 
 }
