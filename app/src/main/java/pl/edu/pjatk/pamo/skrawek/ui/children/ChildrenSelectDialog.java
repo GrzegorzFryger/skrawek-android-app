@@ -1,24 +1,25 @@
 package pl.edu.pjatk.pamo.skrawek.ui.children;
 
-import androidx.fragment.app.DialogFragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.UUID;
 
+import javax.inject.Inject;
+
+import pl.edu.pjatk.pamo.skrawek.MyApplication;
 import pl.edu.pjatk.pamo.skrawek.R;
 import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Child;
+import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
 
 public class ChildrenSelectDialog extends DialogFragment {
 
@@ -27,7 +28,10 @@ public class ChildrenSelectDialog extends DialogFragment {
     private View view;
     private RecyclerView recyclerView;
     private OnSelectChildrenFromList listener;
-    private ChildrenSelectDialogViewModel mViewModel;
+
+    @Inject
+    DaggerViewModelFactory viewModelFactory;
+    ChildrenSelectDialogViewModel mViewModel;
 
     public static ChildrenSelectDialog newInstance(String guardianIdParam) {
         ChildrenSelectDialog childrenSelectDialog = new ChildrenSelectDialog();
@@ -47,7 +51,8 @@ public class ChildrenSelectDialog extends DialogFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(ChildrenSelectDialogViewModel.class);
+        ((MyApplication) getActivity().getApplication()).getAppComponent().inject(this);
+        mViewModel = new ViewModelProvider(this, viewModelFactory).get(ChildrenSelectDialogViewModel.class);
 
         mViewModel.getGuardianLiveData().observe(this, guardian -> {
             this.recyclerView = view.findViewById(R.id.list);
