@@ -5,8 +5,8 @@
     <string name="title_notifications">Notifications</string>
     <string name="button_sign_in">Sign in</string>
     <string name="background_image">image</string>
-    <string name="password">Enter password</string>
-    <string name="email">Enter email</string>
+    <string name="enter_password">Enter password</string>
+    <string name="enter_email">Enter email</string>
     <string name="logo">logo</string>
     <string name="title_finances">Finances</string>
     <string name="title_absence">Absence</string>
@@ -14,9 +14,21 @@
     <string name="children_name_surname">Antoni Nowaczek</string>
     <string name="children_image">image for children</string>
     <string name="icon_select">icon to select</string>
-    <string name="child_list_name_surname">Antoni Nowakowski</string>
-    <string name="child_list_pesel">95081105694</string>
-
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Account fragment -->
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="address">Address</string>
+    <string name="postal_code">Postal code</string>
+    <string name="street_number">Street number</string>
+    <string name="city">City</string>
+    <string name="phone">Phone</string>
+    <string name="status">Status</string>
+    <string name="email">Email</string>
+    <string name="account_status">Account status</string>
+    <string name="profile_icon_desc">Profile icon</string>
+    <string name="child_list_name_surname">Antoni Nowakowski</string>
+    <string name="child_list_pesel">95081105694</string>
 </resources>
