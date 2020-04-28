@@ -2,6 +2,7 @@ package pl.edu.pjatk.pamo.skrawek.rest;
 
 import dagger.Module;
 import dagger.Provides;
+import pl.edu.pjatk.pamo.skrawek.repository.AccountRepository;
 import pl.edu.pjatk.pamo.skrawek.repository.GuardianRepository;
 import pl.edu.pjatk.pamo.skrawek.rest.auth.AuthService;
 import pl.edu.pjatk.pamo.skrawek.rest.service.AccountService;
@@ -36,5 +37,10 @@ public class RestModule {
     @Provides
     public GuardianRepository guardianRepository() {
         return new GuardianRepository(guardianService());
+    }
+
+    @Provides
+    public AccountRepository accountRepository() {
+        return new AccountRepository(accountService());
     }
 }

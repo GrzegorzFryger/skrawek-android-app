@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 import dagger.Binds;
 import dagger.Module;
 import dagger.multibindings.IntoMap;
+import pl.edu.pjatk.pamo.skrawek.ui.account.AccountViewModel;
 import pl.edu.pjatk.pamo.skrawek.ui.children.ChildrenSelectDialogViewModel;
 
 @Module
@@ -16,5 +17,10 @@ public abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(ChildrenSelectDialogViewModel.class)
-    abstract ViewModel provideVideoListViewModel(ChildrenSelectDialogViewModel childrenSelectDialogViewModel);
+    abstract ViewModel provideChildrenSelectDialogViewModel(ChildrenSelectDialogViewModel childrenSelectDialogViewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AccountViewModel.class)
+    abstract ViewModel provideAccountViewModel(AccountViewModel accountViewModel);
 }
