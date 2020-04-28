@@ -12,6 +12,9 @@ import pl.edu.pjatk.pamo.skrawek.rest.service.GuardianService;
 import static pl.edu.pjatk.pamo.skrawek.rest.service.ServiceGenerator.createService;
 
 @Module
+/**
+ * This module is responsible for injecting services and repositories to components, that require them
+ */
 public class RestModule {
 
     @Provides

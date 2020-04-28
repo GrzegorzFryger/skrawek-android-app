@@ -7,6 +7,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static pl.edu.pjatk.pamo.skrawek.rest.config.RequestMappings.BASE_URL;
 import static pl.edu.pjatk.pamo.skrawek.rest.config.UnsafeOkHttpClient.getUnsafeOkHttpClient;
 
+/**
+ * This class is a generic factory for creating services, which are used for calling REST API
+ */
 public class ServiceGenerator {
     private static OkHttpClient httpClient = getUnsafeOkHttpClient();
 

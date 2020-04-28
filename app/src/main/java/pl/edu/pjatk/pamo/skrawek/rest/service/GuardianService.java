@@ -9,6 +9,9 @@ import retrofit2.http.Path;
 
 import static pl.edu.pjatk.pamo.skrawek.rest.config.RequestMappings.API_ACCOUNT;
 
+/**
+ * This service defines REST API urls for <strong>Account</strong> module (GuardianController)
+ */
 public interface GuardianService {
 
     @GET(API_ACCOUNT + "guardian/{guardianId}")
