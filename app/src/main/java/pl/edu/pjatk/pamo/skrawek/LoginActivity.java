@@ -16,6 +16,8 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import org.jetbrains.annotations.NotNull;
 
+import javax.inject.Inject;
+
 import pl.edu.pjatk.pamo.skrawek.rest.auth.AuthService;
 import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Account;
 import pl.edu.pjatk.pamo.skrawek.rest.model.auth.LoginRequest;
@@ -38,8 +40,11 @@ import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.saveAuthToken;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "LoginActivity";
 
-    private AccountService accountService;
-    private AuthService authService;
+    @Inject
+    AccountService accountService;
+
+    @Inject
+    AuthService authService;
 
     private TextInputEditText emailInput;
     private TextInputEditText passwordInput;
@@ -49,14 +54,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_fragment);
 
+        ((MyApplication) getApplication()).getAppComponent().inject(this);
+
         Button signInButton = findViewById(R.id.signInButton);
         signInButton.setOnClickListener(this);
 
         emailInput = findViewById(R.id.enterEmail);
         passwordInput = findViewById(R.id.enterPassword);
 
-        accountService = ServiceGenerator.createService(AccountService.class);
-        authService = ServiceGenerator.createService(AuthService.class);
         this.setTransparentTitleBar(getWindow());
     }
 

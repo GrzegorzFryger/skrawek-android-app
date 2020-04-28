@@ -30,4 +30,8 @@ public class MyApplication extends Application {
     public static String getProperty(String key, String defaultValue) {
         return preferences.getString(key, defaultValue);
     }
+
+    public ApplicationComponent getAppComponent() {
+        return appComponent;
+    }
 }
