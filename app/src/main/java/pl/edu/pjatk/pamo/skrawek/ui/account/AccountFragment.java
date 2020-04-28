@@ -11,8 +11,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import javax.inject.Inject;
+
+import pl.edu.pjatk.pamo.skrawek.MyApplication;
 import pl.edu.pjatk.pamo.skrawek.R;
 import pl.edu.pjatk.pamo.skrawek.SharedViewModel;
+import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
 
 import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.CITY;
 import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.NAME;
@@ -26,6 +30,8 @@ import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.getProperty;
 public class AccountFragment extends Fragment {
 
     private AccountViewModel mViewModel;
+    @Inject
+    DaggerViewModelFactory viewModelFactory;
     private SharedViewModel sharedViewModel;
 
     public static AccountFragment newInstance() {
@@ -37,6 +43,8 @@ public class AccountFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.account_fragment, container, false);
+        ((MyApplication) getActivity().getApplication()).getAppComponent().inject(this);
+        mViewModel = new ViewModelProvider(this, viewModelFactory).get(AccountViewModel.class);
         fillFragmentWithData(view);
         return view;
     }

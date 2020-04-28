@@ -33,9 +33,9 @@ public class GuardianRepository {
         call.enqueue(new Callback<Guardian>() {
             @Override
             public void onResponse(@NotNull Call<Guardian> call, @NotNull Response<Guardian> response) {
-                Guardian mBlogWrapper = response.body();
-                if (mBlogWrapper != null) {
-                    mutableLiveData.setValue(mBlogWrapper);
+                Guardian guardian = response.body();
+                if (guardian != null) {
+                    mutableLiveData.setValue(guardian);
                 }
             }
 

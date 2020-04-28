@@ -11,6 +11,7 @@ import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -19,11 +20,10 @@ import org.jetbrains.annotations.NotNull;
 import javax.inject.Inject;
 
 import pl.edu.pjatk.pamo.skrawek.rest.auth.AuthService;
-import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Account;
 import pl.edu.pjatk.pamo.skrawek.rest.model.auth.LoginRequest;
 import pl.edu.pjatk.pamo.skrawek.rest.model.auth.LoginResponse;
-import pl.edu.pjatk.pamo.skrawek.rest.service.AccountService;
-import pl.edu.pjatk.pamo.skrawek.rest.service.ServiceGenerator;
+import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
+import pl.edu.pjatk.pamo.skrawek.ui.account.AccountViewModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,10 +41,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private static final String TAG = "LoginActivity";
 
     @Inject
-    AccountService accountService;
+    AuthService authService;
 
     @Inject
-    AuthService authService;
+    DaggerViewModelFactory viewModelFactory;
+    AccountViewModel mViewModel;
 
     private TextInputEditText emailInput;
     private TextInputEditText passwordInput;
@@ -55,6 +56,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.login_fragment);
 
         ((MyApplication) getApplication()).getAppComponent().inject(this);
+        mViewModel = new ViewModelProvider(this, viewModelFactory).get(AccountViewModel.class);
 
         Button signInButton = findViewById(R.id.signInButton);
         signInButton.setOnClickListener(this);
@@ -96,23 +98,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void getAccountDetails(String email) {
-        Call<Account> call = accountService.getAccountDetails(email);
-        call.enqueue(new Callback<Account>() {
-            @Override
-            public void onResponse(@NotNull Call<Account> call, @NotNull Response<Account> response) {
-                if (response.isSuccessful()) {
-                    Log.i(TAG, "User id: " + requireNonNull(response.body()).getId());
-                    saveAccountData(response.body());
-                    navigateToMainFragment();
-                } else {
-                    Log.e(TAG, "Failed to get account details for user: " + email);
-                }
-            }
-
-            @Override
-            public void onFailure(@NotNull Call<Account> call, @NotNull Throwable t) {
-                Log.e(TAG, requireNonNull(t.getMessage()));
-            }
+        mViewModel.saveAccountLiveData(email).observe(this, account -> {
+            saveAccountData(account);
+            navigateToMainFragment();
         });
     }
 
