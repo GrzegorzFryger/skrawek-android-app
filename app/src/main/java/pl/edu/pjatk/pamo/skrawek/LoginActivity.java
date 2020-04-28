@@ -11,7 +11,6 @@ import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -22,13 +21,12 @@ import javax.inject.Inject;
 import pl.edu.pjatk.pamo.skrawek.rest.auth.AuthService;
 import pl.edu.pjatk.pamo.skrawek.rest.model.auth.LoginRequest;
 import pl.edu.pjatk.pamo.skrawek.rest.model.auth.LoginResponse;
-import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
-import pl.edu.pjatk.pamo.skrawek.ui.account.AccountViewModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import static java.util.Objects.requireNonNull;
+import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.saveEmail;
 import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.saveAuthToken;
 
 /**
@@ -42,10 +40,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Inject
     AuthService authService;
 
-    @Inject
-    DaggerViewModelFactory viewModelFactory;
-    AccountViewModel mViewModel;
-
     private TextInputEditText emailInput;
     private TextInputEditText passwordInput;
 
@@ -55,8 +49,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.login_fragment);
 
         ((MyApplication) getApplication()).getAppComponent().inject(this);
-
-        mViewModel = new ViewModelProvider(this, viewModelFactory).get(AccountViewModel.class);
 
         Button signInButton = findViewById(R.id.signInButton);
         signInButton.setOnClickListener(this);
@@ -84,7 +76,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (response.isSuccessful()) {
                     Log.i(TAG, "User: " + request.getUsername() + " authorized successfully");
                     saveAuthToken("Bearer " + requireNonNull(response.body()).getToken());
-                    getAccountDetails(email);
+                    saveEmail(email);
+                    navigateToMainFragment();
                 } else {
                     Log.e(TAG, "Failed to authorize user: " + request.getUsername());
                 }
@@ -95,11 +88,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Log.e(TAG, requireNonNull(t.getMessage()));
             }
         });
-    }
-
-    public void getAccountDetails(String email) {
-        this.mViewModel.getEmailAccount().setValue(email);
-        navigateToMainFragment();
     }
 
     private void navigateToMainFragment() {

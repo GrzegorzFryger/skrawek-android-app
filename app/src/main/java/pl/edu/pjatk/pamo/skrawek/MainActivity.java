@@ -7,6 +7,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -14,7 +15,18 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import javax.inject.Inject;
+
+import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
+import pl.edu.pjatk.pamo.skrawek.ui.account.AccountViewModel;
+
+import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.getEmail;
+
 public class MainActivity extends AppCompatActivity {
+
+    @Inject
+    DaggerViewModelFactory viewModelFactory;
+    AccountViewModel accountViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
         // make status-bar transparent
         this.setTransparentTitleBar(getWindow());
+
+        ((MyApplication) getApplication()).getAppComponent().inject(this);
+        initializeAccountViewModel();
     }
 
     protected void setTransparentTitleBar(Window window) {
@@ -42,5 +57,10 @@ public class MainActivity extends AppCompatActivity {
 
         // set color icon to dark
         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+    }
+
+    protected void initializeAccountViewModel() {
+        accountViewModel = new ViewModelProvider(this, viewModelFactory).get(AccountViewModel.class);
+        accountViewModel.initializeAccountData(getEmail());
     }
 }
