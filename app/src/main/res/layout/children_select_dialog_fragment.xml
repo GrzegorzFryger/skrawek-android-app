@@ -16,6 +16,8 @@
             android:name="pl.edu.pjatk.pamo.skrawek.ui.children.ChildrenSelectDialog"
             android:layout_width="300dp"
             android:layout_height="300dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

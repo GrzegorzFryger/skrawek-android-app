@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import pl.edu.pjatk.pamo.skrawek.R;
 import pl.edu.pjatk.pamo.skrawek.SharedViewModel;
@@ -44,8 +43,8 @@ public class AccountFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(AccountViewModel.class);
-        this.sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+//        mViewModel = new ViewModelProvider(this).get(AccountViewModel.class);
+//        this.sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
         // TODO: Use the ViewModel
     }
 

@@ -37,4 +37,8 @@
     <string name="transaction_currency">Transaction Currency</string>
     <string name="titile">Titile</string>
     <string name="contractor_details">Contractor Details</string>
+    <string name="finances_information">Finances information</string>
+    <string name="receivables">Receivables</string>
+    <string name="balance">Balance</string>
+    <string name="liabilities">Liabilities</string>
 </resources>

@@ -11,26 +11,33 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment"
+            android:name="pl.edu.pjatk.pamo.skrawek.ui.children.ChildrenSelect"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout="@layout/children_select_fragment" />
+
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:fontFamily="@font/roboto"
-            android:text="Finances information"
+            android:text="@string/finances_information"
             android:textColor="#000000"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/fragment" />
 
         <HorizontalScrollView
             android:id="@+id/horizontalScrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="none"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2">
 
             <LinearLayout
@@ -91,7 +98,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto"
-                            android:text="Receivables"
+                            android:text="@string/receivables"
                             android:textColor="#000000"
                             android:textSize="18sp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -151,7 +158,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto"
-                            android:text="Balance"
+                            android:text="@string/balance"
                             android:textColor="#000000"
                             android:textSize="18sp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -210,7 +217,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto"
-                            android:text="Liabilities"
+                            android:text="@string/liabilities"
                             android:textColor="#000000"
                             android:textSize="18sp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -228,7 +235,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:fontFamily="@font/roboto"
             android:text="History payments"
             android:textColor="#000000"
@@ -237,13 +243,11 @@
             app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
             android:fillViewport="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/incomingPayments">
 
             <LinearLayout
