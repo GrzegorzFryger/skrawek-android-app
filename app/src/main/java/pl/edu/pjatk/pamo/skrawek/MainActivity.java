@@ -19,13 +19,19 @@ import javax.inject.Inject;
 
 import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
 import pl.edu.pjatk.pamo.skrawek.ui.account.AccountViewModel;
+import pl.edu.pjatk.pamo.skrawek.ui.snackbar.SnackbarFactory;
 
+import static pl.edu.pjatk.pamo.skrawek.MyApplication.getStringFromRes;
 import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.getEmail;
 
 public class MainActivity extends AppCompatActivity {
 
     @Inject
     DaggerViewModelFactory viewModelFactory;
+
+    @Inject
+    SnackbarFactory snackbarFactory;
+
     AccountViewModel accountViewModel;
 
     @Override
@@ -60,6 +66,10 @@ public class MainActivity extends AppCompatActivity {
 
         ((MyApplication) getApplication()).getAppComponent().inject(this);
         initializeAccountViewModel();
+
+        snackbarFactory.buildSnackbarSuccessMessage(findViewById(android.R.id.content),
+                getApplicationContext(), getStringFromRes(R.string.rest_login_sucess))
+                .show();
     }
 
     protected void setTransparentTitleBar(Window window) {

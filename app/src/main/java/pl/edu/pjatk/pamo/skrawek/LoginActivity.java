@@ -21,13 +21,15 @@ import javax.inject.Inject;
 import pl.edu.pjatk.pamo.skrawek.rest.auth.AuthService;
 import pl.edu.pjatk.pamo.skrawek.rest.model.auth.LoginRequest;
 import pl.edu.pjatk.pamo.skrawek.rest.model.auth.LoginResponse;
+import pl.edu.pjatk.pamo.skrawek.ui.snackbar.SnackbarFactory;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import static java.util.Objects.requireNonNull;
-import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.saveEmail;
+import static pl.edu.pjatk.pamo.skrawek.MyApplication.getStringFromRes;
 import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.saveAuthToken;
+import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.saveEmail;
 
 /**
  * This activity is entry point of application.
@@ -39,6 +41,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Inject
     AuthService authService;
+
+    @Inject
+    SnackbarFactory snackbarFactory;
 
     private TextInputEditText emailInput;
     private TextInputEditText passwordInput;
@@ -80,17 +85,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     navigateToMainFragment();
                 } else {
                     Log.e(TAG, "Failed to authorize user: " + request.getUsername());
+                    snackbarFactory.buildSnackbarWithErrorMessage(findViewById(android.R.id.content),
+                            getApplicationContext(), getStringFromRes(R.string.rest_login_fail))
+                            .show();
                 }
             }
 
             @Override
             public void onFailure(@NotNull Call<LoginResponse> call, @NotNull Throwable t) {
                 Log.e(TAG, requireNonNull(t.getMessage()));
+                snackbarFactory.buildSnackbarWithErrorMessage(findViewById(android.R.id.content),
+                        getApplicationContext(), getStringFromRes(R.string.rest_call_fail))
+                        .show();
             }
         });
     }
 
-    private void navigateToMainFragment() {
+    protected void navigateToMainFragment() {
         startActivity(new Intent(this, MainActivity.class));
     }
 

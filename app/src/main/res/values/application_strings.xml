@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="rest_login_fail">Failed to log in</string>
+    <string name="rest_login_sucess">You have successfully logged in</string>
+    <string name="rest_call_fail">There was an error when calling REST API</string>
+</resources>

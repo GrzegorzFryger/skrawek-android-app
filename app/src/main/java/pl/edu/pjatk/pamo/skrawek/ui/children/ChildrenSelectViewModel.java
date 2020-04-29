@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
+import javax.inject.Inject;
+
 import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Child;
 
 public class ChildrenSelectViewModel extends ViewModel {
@@ -13,6 +15,7 @@ public class ChildrenSelectViewModel extends ViewModel {
     private MutableLiveData<Child> selectedChild = new MutableLiveData<>();
 
 
+    @Inject
     public ChildrenSelectViewModel() {
     }
 
