@@ -1,4 +1,4 @@
-package pl.edu.pjatk.pamo.skrawek.rest;
+package pl.edu.pjatk.pamo.skrawek.module;
 
 import dagger.Module;
 import dagger.Provides;

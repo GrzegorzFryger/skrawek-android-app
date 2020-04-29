@@ -1,8 +1,9 @@
-package pl.edu.pjatk.pamo.skrawek.rest;
+package pl.edu.pjatk.pamo.skrawek.module;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import pl.edu.pjatk.pamo.skrawek.module.RestModule;
 import pl.edu.pjatk.pamo.skrawek.repository.AccountRepository;
 import pl.edu.pjatk.pamo.skrawek.repository.GuardianRepository;
 import pl.edu.pjatk.pamo.skrawek.rest.auth.AuthService;
