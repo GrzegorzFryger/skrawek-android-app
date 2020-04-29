@@ -51,6 +51,7 @@ public class ChildrenSelectDialog extends DialogFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         ((MyApplication) getActivity().getApplication()).getAppComponent().inject(this);
         mViewModel = new ViewModelProvider(this, viewModelFactory).get(ChildrenSelectDialogViewModel.class);
 

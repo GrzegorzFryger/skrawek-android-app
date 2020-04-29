@@ -9,11 +9,22 @@ import dagger.multibindings.IntoMap;
 import pl.edu.pjatk.pamo.skrawek.SharedViewModel;
 import pl.edu.pjatk.pamo.skrawek.ui.account.AccountViewModel;
 import pl.edu.pjatk.pamo.skrawek.ui.children.ChildrenSelectDialogViewModel;
+import pl.edu.pjatk.pamo.skrawek.ui.finances.FinancesViewModel;
 
 @Module
 public abstract class ViewModelModule {
     @Binds
     abstract ViewModelProvider.Factory bindViewModelFactory(DaggerViewModelFactory factory);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ChildrenSelectDialogViewModel.class)
+    abstract ViewModel provideVideoListViewModel(ChildrenSelectDialogViewModel childrenSelectDialogViewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(FinancesViewModel.class)
+    abstract ViewModel provideFinancesViewModel(FinancesViewModel financesViewModel);
 
     @Binds
     @IntoMap

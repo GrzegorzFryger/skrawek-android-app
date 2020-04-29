@@ -39,9 +39,21 @@ public class MainActivity extends AppCompatActivity {
                 R.id.navigation_home, R.id.navigation_finances, R.id.navigation_absence, R.id.navigation_account)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+
         //todo temporary removed
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            if (destination.getId() == R.id.incomingPaymentsDetailsFragment) {
+                navView.setVisibility(View.GONE);
+            } else {
+                navView.setVisibility(View.VISIBLE);
+            }
+        });
+
+//        navController.addOnDestinationChangedListener(s -> );
 
         // make status-bar transparent
         this.setTransparentTitleBar(getWindow());
