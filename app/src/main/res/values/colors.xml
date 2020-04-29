@@ -7,5 +7,10 @@
     <color name="colorHeaderText">#606FEE</color>
     <color name="colorText">#828282</color>
     <color name="Black">#000000</color>
-    <color name="snackbar_red">#FF2828</color>
+
+    <!-- Snackbar backgroud colors -->
+    <color name="snackbar_red">#f44336</color>
+    <color name="snackbar_yellow">#f3ba49</color>
+    <color name="snackbar_green">#1eaf42</color>
+    <color name="snackbar_blue">#2196f3</color>
 </resources>

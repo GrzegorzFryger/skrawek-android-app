@@ -4,18 +4,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.jetbrains.annotations.NotNull;
@@ -25,6 +21,7 @@ import javax.inject.Inject;
 import pl.edu.pjatk.pamo.skrawek.rest.auth.AuthService;
 import pl.edu.pjatk.pamo.skrawek.rest.model.auth.LoginRequest;
 import pl.edu.pjatk.pamo.skrawek.rest.model.auth.LoginResponse;
+import pl.edu.pjatk.pamo.skrawek.ui.snackbar.SnackbarFactory;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,6 +41,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Inject
     AuthService authService;
+
+    @Inject
+    SnackbarFactory snackbarFactory;
 
     private TextInputEditText emailInput;
     private TextInputEditText passwordInput;
@@ -85,14 +85,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     navigateToMainFragment();
                 } else {
                     Log.e(TAG, "Failed to authorize user: " + request.getUsername());
-                    showErrorMessageUsingSnackbar(getStringFromRes(R.string.rest_login_fail));
+                    snackbarFactory.buildSnackbarWithErrorMessage(findViewById(android.R.id.content),
+                            getApplicationContext(), getStringFromRes(R.string.rest_login_fail))
+                            .show();
                 }
             }
 
             @Override
             public void onFailure(@NotNull Call<LoginResponse> call, @NotNull Throwable t) {
                 Log.e(TAG, requireNonNull(t.getMessage()));
-                showErrorMessageUsingSnackbar(getStringFromRes(R.string.rest_call_fail));
+                snackbarFactory.buildSnackbarWithErrorMessage(findViewById(android.R.id.content),
+                        getApplicationContext(), getStringFromRes(R.string.rest_call_fail))
+                        .show();
             }
         });
     }
@@ -108,16 +112,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         // set color icon to dark
         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-    }
-
-    protected void showErrorMessageUsingSnackbar(String message) {
-        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
-                message, Snackbar.LENGTH_LONG);
-        View view = snackbar.getView();
-        view.setBackgroundColor(ContextCompat.getColor(this, R.color.snackbar_red));
-        TextView snackTextView = view.findViewById(R.id.snackbar_text);
-        snackTextView.setGravity(Gravity.CENTER_HORIZONTAL);
-        snackTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        snackbar.show();
     }
 }
