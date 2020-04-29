@@ -31,4 +31,10 @@
     <string name="profile_icon_desc">Profile icon</string>
     <string name="child_list_name_surname">Antoni Nowakowski</string>
     <string name="child_list_pesel">95081105694</string>
+    <string name="transaction_date">Transaction Date</string>
+    <string name="payment_type">Payment Type</string>
+    <string name="transaction_amount">Transaction Amount</string>
+    <string name="transaction_currency">Transaction Currency</string>
+    <string name="titile">Titile</string>
+    <string name="contractor_details">Contractor Details</string>
 </resources>

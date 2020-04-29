@@ -1,12 +1,11 @@
 package pl.edu.pjatk.pamo.skrawek.rest.model.finances;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.UUID;
 
 public class IncomingPayment {
     private PaymentType paymentType;
-    private LocalDate transactionDate;
+    private String transactionDate;
     private String contractorDetails;
     private String title;
     private BigDecimal transactionAmount;
@@ -22,11 +21,11 @@ public class IncomingPayment {
         this.paymentType = paymentType;
     }
 
-    public LocalDate getTransactionDate() {
+    public String getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(LocalDate transactionDate) {
+    public void setTransactionDate(String transactionDate) {
         this.transactionDate = transactionDate;
     }
 
@@ -79,4 +78,17 @@ public class IncomingPayment {
     }
 
 
+    @Override
+    public String toString() {
+        return "IncomingPayment{" +
+                "paymentType=" + paymentType +
+                ", transactionDate=" + transactionDate +
+                ", contractorDetails='" + contractorDetails + '\'' +
+                ", title='" + title + '\'' +
+                ", transactionAmount=" + transactionAmount +
+                ", transactionCurrency='" + transactionCurrency + '\'' +
+                ", childId=" + childId +
+                ", guardianId=" + guardianId +
+                '}';
+    }
 }

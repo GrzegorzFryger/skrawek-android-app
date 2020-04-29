@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -20,27 +21,27 @@ public class FinancesRepository {
     private static final String TAG = "FinancesRepository";
 
     private final FinancesService financesService;
-    private final MutableLiveData<IncomingPayment> mutableLiveData = new MutableLiveData<>();
+    private final MutableLiveData<List<IncomingPayment>> mutableLiveData = new MutableLiveData<>();
 
     @Inject
     public FinancesRepository(FinancesService guardianService) {
         this.financesService = guardianService;
     }
 
-    public MutableLiveData<IncomingPayment> getIncomingPaymentsForChildren(UUID uuid) {
-        Call<IncomingPayment> call = financesService.getAllIncomingPaymentsForChild(uuid);
+    public MutableLiveData<List<IncomingPayment>> getIncomingPaymentsForChildren(UUID uuid) {
+        Call<List<IncomingPayment>> call = financesService.getAllIncomingPaymentsForChild(uuid);
 
-        call.enqueue(new Callback<IncomingPayment>() {
+        call.enqueue(new Callback<List<IncomingPayment>>() {
             @Override
-            public void onResponse(@NotNull Call<IncomingPayment> call, @NotNull Response<IncomingPayment> response) {
-                IncomingPayment mBlogWrapper = response.body();
+            public void onResponse(@NotNull Call<List<IncomingPayment>> call, @NotNull Response<List<IncomingPayment>> response) {
+                List<IncomingPayment> mBlogWrapper = response.body();
                 if (mBlogWrapper != null) {
                     mutableLiveData.setValue(mBlogWrapper);
                 }
             }
 
             @Override
-            public void onFailure(@NotNull Call<IncomingPayment> call, @NotNull Throwable t) {
+            public void onFailure(@NotNull Call<List<IncomingPayment>> call, @NotNull Throwable t) {
                 Log.e(TAG, "Failed to get Incoming data for id: " + uuid);
             }
         });

@@ -7,6 +7,7 @@ import dagger.Binds;
 import dagger.Module;
 import dagger.multibindings.IntoMap;
 import pl.edu.pjatk.pamo.skrawek.ui.children.ChildrenSelectDialogViewModel;
+import pl.edu.pjatk.pamo.skrawek.ui.finances.FinancesViewModel;
 
 @Module
 public abstract class ViewModelModule {
@@ -17,4 +18,9 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ChildrenSelectDialogViewModel.class)
     abstract ViewModel provideVideoListViewModel(ChildrenSelectDialogViewModel childrenSelectDialogViewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(FinancesViewModel.class)
+    abstract ViewModel provideFinancesViewModel(FinancesViewModel financesViewModel);
 }

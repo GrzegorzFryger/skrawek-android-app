@@ -1,5 +1,6 @@
 package pl.edu.pjatk.pamo.skrawek.rest.service;
 
+import java.util.List;
 import java.util.UUID;
 
 import pl.edu.pjatk.pamo.skrawek.rest.model.Balance;
@@ -17,5 +18,5 @@ public interface FinancesService {
     Call<Balance> getBalanceForChild(@Path("childId") UUID childId);
 
     @GET(API_RECEIVABLES + "payments/child/{childId}")
-    Call<IncomingPayment> getAllIncomingPaymentsForChild(@Path("childId") UUID childId);
+    Call<List<IncomingPayment>> getAllIncomingPaymentsForChild(@Path("childId") UUID childId);
 }
