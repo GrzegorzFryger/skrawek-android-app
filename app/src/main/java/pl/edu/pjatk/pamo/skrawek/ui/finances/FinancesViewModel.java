@@ -10,6 +10,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import pl.edu.pjatk.pamo.skrawek.repository.FinancesRepository;
+import pl.edu.pjatk.pamo.skrawek.rest.model.Balance;
 import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Child;
 import pl.edu.pjatk.pamo.skrawek.rest.model.finances.IncomingPayment;
 
@@ -37,5 +38,9 @@ public class FinancesViewModel extends ViewModel {
 
     public LiveData<IncomingPayment> getSelectedIncomingPayment() {
         return selectedIncomingPayment;
+    }
+
+    public LiveData<Balance> getBalance() {
+        return Transformations.switchMap(selectedChild, s -> this.financesRepository.getBalance(s.getId()));
     }
 }

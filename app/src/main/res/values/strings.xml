@@ -41,4 +41,5 @@
     <string name="receivables">Receivables</string>
     <string name="balance">Balance</string>
     <string name="liabilities">Liabilities</string>
+    <string name="pln">PLN</string>
 </resources>
