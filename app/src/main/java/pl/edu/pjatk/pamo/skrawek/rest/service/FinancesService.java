@@ -12,6 +12,9 @@ import retrofit2.http.Path;
 import static pl.edu.pjatk.pamo.skrawek.rest.config.RequestMappings.API_FINANCES;
 import static pl.edu.pjatk.pamo.skrawek.rest.config.RequestMappings.API_RECEIVABLES;
 
+/**
+ * This service defines REST API urls for <strong>Finances</strong> module (FinancesController)
+ */
 public interface FinancesService {
 
     @GET(API_FINANCES + "balance/{childId}")

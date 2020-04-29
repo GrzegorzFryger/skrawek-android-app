@@ -4,28 +4,24 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-import pl.edu.pjatk.pamo.skrawek.R;
-import pl.edu.pjatk.pamo.skrawek.SharedViewModel;
+import javax.inject.Inject;
 
-import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.CITY;
-import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.NAME;
-import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.PHONE;
-import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.POSTAL_CODE;
-import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.STATUS;
-import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.STREET_NUMBER;
-import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.SURNAME;
-import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.getProperty;
+import pl.edu.pjatk.pamo.skrawek.MyApplication;
+import pl.edu.pjatk.pamo.skrawek.R;
+import pl.edu.pjatk.pamo.skrawek.databinding.AccountFragmentBinding;
+import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
 
 public class AccountFragment extends Fragment {
 
     private AccountViewModel mViewModel;
-    private SharedViewModel sharedViewModel;
+    @Inject
+    DaggerViewModelFactory viewModelFactory;
 
     public static AccountFragment newInstance() {
         return new AccountFragment();
@@ -35,30 +31,20 @@ public class AccountFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.account_fragment, container, false);
-        fillFragmentWithData(view);
-        return view;
+        ((MyApplication) getActivity().getApplication()).getAppComponent().inject(this);
+        mViewModel = new ViewModelProvider(getActivity(), viewModelFactory).get(AccountViewModel.class);
+
+        AccountFragmentBinding accountFragmentBinding = DataBindingUtil
+                .inflate(inflater, R.layout.account_fragment, container, false);
+        accountFragmentBinding.setVm(mViewModel);
+        accountFragmentBinding.setLifecycleOwner(this);
+
+        return accountFragmentBinding.getRoot();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        mViewModel = new ViewModelProvider(this).get(AccountViewModel.class);
-//        this.sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
-        // TODO: Use the ViewModel
-    }
-
-    private void fillFragmentWithData(View view) {
-        updateText(view, R.id.fullNameTextView, getProperty(NAME) + " " + getProperty(SURNAME));
-        updateText(view, R.id.cityTextView, getProperty(POSTAL_CODE) + " " + getProperty(CITY));
-        updateText(view, R.id.streetTextView, getProperty(STREET_NUMBER));
-        updateText(view, R.id.phoneTextView, getProperty(PHONE));
-        updateText(view, R.id.accountStatusTextView, getProperty(STATUS));
-    }
-
-    private void updateText(View view, int id, String text) {
-        TextView textView = view.findViewById(id);
-        textView.setText(text);
     }
 
 }

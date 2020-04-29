@@ -19,17 +19,14 @@ import org.jetbrains.annotations.NotNull;
 import javax.inject.Inject;
 
 import pl.edu.pjatk.pamo.skrawek.rest.auth.AuthService;
-import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Account;
 import pl.edu.pjatk.pamo.skrawek.rest.model.auth.LoginRequest;
 import pl.edu.pjatk.pamo.skrawek.rest.model.auth.LoginResponse;
-import pl.edu.pjatk.pamo.skrawek.rest.service.AccountService;
-import pl.edu.pjatk.pamo.skrawek.rest.service.ServiceGenerator;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import static java.util.Objects.requireNonNull;
-import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.saveAccountData;
+import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.saveEmail;
 import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.saveAuthToken;
 
 /**
@@ -39,9 +36,6 @@ import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.saveAuthToken;
  */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "LoginActivity";
-
-    @Inject
-    AccountService accountService;
 
     @Inject
     AuthService authService;
@@ -82,7 +76,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (response.isSuccessful()) {
                     Log.i(TAG, "User: " + request.getUsername() + " authorized successfully");
                     saveAuthToken("Bearer " + requireNonNull(response.body()).getToken());
-                    getAccountDetails(email);
+                    saveEmail(email);
+                    navigateToMainFragment();
                 } else {
                     Log.e(TAG, "Failed to authorize user: " + request.getUsername());
                 }
@@ -90,27 +85,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void onFailure(@NotNull Call<LoginResponse> call, @NotNull Throwable t) {
-                Log.e(TAG, requireNonNull(t.getMessage()));
-            }
-        });
-    }
-
-    public void getAccountDetails(String email) {
-        Call<Account> call = accountService.getAccountDetails(email);
-        call.enqueue(new Callback<Account>() {
-            @Override
-            public void onResponse(@NotNull Call<Account> call, @NotNull Response<Account> response) {
-                if (response.isSuccessful()) {
-                    Log.i(TAG, "User id: " + requireNonNull(response.body()).getId());
-                    saveAccountData(response.body());
-                    navigateToMainFragment();
-                } else {
-                    Log.e(TAG, "Failed to get account details for user: " + email);
-                }
-            }
-
-            @Override
-            public void onFailure(@NotNull Call<Account> call, @NotNull Throwable t) {
                 Log.e(TAG, requireNonNull(t.getMessage()));
             }
         });

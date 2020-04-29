@@ -3,6 +3,7 @@ package pl.edu.pjatk.pamo.skrawek.rest;
 import dagger.Module;
 import dagger.Provides;
 import pl.edu.pjatk.pamo.skrawek.repository.FinancesRepository;
+import pl.edu.pjatk.pamo.skrawek.repository.AccountRepository;
 import pl.edu.pjatk.pamo.skrawek.repository.GuardianRepository;
 import pl.edu.pjatk.pamo.skrawek.rest.auth.AuthService;
 import pl.edu.pjatk.pamo.skrawek.rest.service.AccountService;
@@ -12,6 +13,9 @@ import pl.edu.pjatk.pamo.skrawek.rest.service.GuardianService;
 import static pl.edu.pjatk.pamo.skrawek.rest.service.ServiceGenerator.createService;
 
 @Module
+/**
+ * This module is responsible for injecting services and repositories to components, that require them
+ */
 public class RestModule {
 
     @Provides
@@ -42,5 +46,11 @@ public class RestModule {
     @Provides
     public FinancesRepository financesRepository() {
         return new FinancesRepository(financesService());
+    }
+  
+    @Provides
+    public AccountRepository accountRepository() {
+        return new AccountRepository(accountService());
+
     }
 }
