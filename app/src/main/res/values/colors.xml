@@ -7,4 +7,5 @@
     <color name="colorHeaderText">#606FEE</color>
     <color name="colorText">#828282</color>
     <color name="Black">#000000</color>
+    <color name="snackbar_red">#FF2828</color>
 </resources>

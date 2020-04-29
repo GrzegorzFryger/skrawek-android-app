@@ -4,14 +4,18 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.jetbrains.annotations.NotNull;
@@ -26,8 +30,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static java.util.Objects.requireNonNull;
-import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.saveEmail;
+import static pl.edu.pjatk.pamo.skrawek.MyApplication.getStringFromRes;
 import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.saveAuthToken;
+import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.saveEmail;
 
 /**
  * This activity is entry point of application.
@@ -80,17 +85,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     navigateToMainFragment();
                 } else {
                     Log.e(TAG, "Failed to authorize user: " + request.getUsername());
+                    showErrorMessageUsingSnackbar(getStringFromRes(R.string.rest_login_fail));
                 }
             }
 
             @Override
             public void onFailure(@NotNull Call<LoginResponse> call, @NotNull Throwable t) {
                 Log.e(TAG, requireNonNull(t.getMessage()));
+                showErrorMessageUsingSnackbar(getStringFromRes(R.string.rest_call_fail));
             }
         });
     }
 
-    private void navigateToMainFragment() {
+    protected void navigateToMainFragment() {
         startActivity(new Intent(this, MainActivity.class));
     }
 
@@ -101,5 +108,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         // set color icon to dark
         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+    }
+
+    protected void showErrorMessageUsingSnackbar(String message) {
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
+                message, Snackbar.LENGTH_LONG);
+        View view = snackbar.getView();
+        view.setBackgroundColor(ContextCompat.getColor(this, R.color.snackbar_red));
+        TextView snackTextView = view.findViewById(R.id.snackbar_text);
+        snackTextView.setGravity(Gravity.CENTER_HORIZONTAL);
+        snackTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        snackbar.show();
     }
 }
