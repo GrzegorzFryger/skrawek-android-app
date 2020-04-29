@@ -20,14 +20,14 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_navigation_home_to_absenceFragment"
-            app:destination="@id/absenceFragment" />
-        <action
             android:id="@+id/action_navigation_home_to_navigation_account"
             app:destination="@id/navigation_account" />
         <action
             android:id="@+id/action_navigation_home_to_navigation_finances"
             app:destination="@id/navigation_finances" />
+        <action
+            android:id="@+id/action_navigation_home_to_absenceFragment"
+            app:destination="@id/navigation_absence" />
     </fragment>
     <fragment
         android:id="@+id/navigation_account"
@@ -35,15 +35,15 @@
         android:label="@string/title_account"
         tools:layout="@layout/account_fragment" />
     <fragment
-        android:id="@+id/absenceFragment"
-        android:name="pl.edu.pjatk.pamo.skrawek.ui.absence.AbsenceFragment"
-        android:label="absence_fragment"
-        tools:layout="@layout/absence_fragment" />
-    <fragment
         android:id="@+id/incomingPaymentsDetailsFragment"
         android:name="pl.edu.pjatk.pamo.skrawek.ui.finances.IncomingPaymentsDetailsFragment"
         android:label="incoming_payments_details_fragment"
         tools:layout="@layout/incoming_payments_details_fragment" />
+    <fragment
+        android:id="@+id/navigation_absence"
+        android:name="pl.edu.pjatk.pamo.skrawek.ui.absence.AbsenceFragment"
+        android:label="@string/title_absence"
+        tools:layout="@layout/absence_fragment" />
 
 
 </navigation>

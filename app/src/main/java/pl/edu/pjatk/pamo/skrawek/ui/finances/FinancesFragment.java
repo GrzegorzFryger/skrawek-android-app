@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,6 +42,12 @@ public class FinancesFragment extends Fragment {
 
         this.initializeViewModels();
         this.view = inflater.inflate(R.layout.finances_fragment, container, false);
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         sharedViewModel.getSelectedChild().observe(getViewLifecycleOwner(), s -> {
             this.mViewModel.selectChild(s);
@@ -52,12 +59,15 @@ public class FinancesFragment extends Fragment {
             recyclerView.setAdapter(new IncomingPaymentRecyclerViewAdapter(s, onSelectPayment()));
         });
 
-        return view;
-    }
+        mViewModel.getBalance().observe(getViewLifecycleOwner(), balance -> {
+            TextView vBalance = view.findViewById(R.id.valueBalance);
+            TextView vReceivables = view.findViewById(R.id.valueReceivables);
+            TextView vLiabilities = view.findViewById(R.id.valueLiabilities);
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+            vBalance.setText(String.valueOf(balance.getReceivables()));
+            vReceivables.setText(String.valueOf(balance.getReceivables()));
+            vLiabilities.setText(String.valueOf(balance.getLiabilities()));
+        });
 
     }
 

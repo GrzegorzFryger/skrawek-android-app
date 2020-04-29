@@ -11,6 +11,7 @@ import java.util.UUID;
 
 import javax.inject.Inject;
 
+import pl.edu.pjatk.pamo.skrawek.rest.model.Balance;
 import pl.edu.pjatk.pamo.skrawek.rest.model.finances.IncomingPayment;
 import pl.edu.pjatk.pamo.skrawek.rest.service.FinancesService;
 import retrofit2.Call;
@@ -21,7 +22,8 @@ public class FinancesRepository {
     private static final String TAG = "FinancesRepository";
 
     private final FinancesService financesService;
-    private final MutableLiveData<List<IncomingPayment>> mutableLiveData = new MutableLiveData<>();
+    private final MutableLiveData<List<IncomingPayment>> listMutableLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Balance> balance = new MutableLiveData<>();
 
     @Inject
     public FinancesRepository(FinancesService guardianService) {
@@ -36,7 +38,7 @@ public class FinancesRepository {
             public void onResponse(@NotNull Call<List<IncomingPayment>> call, @NotNull Response<List<IncomingPayment>> response) {
                 List<IncomingPayment> mBlogWrapper = response.body();
                 if (mBlogWrapper != null) {
-                    mutableLiveData.setValue(mBlogWrapper);
+                    listMutableLiveData.setValue(mBlogWrapper);
                 }
             }
 
@@ -45,6 +47,26 @@ public class FinancesRepository {
                 Log.e(TAG, "Failed to get Incoming data for id: " + uuid);
             }
         });
-        return mutableLiveData;
+        return listMutableLiveData;
+    }
+
+    public MutableLiveData<Balance> getBalance(UUID uuid) {
+        Call<Balance> call = financesService.getBalanceForChild(uuid);
+
+        call.enqueue(new Callback<Balance>() {
+            @Override
+            public void onResponse(@NotNull Call<Balance> call, @NotNull Response<Balance> response) {
+                Balance mBlogWrapper = response.body();
+                if (mBlogWrapper != null) {
+                    balance.setValue(mBlogWrapper);
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<Balance> call, @NotNull Throwable t) {
+                Log.e(TAG, "Failed to get Incoming data for id: " + uuid);
+            }
+        });
+        return balance;
     }
 }
