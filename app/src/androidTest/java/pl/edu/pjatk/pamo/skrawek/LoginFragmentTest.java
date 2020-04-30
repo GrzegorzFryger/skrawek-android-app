@@ -34,6 +34,7 @@ public class LoginFragmentTest {
         onView(withId(R.id.signInButton)).perform(click());
 
         // Step 1 - Wait for REST API call timeout to occur
+        // This step requires backend REST API to be turned off
         onView(isRoot()).perform(waitFor(10000L));
 
         // Step 2 - Verify that snackbar appears with error

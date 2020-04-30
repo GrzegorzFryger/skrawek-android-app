@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
         snackbarFactory.buildSnackbarSuccessMessage(findViewById(android.R.id.content),
                 getApplicationContext(), getStringFromRes(R.string.rest_login_sucess))
+                .setDuration(1000) // Login message should be shorter so that user can start using nav menu
                 .show();
     }
 
