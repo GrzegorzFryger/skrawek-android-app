@@ -2,11 +2,13 @@ package pl.edu.pjatk.pamo.skrawek.module;
 
 import dagger.Module;
 import dagger.Provides;
+import pl.edu.pjatk.pamo.skrawek.repository.CalendarRepository;
 import pl.edu.pjatk.pamo.skrawek.repository.FinancesRepository;
 import pl.edu.pjatk.pamo.skrawek.repository.AccountRepository;
 import pl.edu.pjatk.pamo.skrawek.repository.GuardianRepository;
 import pl.edu.pjatk.pamo.skrawek.rest.auth.AuthService;
 import pl.edu.pjatk.pamo.skrawek.rest.service.AccountService;
+import pl.edu.pjatk.pamo.skrawek.rest.service.CalendarService;
 import pl.edu.pjatk.pamo.skrawek.rest.service.FinancesService;
 import pl.edu.pjatk.pamo.skrawek.rest.service.GuardianService;
 
@@ -39,6 +41,11 @@ public class RestModule {
     }
 
     @Provides
+    public CalendarService calendarService() {
+        return createService(CalendarService.class);
+    }
+
+    @Provides
     public GuardianRepository guardianRepository() {
         return new GuardianRepository(guardianService());
     }
@@ -51,6 +58,10 @@ public class RestModule {
     @Provides
     public AccountRepository accountRepository() {
         return new AccountRepository(accountService());
+    }
 
+    @Provides
+    public CalendarRepository calendarRepository() {
+        return new CalendarRepository(calendarService());
     }
 }

@@ -29,4 +29,9 @@ public class RequestMappings {
      * Base URL for controllers from REST API <strong>Receivables</strong> module
      */
     public static final String API_RECEIVABLES = "/api/receivables/";
+
+    /**
+     * Base URL for controllers from REST API <strong>Calendar</strong> module
+     */
+    public static final String API_CALENDAR = "/api/calendar/";
 }

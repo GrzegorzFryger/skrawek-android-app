@@ -4,10 +4,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import pl.edu.pjatk.pamo.skrawek.repository.AccountRepository;
+import pl.edu.pjatk.pamo.skrawek.repository.CalendarRepository;
 import pl.edu.pjatk.pamo.skrawek.repository.FinancesRepository;
 import pl.edu.pjatk.pamo.skrawek.repository.GuardianRepository;
 import pl.edu.pjatk.pamo.skrawek.rest.auth.AuthService;
 import pl.edu.pjatk.pamo.skrawek.rest.service.AccountService;
+import pl.edu.pjatk.pamo.skrawek.rest.service.CalendarService;
 import pl.edu.pjatk.pamo.skrawek.rest.service.FinancesService;
 import pl.edu.pjatk.pamo.skrawek.rest.service.GuardianService;
 
@@ -70,6 +72,18 @@ public class RestModuleTest {
     }
 
     @Test
+    public void Should_CreateCalendarService() {
+        //Given
+
+        //When
+        CalendarService result = restModule.calendarService();
+
+        //Then
+        assertNotNull(result);
+    }
+
+
+    @Test
     public void Should_CreateGuardianRepository() {
         //Given
 
@@ -100,5 +114,16 @@ public class RestModuleTest {
 
         //Then
         assertNotNull(accountRepository);
+    }
+
+    @Test
+    public void Should_CreateCalendarRepository() {
+        //Given
+
+        //When
+        CalendarRepository calendarRepository = restModule.calendarRepository();
+
+        //Then
+        assertNotNull(calendarRepository);
     }
 }
