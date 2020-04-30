@@ -7,7 +7,7 @@ import java.time.LocalDate;
  */
 public class DayOffWork {
     private Long id;
-    private LocalDate date;
+    private String date;
     private String name;
     private EventType eventType;
 
@@ -19,11 +19,11 @@ public class DayOffWork {
         this.id = id;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

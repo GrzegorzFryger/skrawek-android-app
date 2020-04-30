@@ -39,6 +39,7 @@ public class CalendarRepository {
                 if (dayOffWorkList != null) {
                     daysOffWorkLiveData.setValue(dayOffWorkList);
                 }
+                Log.i(TAG, "Downloaded list of holidays");
             }
 
             @Override

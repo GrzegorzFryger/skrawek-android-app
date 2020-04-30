@@ -48,7 +48,7 @@ public class DayOffWorkViewModelTest {
 
 
         DayOffWork dayOffWork = new DayOffWork();
-        dayOffWork.setDate(LocalDate.of(2020, 1, 1));
+        dayOffWork.setDate("2020-01-01");
         dayOffWork.setEventType(EventType.HOLIDAY);
         dayOffWork.setId(1L);
         dayOffWork.setName("Some holiday");
@@ -77,7 +77,7 @@ public class DayOffWorkViewModelTest {
         assertEquals(1, daysOffWork.getValue().size());
 
         assertEquals(new Long(1), result.getId());
-        assertEquals(LocalDate.of(2020, 1, 1), result.getDate());
+        assertEquals("2020-01-01", result.getDate());
         assertEquals(EventType.HOLIDAY, result.getEventType());
         assertEquals("Some holiday", result.getName());
     }
