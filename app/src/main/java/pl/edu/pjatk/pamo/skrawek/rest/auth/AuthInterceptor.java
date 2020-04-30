@@ -11,6 +11,9 @@ import okhttp3.Response;
 import static pl.edu.pjatk.pamo.skrawek.rest.auth.AuthConstants.AUTHORIZATION_HEADER;
 import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.getAuthToken;
 
+/**
+ * This interceptor is responsible for adding auth token to each request sent to REST API
+ */
 public class AuthInterceptor implements Interceptor {
 
     public AuthInterceptor() {

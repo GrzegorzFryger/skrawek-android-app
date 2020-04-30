@@ -11,6 +11,9 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.inject.Singleton;
 
+/**
+ * This factory is responsible for creating view models
+ */
 @Singleton
 public class DaggerViewModelFactory implements ViewModelProvider.Factory {
     private final Map<Class<? extends ViewModel>, Provider<ViewModel>> creators;

@@ -6,6 +6,9 @@ import pl.edu.pjatk.pamo.skrawek.MyApplication;
 
 import static pl.edu.pjatk.pamo.skrawek.MyApplication.addProperty;
 
+/**
+ * This class is responsible for storing globally most important application params - for instance user email
+ */
 public class SessionManager {
     public static final String USER_TOKEN = "token";
     public static final String GUARDIAN_ID = "guardianId";

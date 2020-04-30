@@ -18,6 +18,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * This repository is responsible for retrieving financial data
+ */
 public class FinancesRepository {
     private static final String TAG = "FinancesRepository";
 

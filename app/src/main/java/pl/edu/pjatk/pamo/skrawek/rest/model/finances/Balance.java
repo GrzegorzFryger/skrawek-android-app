@@ -3,6 +3,9 @@ package pl.edu.pjatk.pamo.skrawek.rest.model.finances;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+/**
+ * Model class - used when calling REST API
+ */
 public class Balance {
     private BigDecimal balance;
     private BigDecimal receivables;

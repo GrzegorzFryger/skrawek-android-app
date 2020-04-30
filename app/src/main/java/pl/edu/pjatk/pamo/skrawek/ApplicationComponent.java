@@ -12,6 +12,9 @@ import pl.edu.pjatk.pamo.skrawek.ui.children.ChildrenSelectDialog;
 import pl.edu.pjatk.pamo.skrawek.ui.finances.FinancesFragment;
 import pl.edu.pjatk.pamo.skrawek.ui.finances.IncomingPaymentsDetailsFragment;
 
+/**
+ * This Component is responsible for telling which components require injecting some dependencies
+ */
 @Singleton
 @Component(modules = {RestModule.class, ViewModelModule.class, ViewModule.class})
 public interface ApplicationComponent {

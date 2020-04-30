@@ -16,6 +16,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * This repository is responsible for retrieving days calendar data
+ */
 public class CalendarRepository {
     private static final String TAG = "CalendarRepository";
 

@@ -25,6 +25,10 @@ import pl.edu.pjatk.pamo.skrawek.ui.snackbar.SnackbarFactory;
 import static pl.edu.pjatk.pamo.skrawek.MyApplication.getStringFromRes;
 import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.getEmail;
 
+/**
+ * This is main activity - which contains core functions.
+ * These are available once user successfully logs in
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Inject
