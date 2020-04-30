@@ -6,6 +6,7 @@ import dagger.Component;
 import pl.edu.pjatk.pamo.skrawek.module.RestModule;
 import pl.edu.pjatk.pamo.skrawek.module.ViewModelModule;
 import pl.edu.pjatk.pamo.skrawek.module.ViewModule;
+import pl.edu.pjatk.pamo.skrawek.ui.absence.AbsenceFragment;
 import pl.edu.pjatk.pamo.skrawek.ui.account.AccountFragment;
 import pl.edu.pjatk.pamo.skrawek.ui.children.ChildrenSelectDialog;
 import pl.edu.pjatk.pamo.skrawek.ui.finances.FinancesFragment;
@@ -24,6 +25,8 @@ public interface ApplicationComponent {
     void inject(IncomingPaymentsDetailsFragment incomingPaymentsDetailsFragment);
 
     void inject(AccountFragment accountFragment);
+
+    void inject(AbsenceFragment absenceFragment);
 
     void inject(MainActivity mainActivity);
 
