@@ -11,7 +11,7 @@ import java.util.UUID;
 
 import javax.inject.Inject;
 
-import pl.edu.pjatk.pamo.skrawek.rest.model.Balance;
+import pl.edu.pjatk.pamo.skrawek.rest.model.finances.Balance;
 import pl.edu.pjatk.pamo.skrawek.rest.model.finances.IncomingPayment;
 import pl.edu.pjatk.pamo.skrawek.rest.service.FinancesService;
 import retrofit2.Call;

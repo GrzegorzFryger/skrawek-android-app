@@ -1,4 +1,4 @@
-package pl.edu.pjatk.pamo.skrawek.rest.model;
+package pl.edu.pjatk.pamo.skrawek.rest.model.finances;
 
 import java.math.BigDecimal;
 import java.util.UUID;
