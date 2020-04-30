@@ -39,8 +39,8 @@ public class ChangeFragmentBehaviorTest {
                 .check(matches(isDisplayed()));
 
         // Step 1 - Wait for Snackbar to disappear
-        // Snackbar is visible for 1500 ms - we give some more time to include disappear animation
-        onView(isRoot()).perform(waitFor(3000L));
+        // Snackbar is visible for 1000 ms - we give some more time to include disappear animation
+        onView(isRoot()).perform(waitFor(2000L));
 
         // Step 2 - Start at home fragment
         onView(withId(R.id.navigation_home)).check(matches(isSelected()));
