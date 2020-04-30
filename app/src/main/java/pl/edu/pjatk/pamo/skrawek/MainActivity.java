@@ -18,6 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import javax.inject.Inject;
 
 import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
+import pl.edu.pjatk.pamo.skrawek.ui.absence.DayOffWorkViewModel;
 import pl.edu.pjatk.pamo.skrawek.ui.account.AccountViewModel;
 import pl.edu.pjatk.pamo.skrawek.ui.snackbar.SnackbarFactory;
 
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     SnackbarFactory snackbarFactory;
 
     AccountViewModel accountViewModel;
+
+    DayOffWorkViewModel dayOffWorkViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         this.setTransparentTitleBar(getWindow());
 
         ((MyApplication) getApplication()).getAppComponent().inject(this);
-        initializeAccountViewModel();
+        initializeViewModels();
 
         snackbarFactory.buildSnackbarSuccessMessage(findViewById(android.R.id.content),
                 getApplicationContext(), getStringFromRes(R.string.rest_login_sucess))
@@ -82,8 +85,11 @@ public class MainActivity extends AppCompatActivity {
         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
     }
 
-    protected void initializeAccountViewModel() {
+    protected void initializeViewModels() {
         accountViewModel = new ViewModelProvider(this, viewModelFactory).get(AccountViewModel.class);
         accountViewModel.initializeAccountData(getEmail());
+
+        dayOffWorkViewModel = new ViewModelProvider(this, viewModelFactory).get(DayOffWorkViewModel.class);
+        dayOffWorkViewModel.initializeData();
     }
 }

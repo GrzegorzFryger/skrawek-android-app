@@ -10,12 +10,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import javax.inject.Inject;
+
+import pl.edu.pjatk.pamo.skrawek.MyApplication;
 import pl.edu.pjatk.pamo.skrawek.R;
 import pl.edu.pjatk.pamo.skrawek.SharedViewModel;
+import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
 
 public class AbsenceFragment extends Fragment {
 
-    private AbsenceViewModel mViewModel;
+    @Inject
+    DaggerViewModelFactory viewModelFactory;
+
+    private DayOffWorkViewModel mViewModel;
     private SharedViewModel sharedViewModel;
 
     public static AbsenceFragment newInstance() {
@@ -31,7 +38,8 @@ public class AbsenceFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(AbsenceViewModel.class);
+        ((MyApplication) getActivity().getApplication()).getAppComponent().inject(this);
+        mViewModel = new ViewModelProvider(getActivity(), viewModelFactory).get(DayOffWorkViewModel.class);
         this.sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
         // TODO: Use the ViewModel
     }
