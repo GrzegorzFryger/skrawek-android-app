@@ -29,7 +29,7 @@ public class AccountRepositoryTest {
     }
 
     @Test
-    public void Should_MutableLiveData() {
+    public void Should_GetMutableLiveDataFor_AccountDetails() {
         //Given
         Call call = mock(Call.class);
 

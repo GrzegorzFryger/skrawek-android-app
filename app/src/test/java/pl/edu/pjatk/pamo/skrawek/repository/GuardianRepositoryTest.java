@@ -32,7 +32,7 @@ public class GuardianRepositoryTest {
     }
 
     @Test
-    public void Should_MutableLiveData() {
+    public void Should_MutableLiveDataFor_Guardian() {
         //Given
         Call call = mock(Call.class);
 

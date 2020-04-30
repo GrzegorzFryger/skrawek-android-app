@@ -3,7 +3,7 @@ package pl.edu.pjatk.pamo.skrawek.rest.service;
 import java.util.List;
 import java.util.UUID;
 
-import pl.edu.pjatk.pamo.skrawek.rest.model.Balance;
+import pl.edu.pjatk.pamo.skrawek.rest.model.finances.Balance;
 import pl.edu.pjatk.pamo.skrawek.rest.model.finances.IncomingPayment;
 import retrofit2.Call;
 import retrofit2.http.GET;
