@@ -14,6 +14,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * This repository is responsible for retrieving account data
+ */
 public class AccountRepository {
     private static final String TAG = "AccountRepository";
 

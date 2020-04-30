@@ -4,6 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * Model class - used when calling REST API
+ */
 public class Account {
     private UUID id;
     private String name;

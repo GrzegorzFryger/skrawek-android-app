@@ -1,8 +1,10 @@
 package pl.edu.pjatk.pamo.skrawek.rest.model.accounts;
 
-import java.time.LocalDate;
 import java.util.UUID;
 
+/**
+ * Model class - used when calling REST API
+ */
 public class Child {
     private UUID id;
     private String name;

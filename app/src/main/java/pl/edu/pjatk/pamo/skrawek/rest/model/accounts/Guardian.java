@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Model class - used when calling REST API
+ */
 public class Guardian extends Account {
     private List<Child> children = new ArrayList<>();
 

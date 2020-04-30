@@ -8,6 +8,9 @@ import retrofit2.http.POST;
 
 import static pl.edu.pjatk.pamo.skrawek.rest.config.RequestMappings.API_AUTH;
 
+/**
+ * This service defines REST API urls for <strong>Account</strong> module (AccountController)
+ */
 public interface AuthService {
 
     @POST(API_AUTH)

@@ -14,6 +14,9 @@ import pl.edu.pjatk.pamo.skrawek.ui.children.ChildrenSelectDialogViewModel;
 import pl.edu.pjatk.pamo.skrawek.ui.children.ChildrenSelectViewModel;
 import pl.edu.pjatk.pamo.skrawek.ui.finances.FinancesViewModel;
 
+/**
+ * This module is responsible for binding view models
+ */
 @Module
 public abstract class ViewModelModule {
     @Binds
