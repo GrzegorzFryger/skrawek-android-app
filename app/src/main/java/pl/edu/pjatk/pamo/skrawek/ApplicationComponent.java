@@ -12,6 +12,7 @@ import pl.edu.pjatk.pamo.skrawek.ui.account.AccountFragment;
 import pl.edu.pjatk.pamo.skrawek.ui.children.ChildrenSelectDialog;
 import pl.edu.pjatk.pamo.skrawek.ui.finances.FinancesFragment;
 import pl.edu.pjatk.pamo.skrawek.ui.finances.IncomingPaymentsDetailsFragment;
+import pl.edu.pjatk.pamo.skrawek.ui.home.HomeFragment;
 
 /**
  * This Component is responsible for telling which components require injecting some dependencies
@@ -30,7 +31,7 @@ public interface ApplicationComponent {
 
     void inject(AccountFragment accountFragment);
 
-    void inject(AbsenceFragment absenceFragment);
+    void inject(HomeFragment homeFragment);
 
     void inject(MainActivity mainActivity);
 
