@@ -30,13 +30,13 @@ public class DateUtils {
     public String calendarToString(Calendar calendar) {
         Date date = calendar.getTime();
 
-        String inActiveDate = "";
+        String result = "";
         try {
-            inActiveDate = dateFormat.format(date);
-        } catch (ParseException e1) {
+            result = dateFormat.format(date);
+        } catch (ParseException pe) {
             Log.e(TAG, "Failed to parse date to string");
         }
-        return inActiveDate;
+        return result;
     }
 
     public Date toDate(LocalDate dateToConvert) {
