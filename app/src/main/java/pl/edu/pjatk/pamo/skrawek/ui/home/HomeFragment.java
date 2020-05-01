@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +26,7 @@ import pl.edu.pjatk.pamo.skrawek.MyApplication;
 import pl.edu.pjatk.pamo.skrawek.R;
 import pl.edu.pjatk.pamo.skrawek.rest.model.calendar.DayOffWork;
 import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
+import pl.edu.pjatk.pamo.skrawek.ui.absence.AbsenceEventDay;
 import pl.edu.pjatk.pamo.skrawek.ui.absence.DayOffWorkViewModel;
 import pl.edu.pjatk.pamo.skrawek.util.DateUtils;
 
@@ -38,6 +40,7 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
     DateUtils dateUtils;
 
     private DayOffWorkViewModel dayOffWorkViewModel;
+    private TextView absenceTextView;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -48,6 +51,7 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ((MyApplication) getActivity().getApplication()).getAppComponent().inject(this);
         dayOffWorkViewModel = new ViewModelProvider(getActivity(), viewModelFactory).get(DayOffWorkViewModel.class);
+        absenceTextView = view.findViewById(R.id.absenceTextView);
         markHolidaysInCalendar(view);
         return view;
     }
@@ -59,8 +63,14 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
 
     @Override
     public void onDayClick(EventDay eventDay) {
-        Calendar clickedDayCalendar = eventDay.getCalendar();
-        Log.i(TAG, "Clicked day: " + dateUtils.calendarToString(clickedDayCalendar));
+        if (eventDay instanceof AbsenceEventDay) {
+            AbsenceEventDay absenceEventDay = (AbsenceEventDay) eventDay;
+            Calendar clickedDayCalendar = eventDay.getCalendar();
+            Log.i(TAG, "Clicked day: " + dateUtils.calendarToString(clickedDayCalendar));
+            absenceTextView.setText(absenceEventDay.getEventDescription());
+        } else {
+            absenceTextView.setText("");
+        }
     }
 
     private void markHolidaysInCalendar(View view) {
