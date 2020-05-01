@@ -48,6 +48,8 @@ public class DateUtils {
             return new AbsenceEventDay(calendar, R.drawable.red_circle, dayOffWork.getName());
         } else if (EventType.INTERNAL_EVENT.equals(dayOffWork.getEventType())) {
             return new AbsenceEventDay(calendar, R.drawable.purple_circle, dayOffWork.getName());
+        } else if (EventType.WEEKEND.equals(dayOffWork.getEventType())) {
+            return new AbsenceEventDay(calendar, dayOffWork.getName());
         }
         return new AbsenceEventDay(calendar, dayOffWork.getName());
     }

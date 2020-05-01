@@ -108,6 +108,19 @@ public class DateUtilsTest {
         assertEquals("Some name", result.getEventDescription());
     }
 
+    @Test
+    public void Should_CreateWeekendDay() {
+        //Given
+        DayOffWork input = buildDayOffWork(EventType.WEEKEND);
+
+        //When
+        AbsenceEventDay result = dateUtils.prepareEventDay(input);
+
+        //Then
+        assertNotNull(result);
+        assertEquals("Some name", result.getEventDescription());
+    }
+
     private DayOffWork buildDayOffWork(EventType eventType) {
         DayOffWork dayOffWork = new DayOffWork();
         dayOffWork.setName("Some name");
