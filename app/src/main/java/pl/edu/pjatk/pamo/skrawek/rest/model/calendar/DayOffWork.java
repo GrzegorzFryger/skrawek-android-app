@@ -1,7 +1,5 @@
 package pl.edu.pjatk.pamo.skrawek.rest.model.calendar;
 
-import java.time.LocalDate;
-
 /**
  * Model class - used when calling REST API
  */
