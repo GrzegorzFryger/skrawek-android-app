@@ -1,7 +1,5 @@
 package pl.edu.pjatk.pamo.skrawek.util;
 
-import com.applandeo.materialcalendarview.EventDay;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,9 +10,11 @@ import java.util.Date;
 import pl.edu.pjatk.pamo.skrawek.R;
 import pl.edu.pjatk.pamo.skrawek.rest.model.calendar.DayOffWork;
 import pl.edu.pjatk.pamo.skrawek.rest.model.calendar.EventType;
+import pl.edu.pjatk.pamo.skrawek.ui.absence.AbsenceEventDay;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 public class DateUtilsTest {
 
@@ -73,10 +73,11 @@ public class DateUtilsTest {
         DayOffWork input = buildDayOffWork(null);
 
         //When
-        EventDay result = dateUtils.prepareEventDay(input);
+        AbsenceEventDay result = dateUtils.prepareEventDay(input);
 
         //Then
         assertNotNull(result);
+        assertEquals("Some name", result.getEventDescription());
     }
 
     @Test
@@ -85,11 +86,12 @@ public class DateUtilsTest {
         DayOffWork input = buildDayOffWork(EventType.HOLIDAY);
 
         //When
-        EventDay result = dateUtils.prepareEventDay(input);
+        AbsenceEventDay result = dateUtils.prepareEventDay(input);
 
         //Then
         assertNotNull(result);
         assertEquals(R.drawable.red_circle, result.getImageDrawable());
+        assertEquals("Some name", result.getEventDescription());
     }
 
     @Test
@@ -98,11 +100,12 @@ public class DateUtilsTest {
         DayOffWork input = buildDayOffWork(EventType.INTERNAL_EVENT);
 
         //When
-        EventDay result = dateUtils.prepareEventDay(input);
+        AbsenceEventDay result = dateUtils.prepareEventDay(input);
 
         //Then
         assertNotNull(result);
         assertEquals(R.drawable.purple_circle, result.getImageDrawable());
+        assertEquals("Some name", result.getEventDescription());
     }
 
     private DayOffWork buildDayOffWork(EventType eventType) {

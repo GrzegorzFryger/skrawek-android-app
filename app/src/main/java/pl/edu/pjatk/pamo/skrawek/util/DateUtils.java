@@ -3,8 +3,6 @@ package pl.edu.pjatk.pamo.skrawek.util;
 import android.net.ParseException;
 import android.util.Log;
 
-import com.applandeo.materialcalendarview.EventDay;
-
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -14,6 +12,7 @@ import java.util.Date;
 import pl.edu.pjatk.pamo.skrawek.R;
 import pl.edu.pjatk.pamo.skrawek.rest.model.calendar.DayOffWork;
 import pl.edu.pjatk.pamo.skrawek.rest.model.calendar.EventType;
+import pl.edu.pjatk.pamo.skrawek.ui.absence.AbsenceEventDay;
 
 public class DateUtils {
     private static final String TAG = "DateUtils";
@@ -43,13 +42,13 @@ public class DateUtils {
         return Date.from(dateToConvert.atStartOfDay(defaultZoneId).toInstant());
     }
 
-    public EventDay prepareEventDay(DayOffWork dayOffWork) {
+    public AbsenceEventDay prepareEventDay(DayOffWork dayOffWork) {
         Calendar calendar = toCalendar(LocalDate.parse(dayOffWork.getDate()));
         if (EventType.HOLIDAY.equals(dayOffWork.getEventType())) {
-            return new EventDay(calendar, R.drawable.red_circle);
+            return new AbsenceEventDay(calendar, R.drawable.red_circle, dayOffWork.getName());
         } else if (EventType.INTERNAL_EVENT.equals(dayOffWork.getEventType())) {
-            return new EventDay(calendar, R.drawable.purple_circle);
+            return new AbsenceEventDay(calendar, R.drawable.purple_circle, dayOffWork.getName());
         }
-        return new EventDay(calendar);
+        return new AbsenceEventDay(calendar, dayOffWork.getName());
     }
 }
