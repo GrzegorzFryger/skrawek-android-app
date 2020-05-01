@@ -1,27 +1,43 @@
 package pl.edu.pjatk.pamo.skrawek.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import pl.edu.pjatk.pamo.skrawek.R;
-import pl.edu.pjatk.pamo.skrawek.SharedViewModel;
-import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Child;
-import pl.edu.pjatk.pamo.skrawek.ui.finances.FinancesViewModel;
+import com.applandeo.materialcalendarview.CalendarView;
+import com.applandeo.materialcalendarview.EventDay;
+import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 
-public class HomeFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+import javax.inject.Inject;
+
+import pl.edu.pjatk.pamo.skrawek.MyApplication;
+import pl.edu.pjatk.pamo.skrawek.R;
+import pl.edu.pjatk.pamo.skrawek.rest.model.calendar.DayOffWork;
+import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
+import pl.edu.pjatk.pamo.skrawek.ui.absence.DayOffWorkViewModel;
+import pl.edu.pjatk.pamo.skrawek.util.DateUtils;
+
+public class HomeFragment extends Fragment implements OnDayClickListener {
     private static final String TAG = "HomeFragment";
 
-    private HomeViewModel homeViewModel;
-    private SharedViewModel sharedViewModel;
+    @Inject
+    DaggerViewModelFactory viewModelFactory;
+
+    @Inject
+    DateUtils dateUtils;
+
+    private DayOffWorkViewModel dayOffWorkViewModel;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -29,23 +45,34 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-
-        return root;
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        ((MyApplication) getActivity().getApplication()).getAppComponent().inject(this);
+        dayOffWorkViewModel = new ViewModelProvider(getActivity(), viewModelFactory).get(DayOffWorkViewModel.class);
+        markHolidaysInCalendar(view);
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        this.sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
-        // TODO: Use the ViewModel
+    }
+
+    @Override
+    public void onDayClick(EventDay eventDay) {
+        Calendar clickedDayCalendar = eventDay.getCalendar();
+        Log.i(TAG, "Clicked day: " + dateUtils.calendarToString(clickedDayCalendar));
+    }
+
+    private void markHolidaysInCalendar(View view) {
+        dayOffWorkViewModel.getDaysOffWork().observe(this.getViewLifecycleOwner(),
+                dayOffWorks -> {
+                    List<EventDay> events = new ArrayList<>();
+                    for (DayOffWork dayOffWork : dayOffWorks) {
+                        events.add(dateUtils.prepareEventDay(dayOffWork));
+                    }
+                    CalendarView calendarView = view.findViewById(R.id.calendarView);
+                    calendarView.setEvents(events);
+                    calendarView.setOnDayClickListener(this);
+                });
     }
 }
