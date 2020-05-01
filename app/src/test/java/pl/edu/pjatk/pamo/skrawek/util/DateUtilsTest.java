@@ -1,0 +1,117 @@
+package pl.edu.pjatk.pamo.skrawek.util;
+
+import com.applandeo.materialcalendarview.EventDay;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
+
+import pl.edu.pjatk.pamo.skrawek.R;
+import pl.edu.pjatk.pamo.skrawek.rest.model.calendar.DayOffWork;
+import pl.edu.pjatk.pamo.skrawek.rest.model.calendar.EventType;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+public class DateUtilsTest {
+
+    private DateUtils dateUtils;
+
+    @Before
+    public void setUp() {
+        dateUtils = new DateUtils();
+    }
+
+    @Test
+    public void Should_ConvertLocalDate_To_Calendar() {
+        //Given
+        LocalDate input = LocalDate.of(2020, 1, 1);
+
+        //When
+        Calendar result = dateUtils.toCalendar(input);
+
+        //Then
+        assertNotNull(result);
+        assertEquals(input.getYear(), result.get(Calendar.YEAR));
+        // In Calendar month starts from 0 instead of 1, so we add +1
+        assertEquals(input.getMonth().getValue(), result.get(Calendar.MONTH) + 1);
+        assertEquals(input.getDayOfMonth(), result.get(Calendar.DAY_OF_MONTH));
+    }
+
+    @Test
+    public void Should_ConvertLocalDate_To_Date() {
+        //Given
+        LocalDate input = LocalDate.of(2020, 1, 1);
+
+        //When
+        Date result = dateUtils.toDate(input);
+
+        //Then
+        assertNotNull(result);
+    }
+
+    @Test
+    public void Should_ConvertCalendar_ToString() {
+        //Given
+        String expected = "2020-01-01";
+        LocalDate localDate = LocalDate.of(2020, 1, 1);
+        Calendar input = dateUtils.toCalendar(localDate);
+
+        //When
+        String result = dateUtils.calendarToString(input);
+
+        //Then
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void Should_CreateEventDay() {
+        //Given
+        DayOffWork input = buildDayOffWork(null);
+
+        //When
+        EventDay result = dateUtils.prepareEventDay(input);
+
+        //Then
+        assertNotNull(result);
+    }
+
+    @Test
+    public void Should_CreateHolidayEventDay() {
+        //Given
+        DayOffWork input = buildDayOffWork(EventType.HOLIDAY);
+
+        //When
+        EventDay result = dateUtils.prepareEventDay(input);
+
+        //Then
+        assertNotNull(result);
+        assertEquals(R.drawable.red_circle, result.getImageDrawable());
+    }
+
+    @Test
+    public void Should_CreateInternalEventDay() {
+        //Given
+        DayOffWork input = buildDayOffWork(EventType.INTERNAL_EVENT);
+
+        //When
+        EventDay result = dateUtils.prepareEventDay(input);
+
+        //Then
+        assertNotNull(result);
+        assertEquals(R.drawable.purple_circle, result.getImageDrawable());
+    }
+
+    private DayOffWork buildDayOffWork(EventType eventType) {
+        DayOffWork dayOffWork = new DayOffWork();
+        dayOffWork.setName("Some name");
+        dayOffWork.setId(1L);
+        dayOffWork.setEventType(eventType);
+        dayOffWork.setDate("2020-01-01");
+        return dayOffWork;
+    }
+
+}
