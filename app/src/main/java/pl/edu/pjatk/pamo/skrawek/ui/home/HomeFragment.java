@@ -28,6 +28,7 @@ import pl.edu.pjatk.pamo.skrawek.R;
 import pl.edu.pjatk.pamo.skrawek.rest.model.calendar.DayOffWork;
 import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
 import pl.edu.pjatk.pamo.skrawek.ui.absence.AbsenceEventDay;
+import pl.edu.pjatk.pamo.skrawek.ui.absence.AbsenceViewModel;
 import pl.edu.pjatk.pamo.skrawek.ui.absence.DayOffWorkViewModel;
 import pl.edu.pjatk.pamo.skrawek.util.DateUtils;
 
@@ -41,7 +42,9 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
     DateUtils dateUtils;
 
     private DayOffWorkViewModel dayOffWorkViewModel;
+    private AbsenceViewModel absenceViewModel;
     private TextView absenceTextView;
+    private List<EventDay> events;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -52,13 +55,16 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ((MyApplication) getActivity().getApplication()).getAppComponent().inject(this);
         dayOffWorkViewModel = new ViewModelProvider(getActivity(), viewModelFactory).get(DayOffWorkViewModel.class);
+        absenceViewModel = new ViewModelProvider(getActivity(), viewModelFactory).get(AbsenceViewModel.class);
 
         view.findViewById(R.id.profile_image).setOnClickListener(c -> {
             Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_navigation_account);
         });
 
+        events = new ArrayList<>();
         absenceTextView = view.findViewById(R.id.event_info);
         markHolidaysInCalendar(view);
+        addChildAbsences(view);
         return view;
     }
 
@@ -82,7 +88,6 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
     private void markHolidaysInCalendar(View view) {
         dayOffWorkViewModel.getDaysOffWork().observe(this.getViewLifecycleOwner(),
                 dayOffWorks -> {
-                    List<EventDay> events = new ArrayList<>();
                     for (DayOffWork dayOffWork : dayOffWorks) {
                         events.add(dateUtils.prepareEventDay(dayOffWork));
                     }
@@ -90,6 +95,10 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
                     calendarView.setEvents(events);
                     calendarView.setOnDayClickListener(this);
                 });
+    }
+
+    private void addChildAbsences(View view) {
+
     }
 
 }
