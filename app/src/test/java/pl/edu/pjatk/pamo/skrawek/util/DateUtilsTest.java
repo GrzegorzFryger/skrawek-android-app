@@ -6,15 +6,17 @@ import org.junit.Test;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
 
 import pl.edu.pjatk.pamo.skrawek.R;
+import pl.edu.pjatk.pamo.skrawek.rest.model.calendar.Absence;
 import pl.edu.pjatk.pamo.skrawek.rest.model.calendar.DayOffWork;
 import pl.edu.pjatk.pamo.skrawek.rest.model.calendar.EventType;
 import pl.edu.pjatk.pamo.skrawek.ui.absence.AbsenceEventDay;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class DateUtilsTest {
 
@@ -119,6 +121,23 @@ public class DateUtilsTest {
         //Then
         assertNotNull(result);
         assertEquals("Some name", result.getEventDescription());
+    }
+
+    @Test
+    public void Should_CreateAbsenceEventDay() {
+        //Given
+        Absence absence = new Absence();
+        absence.setChildId(UUID.randomUUID());
+        absence.setDate("2020-05-20");
+        absence.setReason("Choroba");
+
+        //When
+        AbsenceEventDay result = dateUtils.prepareEventDay(absence);
+
+        //Then
+        assertNotNull(result);
+        assertEquals(R.drawable.green_circle, result.getImageDrawable());
+        assertTrue(result.getEventDescription().contains("Choroba"));
     }
 
     private DayOffWork buildDayOffWork(EventType eventType) {

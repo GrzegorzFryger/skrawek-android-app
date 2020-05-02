@@ -10,6 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import pl.edu.pjatk.pamo.skrawek.R;
+import pl.edu.pjatk.pamo.skrawek.rest.model.calendar.Absence;
 import pl.edu.pjatk.pamo.skrawek.rest.model.calendar.DayOffWork;
 import pl.edu.pjatk.pamo.skrawek.rest.model.calendar.EventType;
 import pl.edu.pjatk.pamo.skrawek.ui.absence.AbsenceEventDay;
@@ -52,5 +53,12 @@ public class DateUtils {
             return new AbsenceEventDay(calendar, dayOffWork.getName());
         }
         return new AbsenceEventDay(calendar, dayOffWork.getName());
+    }
+
+    public AbsenceEventDay prepareEventDay(Absence absence) {
+        Calendar calendar = toCalendar(LocalDate.parse(absence.getDate()));
+        //TODO Replace Child ID with full name
+        return new AbsenceEventDay(calendar, R.drawable.green_circle,
+                absence.getChildId() + " - " + absence.getReason());
     }
 }
