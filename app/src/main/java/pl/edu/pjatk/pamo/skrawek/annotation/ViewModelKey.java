@@ -1,4 +1,4 @@
-package pl.edu.pjatk.pamo.skrawek.ui;
+package pl.edu.pjatk.pamo.skrawek.annotation;
 
 import androidx.lifecycle.ViewModel;
 

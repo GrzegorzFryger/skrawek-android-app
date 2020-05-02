@@ -7,7 +7,7 @@ import dagger.Binds;
 import dagger.Module;
 import dagger.multibindings.IntoMap;
 import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
-import pl.edu.pjatk.pamo.skrawek.ui.ViewModelKey;
+import pl.edu.pjatk.pamo.skrawek.annotation.ViewModelKey;
 import pl.edu.pjatk.pamo.skrawek.ui.absence.AbsenceViewModel;
 import pl.edu.pjatk.pamo.skrawek.ui.absence.DayOffWorkViewModel;
 import pl.edu.pjatk.pamo.skrawek.ui.account.AccountViewModel;
