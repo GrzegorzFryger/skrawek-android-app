@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
@@ -51,7 +52,12 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ((MyApplication) getActivity().getApplication()).getAppComponent().inject(this);
         dayOffWorkViewModel = new ViewModelProvider(getActivity(), viewModelFactory).get(DayOffWorkViewModel.class);
-        absenceTextView = view.findViewById(R.id.absenceTextView);
+
+        view.findViewById(R.id.profile_image).setOnClickListener(c -> {
+            Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_navigation_account);
+        });
+
+        absenceTextView = view.findViewById(R.id.event_info);
         markHolidaysInCalendar(view);
         return view;
     }
@@ -69,7 +75,7 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
             Log.i(TAG, "Clicked day: " + dateUtils.calendarToString(clickedDayCalendar));
             absenceTextView.setText(absenceEventDay.getEventDescription());
         } else {
-            absenceTextView.setText("");
+            absenceTextView.setText(R.string.none);
         }
     }
 
@@ -85,4 +91,5 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
                     calendarView.setOnDayClickListener(this);
                 });
     }
+
 }
