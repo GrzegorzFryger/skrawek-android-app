@@ -20,7 +20,6 @@ import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.UUID;
 
 import javax.inject.Inject;
 
@@ -33,6 +32,8 @@ import pl.edu.pjatk.pamo.skrawek.ui.absence.AbsenceEventDay;
 import pl.edu.pjatk.pamo.skrawek.ui.absence.AbsenceViewModel;
 import pl.edu.pjatk.pamo.skrawek.ui.absence.DayOffWorkViewModel;
 import pl.edu.pjatk.pamo.skrawek.util.DateUtils;
+
+import static pl.edu.pjatk.pamo.skrawek.rest.auth.SessionManager.getGuardianId;
 
 public class HomeFragment extends Fragment implements OnDayClickListener {
     private static final String TAG = "HomeFragment";
@@ -69,12 +70,7 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
         calendarView = view.findViewById(R.id.calendarView);
         calendarView.setOnDayClickListener(this);
         markHolidaysInCalendar();
-
-        //TODO Remove this hardcoded list
-        List<UUID> childIdList = new ArrayList<>();
-        childIdList.add(UUID.fromString("0560d77d-e0db-4914-ae4a-4f39690ecb2d"));
-        childIdList.add(UUID.fromString("067b5db4-de4e-401e-9cac-7f6289e96c19"));
-        addChildAbsences(childIdList);
+        addChildAbsences();
         return view;
     }
 
@@ -105,18 +101,22 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
                 });
     }
 
-    private void addChildAbsences(List<UUID> childIdList) {
-        for (UUID childId : childIdList) {
-            absenceViewModel.fetchAbsencesForChild(childId).observe(
-                    this.getViewLifecycleOwner(),
-                    absences -> {
-                        for (Absence absence : absences) {
-                            events.add(dateUtils.prepareEventDay(absence));
-                        }
-                        calendarView.setEvents(events);
-                    }
-            );
-        }
+    private void addChildAbsences() {
+        absenceViewModel.getGuardianLiveData(getGuardianId()).observe(this.getViewLifecycleOwner(),
+                guardian -> {
+                    guardian.getChildren().forEach(child -> {
+                        Log.i(TAG, "Loading absences for child: " + child.getId());
+                        absenceViewModel.fetchAbsencesForChild(child.getId()).observe(
+                                this.getViewLifecycleOwner(), absences -> {
+                                    for (Absence absence : absences) {
+                                        Log.i(TAG, "Adding absence for " + child.getId());
+                                        events.add(dateUtils.prepareEventDay(absence, child.getName()));
+                                    }
+                                    calendarView.setEvents(events);
+                                }
+                        );
+                    });
+                });
     }
 
 }
