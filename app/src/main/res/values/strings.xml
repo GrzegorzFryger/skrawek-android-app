@@ -42,4 +42,9 @@
     <string name="balance">Balance</string>
     <string name="liabilities">Liabilities</string>
     <string name="pln">PLN</string>
+    <string name="events_calendar">Selected event: </string>
+    <string name="name_surname">Name Surname</string>
+    <string name="transaction_details">Transaction Details</string>
+    <string name="history_payments">History payments</string>
+    <string name="none">None</string>
 </resources>
