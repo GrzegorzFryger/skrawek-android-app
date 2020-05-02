@@ -20,11 +20,13 @@ import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.UUID;
 
 import javax.inject.Inject;
 
 import pl.edu.pjatk.pamo.skrawek.MyApplication;
 import pl.edu.pjatk.pamo.skrawek.R;
+import pl.edu.pjatk.pamo.skrawek.rest.model.calendar.Absence;
 import pl.edu.pjatk.pamo.skrawek.rest.model.calendar.DayOffWork;
 import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
 import pl.edu.pjatk.pamo.skrawek.ui.absence.AbsenceEventDay;
@@ -44,6 +46,7 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
     private DayOffWorkViewModel dayOffWorkViewModel;
     private AbsenceViewModel absenceViewModel;
     private TextView absenceTextView;
+    private CalendarView calendarView;
     private List<EventDay> events;
 
     public static HomeFragment newInstance() {
@@ -63,8 +66,15 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
 
         events = new ArrayList<>();
         absenceTextView = view.findViewById(R.id.event_info);
-        markHolidaysInCalendar(view);
-        addChildAbsences(view);
+        calendarView = view.findViewById(R.id.calendarView);
+        calendarView.setOnDayClickListener(this);
+        markHolidaysInCalendar();
+
+        //TODO Remove this hardcoded list
+        List<UUID> childIdList = new ArrayList<>();
+        childIdList.add(UUID.fromString("0560d77d-e0db-4914-ae4a-4f39690ecb2d"));
+        childIdList.add(UUID.fromString("067b5db4-de4e-401e-9cac-7f6289e96c19"));
+        addChildAbsences(childIdList);
         return view;
     }
 
@@ -85,20 +95,28 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
         }
     }
 
-    private void markHolidaysInCalendar(View view) {
+    private void markHolidaysInCalendar() {
         dayOffWorkViewModel.getDaysOffWork().observe(this.getViewLifecycleOwner(),
                 dayOffWorks -> {
                     for (DayOffWork dayOffWork : dayOffWorks) {
                         events.add(dateUtils.prepareEventDay(dayOffWork));
                     }
-                    CalendarView calendarView = view.findViewById(R.id.calendarView);
                     calendarView.setEvents(events);
-                    calendarView.setOnDayClickListener(this);
                 });
     }
 
-    private void addChildAbsences(View view) {
-
+    private void addChildAbsences(List<UUID> childIdList) {
+        for (UUID childId : childIdList) {
+            absenceViewModel.fetchAbsencesForChild(childId).observe(
+                    this.getViewLifecycleOwner(),
+                    absences -> {
+                        for (Absence absence : absences) {
+                            events.add(dateUtils.prepareEventDay(absence));
+                        }
+                        calendarView.setEvents(events);
+                    }
+            );
+        }
     }
 
 }

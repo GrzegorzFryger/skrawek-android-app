@@ -1,6 +1,5 @@
 package pl.edu.pjatk.pamo.skrawek.rest.model.calendar;
 
-import java.time.LocalDate;
 import java.util.UUID;
 
 /**
@@ -9,7 +8,7 @@ import java.util.UUID;
 public class Absence {
     private Long id;
     private UUID childId;
-    private LocalDate date;
+    private String date;
     private String reason;
 
     public Long getId() {
@@ -28,11 +27,11 @@ public class Absence {
         this.childId = childId;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
