@@ -1,9 +1,7 @@
 package pl.edu.pjatk.pamo.skrawek.rest.model.accounts;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Model class - used when calling REST API

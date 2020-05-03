@@ -1,18 +1,17 @@
 package pl.edu.pjatk.pamo.skrawek.ui.children;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
+
 import pl.edu.pjatk.pamo.skrawek.R;
 import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Child;
 import pl.edu.pjatk.pamo.skrawek.ui.children.ChildrenSelectDialog.OnSelectChildrenFromList;
-
-
-import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {} and makes a call to the
