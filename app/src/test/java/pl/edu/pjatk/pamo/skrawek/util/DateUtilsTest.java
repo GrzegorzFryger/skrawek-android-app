@@ -92,7 +92,7 @@ public class DateUtilsTest {
 
         //Then
         assertNotNull(result);
-        assertEquals(R.drawable.red_circle, result.getImageDrawable());
+        assertEquals(R.drawable.holiday_24, result.getImageDrawable());
         assertEquals("Some name", result.getEventDescription());
     }
 
@@ -106,7 +106,7 @@ public class DateUtilsTest {
 
         //Then
         assertNotNull(result);
-        assertEquals(R.drawable.purple_circle, result.getImageDrawable());
+        assertEquals(R.drawable.outline_school_24, result.getImageDrawable());
         assertEquals("Some name", result.getEventDescription());
     }
 
@@ -136,7 +136,7 @@ public class DateUtilsTest {
 
         //Then
         assertNotNull(result);
-        assertEquals(R.drawable.green_circle, result.getImageDrawable());
+        assertEquals(R.drawable.child_face_24, result.getImageDrawable());
         assertTrue(result.getEventDescription().contains("Choroba"));
     }
 

@@ -46,9 +46,9 @@ public class DateUtils {
     public AbsenceEventDay prepareEventDay(DayOffWork dayOffWork) {
         Calendar calendar = toCalendar(LocalDate.parse(dayOffWork.getDate()));
         if (EventType.HOLIDAY.equals(dayOffWork.getEventType())) {
-            return new AbsenceEventDay(calendar, R.drawable.red_circle, dayOffWork.getName());
+            return new AbsenceEventDay(calendar, R.drawable.holiday_24, dayOffWork.getName());
         } else if (EventType.INTERNAL_EVENT.equals(dayOffWork.getEventType())) {
-            return new AbsenceEventDay(calendar, R.drawable.purple_circle, dayOffWork.getName());
+            return new AbsenceEventDay(calendar, R.drawable.outline_school_24, dayOffWork.getName());
         } else if (EventType.WEEKEND.equals(dayOffWork.getEventType())) {
             return new AbsenceEventDay(calendar, dayOffWork.getName());
         }
@@ -57,7 +57,7 @@ public class DateUtils {
 
     public AbsenceEventDay prepareEventDay(Absence absence, String reason) {
         Calendar calendar = toCalendar(LocalDate.parse(absence.getDate()));
-        return new AbsenceEventDay(calendar, R.drawable.green_circle,
+        return new AbsenceEventDay(calendar, R.drawable.child_face_24,
                 reason);
     }
 }
