@@ -42,7 +42,7 @@ public class ChildrenSelectViewModelTest {
         //Given
 
         //When
-        childrenSelectViewModel.getSelectedChild().setValue(child);
+        childrenSelectViewModel.selectChild(child);
         LiveData<String> fullName = childrenSelectViewModel.getSelectedChildNameAndSurname();
         fullName.observeForever(stringObserver);
 
