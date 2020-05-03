@@ -47,8 +47,11 @@ public class AccountFragmentTest {
 
         // Step 3 - Verify that all necessary labels are visible
         onView(withId(R.id.nameHeaderTextView)).check(matches(isDisplayed()));
-        onView(withId(R.id.addressHeaderTextView)).check(matches(isDisplayed()));
-        onView(withId(R.id.phoneHeaderTextView)).check(matches(isDisplayed()));
-        onView(withId(R.id.accountStatusTextView)).check(matches(isDisplayed()));
+        onView(withId(R.id.surnameHeaderTextView)).check(matches(isDisplayed()));
+        onView(withId(R.id.surnameHeaderTextView)).check(matches(isDisplayed()));
+        onView(withId(R.id.city_postal_code_HeaderTextView)).check(matches(isDisplayed()));
+        onView(withId(R.id.address_HeaderTextView)).check(matches(isDisplayed()));
+        onView(withId(R.id.phone)).check(matches(isDisplayed()));
+        onView(withId(R.id.status_HeaderTextView)).check(matches(isDisplayed()));
     }
 }
