@@ -47,4 +47,5 @@
     <string name="transaction_details">Transaction Details</string>
     <string name="history_payments">History payments</string>
     <string name="none">None</string>
+    <string name="list_absences">List absences</string>
 </resources>
