@@ -16,7 +16,6 @@ public class AccountViewModel extends ViewModel {
 
     @Inject
     public AccountViewModel() {
-
     }
 
     public void setGuardian(Guardian guardian) {
