@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -81,7 +82,7 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        view.findViewById(R.id.profile_image).setOnClickListener(c -> {
+        view.findViewById(R.id.profile_image_home).setOnClickListener(c -> {
             Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_navigation_account);
         });
 
@@ -91,6 +92,14 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
                             .stream()
                             .map(Child::getId).collect(Collectors.toList())
             );
+
+            ImageView imageView = view.findViewById(R.id.profile_image_home);
+
+            if (isWoman(guardian.getName())) {
+                imageView.setImageResource(R.drawable.img_mom);
+            } else {
+                imageView.setImageResource(R.drawable.img_dad);
+            }
 
             TextView viewSurname = view.findViewById(R.id.name_surname_home);
             viewSurname.setText(String.format(NAME_SURNAME_TEMPLATE, guardian.getName(), guardian.getSurname()));
@@ -132,6 +141,10 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
                     }
             );
         }
+    }
+
+    private boolean isWoman(String name) {
+        return name.substring(name.length() - 1).toLowerCase().trim().equals("a");
     }
 
 }

@@ -10,11 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import pl.edu.pjatk.pamo.skrawek.R;
-import pl.edu.pjatk.pamo.skrawek.dummy.DummyContent.DummyItem;
 import pl.edu.pjatk.pamo.skrawek.rest.model.calendar.Absence;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link } and makes a call to the
  * specified {@link}.
  * TODO: Replace the implementation with code for your data type.
  */

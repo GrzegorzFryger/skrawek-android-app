@@ -25,6 +25,7 @@ public class AccountFragment extends Fragment {
     @Inject
     DaggerViewModelFactory viewModelFactory;
     private SharedViewModel sharedViewModel;
+    private AccountFragmentBinding accountFragmentBinding;
 
     public static AccountFragment newInstance() {
         return new AccountFragment();
@@ -38,7 +39,7 @@ public class AccountFragment extends Fragment {
         mViewModel = new ViewModelProvider(getActivity(), viewModelFactory).get(AccountViewModel.class);
         sharedViewModel = new ViewModelProvider(getActivity(), viewModelFactory).get(SharedViewModel.class);
 
-        AccountFragmentBinding accountFragmentBinding = DataBindingUtil
+        accountFragmentBinding = DataBindingUtil
                 .inflate(inflater, R.layout.account_fragment, container, false);
         accountFragmentBinding.setVm(mViewModel);
         accountFragmentBinding.setLifecycleOwner(this);
@@ -51,7 +52,18 @@ public class AccountFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         sharedViewModel.getLoggedGuardian().observe(getViewLifecycleOwner(), guardian -> {
             this.mViewModel.setGuardian(guardian);
+
+            if (isWoman(guardian.getName())) {
+                accountFragmentBinding.profileImage.setImageResource(R.drawable.img_mom);
+            } else {
+                accountFragmentBinding.profileImage.setImageResource(R.drawable.img_dad);
+            }
+
         });
+    }
+
+    private boolean isWoman(String name) {
+        return name.substring(name.length() - 1).toLowerCase().trim().equals("a");
     }
 
 }
