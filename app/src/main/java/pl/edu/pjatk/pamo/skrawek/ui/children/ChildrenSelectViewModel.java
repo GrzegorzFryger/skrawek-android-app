@@ -14,7 +14,6 @@ public class ChildrenSelectViewModel extends ViewModel {
     private String DEFAULT_MESSAGE = "Select children";
     private MutableLiveData<Child> selectedChild = new MutableLiveData<>();
 
-
     @Inject
     public ChildrenSelectViewModel() {
     }
@@ -25,11 +24,15 @@ public class ChildrenSelectViewModel extends ViewModel {
         );
     }
 
+    public void selectChild(Child child) {
+        this.getSelectedChild().setValue(child);
+    }
+
     public MutableLiveData<Child> getSelectedChild() {
         return selectedChild;
     }
 
-    public LiveData<String> getGuardianLiveData() {
+    public LiveData<String> defaultMessage() {
         return new MutableLiveData<>(this.DEFAULT_MESSAGE);
     }
 

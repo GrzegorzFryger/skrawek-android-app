@@ -12,39 +12,33 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.UUID;
-
 import javax.inject.Inject;
 
 import pl.edu.pjatk.pamo.skrawek.MyApplication;
 import pl.edu.pjatk.pamo.skrawek.R;
+import pl.edu.pjatk.pamo.skrawek.SharedViewModel;
 import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Child;
 import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
 
 public class ChildrenSelectDialog extends DialogFragment {
 
-    private static final String PARAM_GUARDIAN_ID = "GUARDIAN_ID";
-    private String guardianIdParam;
+    @Inject
+    DaggerViewModelFactory viewModelFactory;
     private View view;
     private RecyclerView recyclerView;
     private OnSelectChildrenFromList listener;
+    private SharedViewModel sharedViewModel;
 
-    @Inject
-    DaggerViewModelFactory viewModelFactory;
-    ChildrenSelectDialogViewModel mViewModel;
-
-    public static ChildrenSelectDialog newInstance(String guardianIdParam) {
-        ChildrenSelectDialog childrenSelectDialog = new ChildrenSelectDialog();
-        Bundle args = new Bundle();
-        args.putSerializable(PARAM_GUARDIAN_ID, guardianIdParam);
-        childrenSelectDialog.setArguments(args);
-        return childrenSelectDialog;
+    public static ChildrenSelectDialog newInstance() {
+        return new ChildrenSelectDialog();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         this.view = inflater.inflate(R.layout.children_select_dialog_fragment, container, false);
+        ((MyApplication) getActivity().getApplication()).getAppComponent().inject(this);
+        sharedViewModel = new ViewModelProvider(requireActivity(), viewModelFactory).get(SharedViewModel.class);
         return view;
     }
 
@@ -52,16 +46,11 @@ public class ChildrenSelectDialog extends DialogFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ((MyApplication) getActivity().getApplication()).getAppComponent().inject(this);
-        mViewModel = new ViewModelProvider(this, viewModelFactory).get(ChildrenSelectDialogViewModel.class);
-
-        mViewModel.getGuardianLiveData().observe(this, guardian -> {
+        sharedViewModel.getLoggedGuardian().observe(this, guardian -> {
             this.recyclerView = view.findViewById(R.id.list);
             recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
             recyclerView.setAdapter(new ChildrenRecyclerViewAdapter(guardian.getChildren(), listener));
         });
-
-        mViewModel.getGuardianIdPublisher().setValue(UUID.fromString(guardianIdParam));
     }
 
     @Override
@@ -74,17 +63,6 @@ public class ChildrenSelectDialog extends DialogFragment {
         this.listener = listener;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            assignParameterFromBundleContext();
-        }
-    }
-
-    private void assignParameterFromBundleContext() {
-        this.guardianIdParam = getArguments().getString(PARAM_GUARDIAN_ID);
-    }
 
     public interface OnSelectChildrenFromList {
         void onSelectedChild(Child item);
