@@ -21,11 +21,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
 import pl.edu.pjatk.pamo.skrawek.MyApplication;
 import pl.edu.pjatk.pamo.skrawek.R;
+import pl.edu.pjatk.pamo.skrawek.SharedViewModel;
+import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Child;
 import pl.edu.pjatk.pamo.skrawek.rest.model.calendar.Absence;
 import pl.edu.pjatk.pamo.skrawek.rest.model.calendar.DayOffWork;
 import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
@@ -48,6 +51,7 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
     private TextView absenceTextView;
     private CalendarView calendarView;
     private List<EventDay> events;
+    private SharedViewModel sharedViewModel;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -59,6 +63,8 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
         ((MyApplication) getActivity().getApplication()).getAppComponent().inject(this);
         dayOffWorkViewModel = new ViewModelProvider(getActivity(), viewModelFactory).get(DayOffWorkViewModel.class);
         absenceViewModel = new ViewModelProvider(getActivity(), viewModelFactory).get(AbsenceViewModel.class);
+        sharedViewModel = new ViewModelProvider(getActivity(), viewModelFactory).get(SharedViewModel.class);
+
 
         view.findViewById(R.id.profile_image).setOnClickListener(c -> {
             Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_navigation_account);
@@ -70,11 +76,14 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
         calendarView.setOnDayClickListener(this);
         markHolidaysInCalendar();
 
-        //TODO Remove this hardcoded list
-        List<UUID> childIdList = new ArrayList<>();
-        childIdList.add(UUID.fromString("0560d77d-e0db-4914-ae4a-4f39690ecb2d"));
-        childIdList.add(UUID.fromString("067b5db4-de4e-401e-9cac-7f6289e96c19"));
-        addChildAbsences(childIdList);
+
+        sharedViewModel.getLoggedGuardian().observe(getViewLifecycleOwner(), guardian -> {
+            this.addChildAbsences(
+                    guardian.getChildren()
+                            .stream()
+                            .map(Child::getId).collect(Collectors.toList())
+            );
+        });
         return view;
     }
 
