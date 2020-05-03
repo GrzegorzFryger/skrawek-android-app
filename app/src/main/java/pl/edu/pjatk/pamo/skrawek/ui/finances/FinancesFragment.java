@@ -79,7 +79,7 @@ public class FinancesFragment extends Fragment {
     private void initializeViewModels() {
         ((MyApplication) getActivity().getApplication()).getAppComponent().inject(this);
         mViewModel = new ViewModelProvider(requireActivity(), viewModelFactory).get(FinancesViewModel.class);
-        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+        sharedViewModel = new ViewModelProvider(requireActivity(), viewModelFactory).get(SharedViewModel.class);
     }
 
     private OnListFragmentInteractionListener onSelectPayment() {

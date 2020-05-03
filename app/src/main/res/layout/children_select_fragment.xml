@@ -39,7 +39,7 @@
             android:layout_width="185dp"
             android:layout_height="31dp"
             android:fontFamily="sans-serif-black"
-            android:text="@{vm.selectedChildNameAndSurname ?? vm.guardianLiveData}"
+            android:text="@{vm.selectedChildNameAndSurname ?? vm.defaultMessage}"
             android:layout_marginStart="@dimen/text_margin"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -41,7 +41,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Inject
     AuthService authService;
-
     @Inject
     SnackbarFactory snackbarFactory;
 
@@ -57,7 +56,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         Button signInButton = findViewById(R.id.signInButton);
         signInButton.setOnClickListener(this);
-
         emailInput = findViewById(R.id.enterEmail);
         passwordInput = findViewById(R.id.enterPassword);
 
@@ -68,7 +66,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         String email = requireNonNull(emailInput.getText()).toString();
         String password = requireNonNull(passwordInput.getText()).toString();
-
         login(email, password);
     }
 
@@ -109,8 +106,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_OVERSCAN);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.setStatusBarColor(Color.TRANSPARENT);
-
-        // set color icon to dark
         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
     }
 }
