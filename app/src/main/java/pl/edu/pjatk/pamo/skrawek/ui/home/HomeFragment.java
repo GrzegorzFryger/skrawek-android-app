@@ -39,6 +39,7 @@ import pl.edu.pjatk.pamo.skrawek.util.DateUtils;
 
 public class HomeFragment extends Fragment implements OnDayClickListener {
     private static final String TAG = "HomeFragment";
+    private String NAME_SURNAME_TEMPLATE = "%s  %s";
 
     @Inject
     DaggerViewModelFactory viewModelFactory;
@@ -52,6 +53,7 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
     private CalendarView calendarView;
     private List<EventDay> events;
     private SharedViewModel sharedViewModel;
+    private View view;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -59,16 +61,12 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        view = inflater.inflate(R.layout.fragment_home, container, false);
         ((MyApplication) getActivity().getApplication()).getAppComponent().inject(this);
         dayOffWorkViewModel = new ViewModelProvider(getActivity(), viewModelFactory).get(DayOffWorkViewModel.class);
         absenceViewModel = new ViewModelProvider(getActivity(), viewModelFactory).get(AbsenceViewModel.class);
         sharedViewModel = new ViewModelProvider(getActivity(), viewModelFactory).get(SharedViewModel.class);
 
-
-        view.findViewById(R.id.profile_image).setOnClickListener(c -> {
-            Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_navigation_account);
-        });
 
         events = new ArrayList<>();
         absenceTextView = view.findViewById(R.id.event_info);
@@ -76,6 +74,16 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
         calendarView.setOnDayClickListener(this);
         markHolidaysInCalendar();
 
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        view.findViewById(R.id.profile_image).setOnClickListener(c -> {
+            Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_navigation_account);
+        });
 
         sharedViewModel.getLoggedGuardian().observe(getViewLifecycleOwner(), guardian -> {
             this.addChildAbsences(
@@ -83,13 +91,11 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
                             .stream()
                             .map(Child::getId).collect(Collectors.toList())
             );
-        });
-        return view;
-    }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+            TextView viewSurname = view.findViewById(R.id.name_surname_home);
+            viewSurname.setText(String.format(NAME_SURNAME_TEMPLATE, guardian.getName(), guardian.getSurname()));
+        });
+
     }
 
     @Override

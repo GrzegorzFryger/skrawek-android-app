@@ -15,18 +15,18 @@
             android:id="@+id/fragment"
             android:name="pl.edu.pjatk.pamo.skrawek.ui.children.ChildrenSelect"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout="@layout/children_select_fragment" />
-
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto"
             android:text="@string/finances_information"
             android:textColor="#000000"
@@ -55,7 +55,7 @@
                     android:layout_height="150dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    app:cardBackgroundColor="#F8BBD0"
+                    app:cardBackgroundColor="#bec9f4"
                     app:cardCornerRadius="24dp">
 
                     <!--                        <ImageView-->
@@ -131,7 +131,7 @@
                     android:layout_height="150dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    app:cardBackgroundColor="#C5CAE9"
+                    app:cardBackgroundColor="#f0bbda"
                     app:cardCornerRadius="24dp">
 
                     <!--                        <ImageView-->
@@ -208,7 +208,7 @@
                     android:layout_height="150dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    app:cardBackgroundColor="#FFCDD2"
+                    app:cardBackgroundColor="#8e9ced"
                     app:cardCornerRadius="24dp">
 
 
@@ -290,8 +290,14 @@
             android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/routed_table"
             android:fillViewport="true"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/incomingPayments">
 
             <LinearLayout
@@ -304,8 +310,6 @@
                     android:name="pl.edu.pjatk.pamo.skrawek.ui.finances.IncomingPaymentFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
                     android:layout_marginBottom="48dp"
                     app:layoutManager="LinearLayoutManager"
                     tools:context=".ui.finances.IncomingPaymentFragment"

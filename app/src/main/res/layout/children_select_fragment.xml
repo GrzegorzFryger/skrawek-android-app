@@ -17,17 +17,19 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/rounded_children_select"
         android:elevation="4dp"
-        android:paddingStart="@dimen/children_elements"
-        android:paddingEnd="@dimen/children_elements"
-        android:paddingTop="@dimen/children_elements">
+        android:layout_marginBottom="2dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="8dp">
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="64dp"
-            android:layout_height="53dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/img_girl"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,20 +40,23 @@
             android:id="@+id/textView"
             android:layout_width="185dp"
             android:layout_height="31dp"
-            android:fontFamily="sans-serif-black"
             android:text="@{vm.selectedChildNameAndSurname ?? vm.defaultMessage}"
             android:layout_marginStart="@dimen/text_margin"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:fontFamily="@font/roboto"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/iconMenuButton"
-            android:layout_width="31dp"
-            android:layout_height="31dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/ic_baseline_menu_24"
             android:tint="@color/colorPrimaryDark"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
             android:layout_marginEnd="@dimen/children_dialog_elements"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
