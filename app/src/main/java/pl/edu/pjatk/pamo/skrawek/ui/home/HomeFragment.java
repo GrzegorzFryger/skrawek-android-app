@@ -38,6 +38,8 @@ import pl.edu.pjatk.pamo.skrawek.ui.absence.AbsenceViewModel;
 import pl.edu.pjatk.pamo.skrawek.ui.absence.DayOffWorkViewModel;
 import pl.edu.pjatk.pamo.skrawek.util.DateUtils;
 
+import static pl.edu.pjatk.pamo.skrawek.MyApplication.getStringFromRes;
+
 public class HomeFragment extends Fragment implements OnDayClickListener {
     private static final String TAG = "HomeFragment";
     private String NAME_SURNAME_TEMPLATE = "%s  %s";
@@ -135,7 +137,8 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
                     this.getViewLifecycleOwner(),
                     absences -> {
                         for (Absence absence : absences) {
-                            events.add(dateUtils.prepareEventDay(absence));
+                            events.add(dateUtils.prepareEventDay(absence,
+                                    getStringFromRes(R.string.child_absence)));
                         }
                         calendarView.setEvents(events);
                     }

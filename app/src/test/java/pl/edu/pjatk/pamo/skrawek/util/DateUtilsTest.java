@@ -132,7 +132,7 @@ public class DateUtilsTest {
         absence.setReason("Choroba");
 
         //When
-        AbsenceEventDay result = dateUtils.prepareEventDay(absence);
+        AbsenceEventDay result = dateUtils.prepareEventDay(absence, "Choroba");
 
         //Then
         assertNotNull(result);

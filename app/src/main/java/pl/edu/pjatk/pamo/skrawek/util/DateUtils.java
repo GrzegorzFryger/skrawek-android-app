@@ -55,10 +55,9 @@ public class DateUtils {
         return new AbsenceEventDay(calendar, dayOffWork.getName());
     }
 
-    public AbsenceEventDay prepareEventDay(Absence absence) {
+    public AbsenceEventDay prepareEventDay(Absence absence, String reason) {
         Calendar calendar = toCalendar(LocalDate.parse(absence.getDate()));
-        //TODO Replace Child ID with full name
         return new AbsenceEventDay(calendar, R.drawable.green_circle,
-                absence.getChildId() + " - " + absence.getReason());
+                reason);
     }
 }
