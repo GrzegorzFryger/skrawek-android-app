@@ -3,4 +3,5 @@
     <string name="rest_login_fail">Failed to log in</string>
     <string name="rest_login_sucess">You have successfully logged in</string>
     <string name="rest_call_fail">There was an error when calling REST API</string>
+    <string name="child_absence">Nieobecność dziecka</string>
 </resources>
