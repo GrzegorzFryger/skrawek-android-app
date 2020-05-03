@@ -15,6 +15,7 @@ import javax.inject.Inject;
 
 import pl.edu.pjatk.pamo.skrawek.MyApplication;
 import pl.edu.pjatk.pamo.skrawek.R;
+import pl.edu.pjatk.pamo.skrawek.SharedViewModel;
 import pl.edu.pjatk.pamo.skrawek.databinding.AccountFragmentBinding;
 import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
 
@@ -23,6 +24,7 @@ public class AccountFragment extends Fragment {
     private AccountViewModel mViewModel;
     @Inject
     DaggerViewModelFactory viewModelFactory;
+    private SharedViewModel sharedViewModel;
 
     public static AccountFragment newInstance() {
         return new AccountFragment();
@@ -34,6 +36,7 @@ public class AccountFragment extends Fragment {
 
         ((MyApplication) getActivity().getApplication()).getAppComponent().inject(this);
         mViewModel = new ViewModelProvider(getActivity(), viewModelFactory).get(AccountViewModel.class);
+        sharedViewModel = new ViewModelProvider(getActivity(), viewModelFactory).get(SharedViewModel.class);
 
         AccountFragmentBinding accountFragmentBinding = DataBindingUtil
                 .inflate(inflater, R.layout.account_fragment, container, false);
@@ -46,6 +49,9 @@ public class AccountFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        sharedViewModel.getLoggedGuardian().observe(getViewLifecycleOwner(), guardian -> {
+            this.mViewModel.setGuardian(guardian);
+        });
     }
 
 }
