@@ -14,11 +14,10 @@ import org.mockito.Mock;
 import pl.edu.pjatk.pamo.skrawek.repository.AccountRepository;
 import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Account;
 import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.AccountStatus;
+import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Guardian;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.only;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -34,16 +33,15 @@ public class AccountViewModelTest {
     private Observer<String> stringObserver;
 
     private MutableLiveData<Account> data;
-
     private AccountViewModel accountViewModel;
+    private Guardian account;
 
 
     @Before
     public void setUp() {
         initMocks(this);
-        accountViewModel = new AccountViewModel(accountRepository);
 
-        Account account = new Account();
+        this.account = new Guardian();
         account.setName("Antoni");
         account.setSurname("Kowalski");
         account.setCity("Warszawa");
@@ -51,6 +49,8 @@ public class AccountViewModelTest {
         account.setPostalCode("15-234");
         account.setPhone("700800900");
         account.setStatus(AccountStatus.ACTIVE);
+
+        accountViewModel = new AccountViewModel();
 
         data = new MutableLiveData<>();
         data.setValue(account);
@@ -63,12 +63,11 @@ public class AccountViewModelTest {
         //Given
 
         //When
-        accountViewModel.initializeAccountData("Some email");
+        accountViewModel.setGuardian(account);
         LiveData<String> fullName = accountViewModel.getAccountOwnerFullName();
         fullName.observeForever(stringObserver);
 
         //Then
-        verify(accountRepository, only()).getMutableLiveData(anyString());
         assertEquals("Antoni Kowalski", fullName.getValue());
     }
 
@@ -77,12 +76,11 @@ public class AccountViewModelTest {
         //Given
 
         //When
-        accountViewModel.initializeAccountData("Some email");
+        accountViewModel.setGuardian(account);
         LiveData<String> city = accountViewModel.getCity();
         city.observeForever(stringObserver);
 
         //Then
-        verify(accountRepository, only()).getMutableLiveData(anyString());
         assertEquals("Warszawa 15-234", city.getValue());
     }
 
@@ -91,12 +89,11 @@ public class AccountViewModelTest {
         //Given
 
         //When
-        accountViewModel.initializeAccountData("Some email");
+        accountViewModel.setGuardian(account);
         LiveData<String> phone = accountViewModel.getPhone();
         phone.observeForever(stringObserver);
 
         //Then
-        verify(accountRepository, only()).getMutableLiveData(anyString());
         assertEquals("700800900", phone.getValue());
     }
 
@@ -105,12 +102,11 @@ public class AccountViewModelTest {
         //Given
 
         //When
-        accountViewModel.initializeAccountData("Some email");
+        accountViewModel.setGuardian(account);
         LiveData<String> status = accountViewModel.getStatus();
         status.observeForever(stringObserver);
 
         //Then
-        verify(accountRepository, only()).getMutableLiveData(anyString());
         assertEquals("ACTIVE", status.getValue());
     }
 
@@ -119,12 +115,11 @@ public class AccountViewModelTest {
         //Given
 
         //When
-        accountViewModel.initializeAccountData("Some email");
+        accountViewModel.setGuardian(account);
         LiveData<String> streetNumber = accountViewModel.getStreetNumber();
         streetNumber.observeForever(stringObserver);
 
         //Then
-        verify(accountRepository, only()).getMutableLiveData(anyString());
         assertEquals("Andersa 115", streetNumber.getValue());
     }
 }
