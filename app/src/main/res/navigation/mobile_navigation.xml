@@ -12,7 +12,8 @@
         tools:layout="@layout/finances_fragment">
         <action
             android:id="@+id/action_navigation_finances_to_incomingPaymentsDetailsFragment"
-            app:destination="@id/incomingPaymentsDetailsFragment" />
+            app:destination="@id/incomingPaymentsDetailsFragment"
+            app:enterAnim="@anim/slide_in_right" />
     </fragment>
     <fragment
         android:id="@+id/navigation_home"
@@ -44,6 +45,10 @@
         android:name="pl.edu.pjatk.pamo.skrawek.ui.absence.AbsenceFragment"
         android:label="@string/title_absence"
         tools:layout="@layout/absence_fragment" />
+    <activity
+        android:id="@+id/loginActivity2"
+        android:name="pl.edu.pjatk.pamo.skrawek.LoginActivity"
+        android:label="LoginActivity" />
 
 
 </navigation>

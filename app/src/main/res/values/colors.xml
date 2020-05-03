@@ -9,8 +9,8 @@
     <color name="Black">#000000</color>
 
     <!-- Snackbar backgroud colors -->
-    <color name="snackbar_red">#f44336</color>
+    <color name="snackbar_red">#EF9A9A</color>
     <color name="snackbar_yellow">#f3ba49</color>
-    <color name="snackbar_green">#1eaf42</color>
-    <color name="snackbar_blue">#2196f3</color>
+    <color name="snackbar_green">#A5D6A7</color>
+    <color name="snackbar_blue">#81D4FA</color>
 </resources>

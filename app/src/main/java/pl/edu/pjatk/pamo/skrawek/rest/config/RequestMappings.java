@@ -8,7 +8,7 @@ public class RequestMappings {
      * Android Virtual Devices are listening for 10.0.2.2
      * and forwarding all the requests to your computer
      */
-    public static final String BASE_URL = "https://10.0.2.2:8080/";
+    public static final String BASE_URL = "https://192.168.1.130:8080/";
 
     /**
      * Base URL for controllers related to <strong>AUTH mechanism</strong>
