@@ -55,7 +55,7 @@ public class ChildrenSelectViewModelTest {
         //Given
 
         //When
-        LiveData<String> defaultData = childrenSelectViewModel.getGuardianLiveData();
+        LiveData<String> defaultData = childrenSelectViewModel.defaultMessage();
         defaultData.observeForever(stringObserver);
 
         //Then

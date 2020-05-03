@@ -7,8 +7,8 @@ import pl.edu.pjatk.pamo.skrawek.module.RestModule;
 import pl.edu.pjatk.pamo.skrawek.module.UtilModule;
 import pl.edu.pjatk.pamo.skrawek.module.ViewModelModule;
 import pl.edu.pjatk.pamo.skrawek.module.ViewModule;
-import pl.edu.pjatk.pamo.skrawek.ui.absence.AbsenceFragment;
 import pl.edu.pjatk.pamo.skrawek.ui.account.AccountFragment;
+import pl.edu.pjatk.pamo.skrawek.ui.children.ChildrenSelect;
 import pl.edu.pjatk.pamo.skrawek.ui.children.ChildrenSelectDialog;
 import pl.edu.pjatk.pamo.skrawek.ui.finances.FinancesFragment;
 import pl.edu.pjatk.pamo.skrawek.ui.finances.IncomingPaymentsDetailsFragment;
@@ -34,5 +34,7 @@ public interface ApplicationComponent {
     void inject(HomeFragment homeFragment);
 
     void inject(MainActivity mainActivity);
+
+    void inject(ChildrenSelect childrenSelect);
 
 }

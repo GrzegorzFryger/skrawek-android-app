@@ -9,20 +9,21 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/userLayout"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/rounded_children_select"
         android:elevation="4dp"
-        android:paddingStart="@dimen/children_elements"
-        android:paddingTop="@dimen/children_elements"
-        android:paddingEnd="@dimen/children_elements"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/profile_image"
-            android:layout_width="62dp"
-            android:layout_height="55dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:contentDescription="@string/children_image"
             android:src="@drawable/img_dad"
             android:background="?attr/selectableItemBackgroundBorderless"
@@ -43,49 +44,35 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    <TextView
-        android:id="@+id/events_calendar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:fontFamily="@font/roboto"
-        android:text="@string/events_calendar"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userLayout" />
 
     <TextView
         android:id="@+id/event_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto"
+        android:text="@string/none"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
-        android:text="@string/none"
-        app:layout_constraintStart_toEndOf="@+id/events_calendar"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userLayout" />
 
     <com.applandeo.materialcalendarview.CalendarView
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-
         app:eventsEnabled="true"
-        app:headerColor="@color/colorPrimaryDark"
+        app:headerColor="#bec9f4"
         app:highlightedDaysLabelsColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/events_calendar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/event_info"
         app:layout_constraintVertical_bias="0.0"
         app:selectionColor="@color/colorPrimaryDark"
         app:todayLabelColor="@color/colorPrimaryDark"

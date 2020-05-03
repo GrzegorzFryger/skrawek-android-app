@@ -2,16 +2,31 @@ package pl.edu.pjatk.pamo.skrawek;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
+import javax.inject.Inject;
+
+import pl.edu.pjatk.pamo.skrawek.repository.GuardianRepository;
 import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Account;
 import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Child;
+import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Guardian;
 
 public class SharedViewModel extends ViewModel {
-    private final MutableLiveData<Child> selectedChild = new MutableLiveData<>();
-    private final MutableLiveData<Account> accountMutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<Child> selectedChild = new MutableLiveData<>();
+    private MutableLiveData<Account> accountLiveData = new MutableLiveData<>();
 
-    public SharedViewModel() {
+    private LiveData<Guardian> guardianMutableLiveData;
+    private final GuardianRepository guardianRepository;
+
+    @Inject
+    public SharedViewModel(GuardianRepository guardianRepository) {
+        this.guardianRepository = guardianRepository;
+
+        this.guardianMutableLiveData = Transformations.switchMap(
+                accountLiveData,
+                s -> this.guardianRepository.getMutableLiveData(s.getId())
+        );
     }
 
     public void selectChild(Child child) {
@@ -22,11 +37,12 @@ public class SharedViewModel extends ViewModel {
         return selectedChild;
     }
 
-    public void loggedAccount(Account account) {
-        accountMutableLiveData.setValue(account);
+    public void setLoggedAccount(Account account) {
+        this.accountLiveData.setValue(account);
     }
 
-    public LiveData<Account> getLoggedAccount() {
-        return accountMutableLiveData;
+    public LiveData<Guardian> getLoggedGuardian() {
+        return guardianMutableLiveData;
     }
 }
+
