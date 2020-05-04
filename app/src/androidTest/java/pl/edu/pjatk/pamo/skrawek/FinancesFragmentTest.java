@@ -22,7 +22,7 @@ import static pl.edu.pjatk.pamo.skrawek.ViewActionUtils.waitFor;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class AccountFragmentTest {
+public class FinancesFragmentTest {
     @Rule
     public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
 
@@ -32,7 +32,7 @@ public class AccountFragmentTest {
     }
 
     @Test
-    public void Should_LoadAccountFragment() {
+    public void Should_LoadFinancesFragment() {
         // Step 0 - Verify that snackbar appears after log in
         onView(allOf(withId(R.id.snackbar_text), withText("You have successfully logged in")))
                 .check(matches(isDisplayed()));
@@ -41,17 +41,11 @@ public class AccountFragmentTest {
         // Snackbar is visible for 1000 ms - we give some more time to include disappear animation
         onView(isRoot()).perform(waitFor(2000L));
 
-        // Step 2 - Click account icon
-        onView(withId(R.id.navigation_account)).perform(click());
-        onView(withId(R.id.navigation_account)).check(matches(isSelected()));
+        // Step 2 - Click finances icon
+        onView(withId(R.id.navigation_finances)).perform(click());
+        onView(withId(R.id.navigation_finances)).check(matches(isSelected()));
 
-        // Step 3 - Verify that all necessary labels are visible
-        onView(withId(R.id.nameHeaderTextView)).check(matches(isDisplayed()));
-        onView(withId(R.id.surnameHeaderTextView)).check(matches(isDisplayed()));
-        onView(withId(R.id.surnameHeaderTextView)).check(matches(isDisplayed()));
-        onView(withId(R.id.city_postal_code_HeaderTextView)).check(matches(isDisplayed()));
-        onView(withId(R.id.address_HeaderTextView)).check(matches(isDisplayed()));
-        onView(withId(R.id.phone_HeaderTextView)).check(matches(isDisplayed()));
-        onView(withId(R.id.status_HeaderTextView)).check(matches(isDisplayed()));
+        // Step 3 - Verify that all list of incoming payments is visible
+        onView(withId(R.id.listIncomingPayments)).check(matches(isDisplayed()));
     }
 }
