@@ -12,6 +12,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Comparator;
+import java.util.stream.Collectors;
+
 import javax.inject.Inject;
 
 import pl.edu.pjatk.pamo.skrawek.MyApplication;
@@ -49,7 +52,14 @@ public class ChildrenSelectDialog extends DialogFragment {
         sharedViewModel.getLoggedGuardian().observe(this, guardian -> {
             this.recyclerView = view.findViewById(R.id.list);
             recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-            recyclerView.setAdapter(new ChildrenRecyclerViewAdapter(guardian.getChildren(), listener));
+            recyclerView.setAdapter(
+                    new ChildrenRecyclerViewAdapter(
+                            guardian.getChildren()
+                                    .stream()
+                                    .sorted(Comparator.comparing(Child::getName))
+                                    .collect(Collectors.toList()),
+                            listener
+                    ));
         });
     }
 
