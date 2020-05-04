@@ -9,6 +9,9 @@ import java.lang.annotation.Target;
 
 import dagger.MapKey;
 
+/**
+ * This annotation is used for binding models in {@link pl.edu.pjatk.pamo.skrawek.module.ViewModelModule}
+ */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @MapKey

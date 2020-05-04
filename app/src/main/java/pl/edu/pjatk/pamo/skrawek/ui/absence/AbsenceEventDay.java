@@ -6,6 +6,10 @@ import com.applandeo.materialcalendarview.EventDay;
 
 import java.util.Calendar;
 
+/**
+ * This class is used in Calendar.
+ * It extends standard event day with information of event description.
+ */
 public class AbsenceEventDay extends EventDay {
     private String eventDescription;
 

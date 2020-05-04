@@ -16,6 +16,9 @@ import pl.edu.pjatk.pamo.skrawek.MyApplication;
 import pl.edu.pjatk.pamo.skrawek.databinding.FragmentIncomingPaymentsDetailsBinding;
 import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
 
+/**
+ * This fragment is responsible for all details about incoming payments
+ */
 public class IncomingPaymentsDetailsFragment extends Fragment {
     @Inject
     DaggerViewModelFactory viewModelFactory;
