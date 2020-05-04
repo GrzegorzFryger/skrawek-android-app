@@ -40,6 +40,9 @@ import pl.edu.pjatk.pamo.skrawek.util.DateUtils;
 
 import static pl.edu.pjatk.pamo.skrawek.MyApplication.getStringFromRes;
 
+/**
+ * This fragment is responsible for showing main (home) page of application
+ */
 public class HomeFragment extends Fragment implements OnDayClickListener {
     private static final String TAG = "HomeFragment";
     private String NAME_SURNAME_TEMPLATE = "%s  %s";

@@ -14,6 +14,9 @@ import pl.edu.pjatk.pamo.skrawek.repository.CalendarRepository;
 import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Child;
 import pl.edu.pjatk.pamo.skrawek.rest.model.calendar.Absence;
 
+/**
+ * This view model stores info about child absences
+ */
 public class AbsenceViewModel extends ViewModel {
     private final CalendarRepository calendarRepository;
 

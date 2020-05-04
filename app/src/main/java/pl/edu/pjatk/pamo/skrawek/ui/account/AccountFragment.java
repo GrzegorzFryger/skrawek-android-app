@@ -19,6 +19,9 @@ import pl.edu.pjatk.pamo.skrawek.SharedViewModel;
 import pl.edu.pjatk.pamo.skrawek.databinding.AccountFragmentBinding;
 import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
 
+/**
+ * This fragment is responsible for showing information about user account
+ */
 public class AccountFragment extends Fragment {
 
     private AccountViewModel mViewModel;

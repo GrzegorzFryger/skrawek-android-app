@@ -14,6 +14,9 @@ import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Child;
 import pl.edu.pjatk.pamo.skrawek.rest.model.finances.Balance;
 import pl.edu.pjatk.pamo.skrawek.rest.model.finances.IncomingPayment;
 
+/**
+ * This view model stores info about all incoming payments for given child
+ */
 public class FinancesViewModel extends ViewModel {
     private final FinancesRepository financesRepository;
     private MutableLiveData<Child> selectedChild = new MutableLiveData<>();
