@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.finances.IncomingPaymentsDetailsFragment">
+
     <data>
+
         <variable
-            name="vm"
-            type="pl.edu.pjatk.pamo.skrawek.ui.account.AccountViewModel" />
+            name="financesViewModel"
+            type="pl.edu.pjatk.pamo.skrawek.ui.finances.FinancesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,37 +23,75 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/roboto"
-            android:text="Account Profile"
+            android:text="@string/transaction_details"
             android:textColor="#000000"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/profile_image"
+            android:id="@+id/imageView4"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.15"
-            app:srcCompat="@drawable/img_dad" />
+            app:layout_constraintVertical_bias="0.15
+"
+            app:srcCompat="@drawable/img_girl" />
 
         <LinearLayout
-            android:id="@+id/linearLayout2"
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             android:background="@drawable/routed_table"
             android:orientation="vertical"
             android:padding="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_image">
+            app:layout_constraintTop_toBottomOf="@+id/imageView4">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:elevation="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="16dp"
+                    android:paddingRight="8dp"
+                    android:paddingBottom="16dp">
+
+                    <TextView
+                        android:id="@+id/transactionDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/transaction_date"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/transactionDateValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{financesViewModel.selectedIncomingPayment.transactionDate}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -59,38 +101,39 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:elevation="0dp"
                     android:paddingLeft="8dp"
                     android:paddingTop="16dp"
                     android:paddingRight="8dp"
                     android:paddingBottom="16dp">
 
                     <TextView
-                        android:id="@+id/nameHeaderTextView"
+                        android:id="@+id/paymentType"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/name"
-                        android:textSize="18sp"
+                        android:text="@string/payment_type"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/name"
+                        android:id="@+id/paymentTypeValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{vm.name}"
-                        android:textSize="18sp"
+                        android:text="@{financesViewModel.selectedIncomingPayment.paymentType.toString()}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.cardview.widget.CardView>
+
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="1dp">
+                android:layout_marginBottom="1dp"
+                android:elevation="0dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -101,34 +144,32 @@
                     android:paddingBottom="16dp">
 
                     <TextView
-                        android:id="@+id/surnameHeaderTextView"
+                        android:id="@+id/transactionAmount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
-                        android:text="@string/surname"
-                        android:textSize="18sp"
+                        android:text="@string/transaction_amount"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/surname"
+                        android:id="@+id/transactionAmountValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
-                        android:text="@{vm.surname}"
-                        android:textSize="18sp"
+                        android:text="@{financesViewModel.selectedIncomingPayment.transactionAmount.toString()}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.cardview.widget.CardView>
+
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="1dp">
+                android:layout_marginBottom="1dp"
+                android:elevation="0dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -139,32 +180,32 @@
                     android:paddingBottom="16dp">
 
                     <TextView
-                        android:id="@+id/city_postal_code_HeaderTextView"
+                        android:id="@+id/transactionCurrency"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/city"
-                        android:textSize="18sp"
+                        android:text="@string/transaction_currency"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/city_postal_code"
+                        android:id="@+id/transactionCurrencyValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{vm.city}"
-                        android:textSize="18sp"
+                        android:text="@{financesViewModel.selectedIncomingPayment.transactionCurrency}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.cardview.widget.CardView>
+
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="1dp">
+                android:layout_marginBottom="1dp"
+                android:elevation="0dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -175,32 +216,31 @@
                     android:paddingBottom="16dp">
 
                     <TextView
-                        android:id="@+id/address_HeaderTextView"
+                        android:id="@+id/title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/address"
-                        android:textSize="18sp"
+                        android:text="@string/titile"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/address"
+                        android:id="@+id/titleValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{vm.streetNumber}"
-                        android:textSize="18sp"
+                        android:text="@{financesViewModel.selectedIncomingPayment.title}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.cardview.widget.CardView>
+
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="1dp">
+                android:elevation="0dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -211,62 +251,28 @@
                     android:paddingBottom="16dp">
 
                     <TextView
-                        android:id="@+id/phone_HeaderTextView"
+                        android:id="@+id/contractorDetails"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/phone"
-                        android:textSize="18sp"
+                        android:text="@string/contractor_details"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/phone"
+                        android:id="@+id/contractorDetailsValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{vm.phone}"
-                        android:textSize="18sp"
+                        android:text="@{financesViewModel.selectedIncomingPayment.contractorDetails}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="8dp"
-                    android:paddingTop="16dp"
-                    android:paddingRight="8dp"
-                    android:paddingBottom="16dp">
-
-                    <TextView
-                        android:id="@+id/status_HeaderTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/status"
-                        android:textSize="18sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/status"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{vm.status}"
-                        android:textSize="18sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
         </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

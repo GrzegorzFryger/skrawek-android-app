@@ -18,7 +18,7 @@ import javax.inject.Inject;
 import pl.edu.pjatk.pamo.skrawek.MyApplication;
 import pl.edu.pjatk.pamo.skrawek.R;
 import pl.edu.pjatk.pamo.skrawek.SharedViewModel;
-import pl.edu.pjatk.pamo.skrawek.databinding.FinancesFragmentBinding;
+import pl.edu.pjatk.pamo.skrawek.databinding.FragmentFinancesBinding;
 import pl.edu.pjatk.pamo.skrawek.rest.model.finances.IncomingPayment;
 import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
 
@@ -30,7 +30,7 @@ public class FinancesFragment extends Fragment {
     private SharedViewModel sharedViewModel;
     private RecyclerView recyclerView;
 
-    private FinancesFragmentBinding financesFragmentBinding;
+    private FragmentFinancesBinding financesFragmentBinding;
 
     public static FinancesFragment newInstance() {
         return new FinancesFragment();
@@ -40,7 +40,7 @@ public class FinancesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         this.initializeViewModels();
-        financesFragmentBinding = FinancesFragmentBinding.inflate(inflater, container, false);
+        financesFragmentBinding = FragmentFinancesBinding.inflate(inflater, container, false);
         financesFragmentBinding.setVm(mViewModel);
         financesFragmentBinding.setLifecycleOwner(this);
 

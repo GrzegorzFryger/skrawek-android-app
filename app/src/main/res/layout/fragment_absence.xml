@@ -47,7 +47,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2"
             tools:context=".ui.absence.AbsneceFragment"
-            tools:listitem="@layout/fragment_absence_item" />
+            tools:listitem="@layout/item_list_absence" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

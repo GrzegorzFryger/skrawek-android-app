@@ -33,7 +33,7 @@ public class IncomingPaymentRecyclerViewAdapter extends RecyclerView.Adapter<Inc
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.incoming_payment_fragment_item, parent, false);
+                .inflate(R.layout.item_list_incoming_payment, parent, false);
         return new ViewHolder(view);
     }
 

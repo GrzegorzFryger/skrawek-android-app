@@ -34,7 +34,7 @@ public class AbsenceFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         initializeViewModels();
-        View view = inflater.inflate(R.layout.absence_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_absence, container, false);
         recyclerView = view.findViewById(R.id.listAbsence);
 
         return view;

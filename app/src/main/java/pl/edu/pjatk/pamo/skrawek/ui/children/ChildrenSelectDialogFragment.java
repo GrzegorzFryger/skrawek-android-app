@@ -23,7 +23,7 @@ import pl.edu.pjatk.pamo.skrawek.SharedViewModel;
 import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Child;
 import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
 
-public class ChildrenSelectDialog extends DialogFragment {
+public class ChildrenSelectDialogFragment extends DialogFragment {
 
     @Inject
     DaggerViewModelFactory viewModelFactory;
@@ -32,14 +32,14 @@ public class ChildrenSelectDialog extends DialogFragment {
     private OnSelectChildrenFromList listener;
     private SharedViewModel sharedViewModel;
 
-    public static ChildrenSelectDialog newInstance() {
-        return new ChildrenSelectDialog();
+    public static ChildrenSelectDialogFragment newInstance() {
+        return new ChildrenSelectDialogFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        this.view = inflater.inflate(R.layout.children_select_dialog_fragment, container, false);
+        this.view = inflater.inflate(R.layout.fragment_children_select_dialog, container, false);
         ((MyApplication) getActivity().getApplication()).getAppComponent().inject(this);
         sharedViewModel = new ViewModelProvider(requireActivity(), viewModelFactory).get(SharedViewModel.class);
         return view;

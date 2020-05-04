@@ -9,7 +9,7 @@
         android:id="@+id/navigation_finances"
         android:name="pl.edu.pjatk.pamo.skrawek.ui.finances.FinancesFragment"
         android:label="@string/title_finances"
-        tools:layout="@layout/finances_fragment">
+        tools:layout="@layout/fragment_finances">
         <action
             android:id="@+id/action_navigation_finances_to_incomingPaymentsDetailsFragment"
             app:destination="@id/incomingPaymentsDetailsFragment"
@@ -34,12 +34,12 @@
         android:id="@+id/navigation_account"
         android:name="pl.edu.pjatk.pamo.skrawek.ui.account.AccountFragment"
         android:label="@string/title_account"
-        tools:layout="@layout/account_fragment" />
+        tools:layout="@layout/fragment_account" />
     <fragment
         android:id="@+id/incomingPaymentsDetailsFragment"
         android:name="pl.edu.pjatk.pamo.skrawek.ui.finances.IncomingPaymentsDetailsFragment"
         android:label="incoming_payments_details_fragment"
-        tools:layout="@layout/incoming_payments_details_fragment">
+        tools:layout="@layout/fragment_incoming_payments_details">
         <action
             android:id="@+id/action_incomingPaymentsDetailsFragment_to_navigation_finances2"
             app:destination="@id/navigation_finances"
@@ -52,7 +52,7 @@
         android:id="@+id/navigation_absence"
         android:name="pl.edu.pjatk.pamo.skrawek.ui.absence.AbsenceFragment"
         android:label="@string/title_absence"
-        tools:layout="@layout/absence_fragment" />
+        tools:layout="@layout/fragment_absence" />
     <activity
         android:id="@+id/loginActivity2"
         android:name="pl.edu.pjatk.pamo.skrawek.LoginActivity"

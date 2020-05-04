@@ -4,14 +4,14 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
 
-public class ChildrenSelectTest {
+public class ChildrenSelectFragmentTest {
 
     @Test
     public void Should_CreateChildrenSelect() {
         //Given
 
         //When
-        ChildrenSelect fragment = ChildrenSelect.newInstance();
+        ChildrenSelectFragment fragment = ChildrenSelectFragment.newInstance();
 
         //Then
         assertNotNull(fragment);
