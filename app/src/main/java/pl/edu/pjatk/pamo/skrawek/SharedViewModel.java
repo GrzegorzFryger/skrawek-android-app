@@ -25,7 +25,7 @@ public class SharedViewModel extends ViewModel {
 
         this.guardianMutableLiveData = Transformations.switchMap(
                 accountLiveData,
-                s -> this.guardianRepository.getMutableLiveData(s.getId())
+                s -> this.guardianRepository.getGuardian(s.getId())
         );
     }
 

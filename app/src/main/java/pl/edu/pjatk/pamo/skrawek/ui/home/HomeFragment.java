@@ -5,8 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 
@@ -29,6 +26,7 @@ import javax.inject.Inject;
 import pl.edu.pjatk.pamo.skrawek.MyApplication;
 import pl.edu.pjatk.pamo.skrawek.R;
 import pl.edu.pjatk.pamo.skrawek.SharedViewModel;
+import pl.edu.pjatk.pamo.skrawek.databinding.FragmentHomeBinding;
 import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Child;
 import pl.edu.pjatk.pamo.skrawek.rest.model.calendar.Absence;
 import pl.edu.pjatk.pamo.skrawek.rest.model.calendar.DayOffWork;
@@ -52,11 +50,9 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
 
     private DayOffWorkViewModel dayOffWorkViewModel;
     private AbsenceViewModel absenceViewModel;
-    private TextView absenceTextView;
-    private CalendarView calendarView;
-    private List<EventDay> events;
+    private List<EventDay> events = new ArrayList<>();
     private SharedViewModel sharedViewModel;
-    private View view;
+    private FragmentHomeBinding homeFragmentBinding;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -64,29 +60,28 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_home, container, false);
+        this.initializeViewModels();
+        homeFragmentBinding = FragmentHomeBinding.inflate(inflater, container, false);
+        homeFragmentBinding.setLifecycleOwner(this);
+
+        return homeFragmentBinding.getRoot();
+    }
+
+    private void initializeViewModels() {
         ((MyApplication) getActivity().getApplication()).getAppComponent().inject(this);
         dayOffWorkViewModel = new ViewModelProvider(getActivity(), viewModelFactory).get(DayOffWorkViewModel.class);
         absenceViewModel = new ViewModelProvider(getActivity(), viewModelFactory).get(AbsenceViewModel.class);
         sharedViewModel = new ViewModelProvider(getActivity(), viewModelFactory).get(SharedViewModel.class);
-
-
-        events = new ArrayList<>();
-        absenceTextView = view.findViewById(R.id.event_info);
-        calendarView = view.findViewById(R.id.calendarView);
-        calendarView.setOnDayClickListener(this);
-        markHolidaysInCalendar();
-
-        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        view.findViewById(R.id.profile_image_home).setOnClickListener(c -> {
-            Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_navigation_account);
-        });
+        this.homeFragmentBinding.profileImageHome.setOnClickListener(image ->
+                Navigation.findNavController(this.homeFragmentBinding.getRoot())
+                        .navigate(R.id.action_navigation_home_to_navigation_account)
+        );
 
         sharedViewModel.getLoggedGuardian().observe(getViewLifecycleOwner(), guardian -> {
             this.addChildAbsences(
@@ -95,18 +90,22 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
                             .map(Child::getId).collect(Collectors.toList())
             );
 
-            ImageView imageView = view.findViewById(R.id.profile_image_home);
-
             if (isWoman(guardian.getName())) {
-                imageView.setImageResource(R.drawable.img_mom);
+                this.homeFragmentBinding.profileImageHome.setImageResource(R.drawable.img_mom);
             } else {
-                imageView.setImageResource(R.drawable.img_dad);
+                this.homeFragmentBinding.profileImageHome.setImageResource(R.drawable.img_dad);
             }
 
-            TextView viewSurname = view.findViewById(R.id.name_surname_home);
-            viewSurname.setText(String.format(NAME_SURNAME_TEMPLATE, guardian.getName(), guardian.getSurname()));
+            this.homeFragmentBinding.nameSurnameHome.setText(
+                    String.format(
+                            NAME_SURNAME_TEMPLATE,
+                            guardian.getName(), guardian.getSurname()
+                    )
+            );
         });
 
+        this.homeFragmentBinding.calendarView.setOnDayClickListener(this);
+        markHolidaysInCalendar();
     }
 
     @Override
@@ -115,9 +114,9 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
             AbsenceEventDay absenceEventDay = (AbsenceEventDay) eventDay;
             Calendar clickedDayCalendar = eventDay.getCalendar();
             Log.i(TAG, "Clicked day: " + dateUtils.calendarToString(clickedDayCalendar));
-            absenceTextView.setText(absenceEventDay.getEventDescription());
+            this.homeFragmentBinding.eventInfo.setText(absenceEventDay.getEventDescription());
         } else {
-            absenceTextView.setText(R.string.none);
+            this.homeFragmentBinding.eventInfo.setText(R.string.none);
         }
     }
 
@@ -127,7 +126,7 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
                     for (DayOffWork dayOffWork : dayOffWorks) {
                         events.add(dateUtils.prepareEventDay(dayOffWork));
                     }
-                    calendarView.setEvents(events);
+                    this.homeFragmentBinding.calendarView.setEvents(events);
                 });
     }
 
@@ -140,7 +139,7 @@ public class HomeFragment extends Fragment implements OnDayClickListener {
                             events.add(dateUtils.prepareEventDay(absence,
                                     getStringFromRes(R.string.child_absence)));
                         }
-                        calendarView.setEvents(events);
+                        this.homeFragmentBinding.calendarView.setEvents(events);
                     }
             );
         }

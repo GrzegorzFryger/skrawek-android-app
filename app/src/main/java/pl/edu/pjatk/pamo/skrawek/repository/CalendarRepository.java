@@ -33,7 +33,7 @@ public class CalendarRepository {
         this.calendarService = calendarService;
     }
 
-    public MutableLiveData<List<DayOffWork>> getMutableLiveData() {
+    public MutableLiveData<List<DayOffWork>> getListDayOff() {
         Call<List<DayOffWork>> call = calendarService.getAllDaysOffWork();
         call.enqueue(new Callback<List<DayOffWork>>() {
             @Override

@@ -20,6 +20,7 @@ import pl.edu.pjatk.pamo.skrawek.databinding.ChildrenSelectFragmentBinding;
 import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
 
 public class ChildrenSelect extends Fragment {
+    private static final String TAG = "missiles";
     @Inject
     DaggerViewModelFactory viewModelFactory;
 
@@ -64,7 +65,8 @@ public class ChildrenSelect extends Fragment {
             this.sharedViewModel.selectChild(item);
             newFragment.dismiss();
         });
-        newFragment.show(getFragmentManager(), "missiles");
+
+        newFragment.show(getFragmentManager(), TAG);
     }
 
 }

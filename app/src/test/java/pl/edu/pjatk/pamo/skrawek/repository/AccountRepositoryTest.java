@@ -35,7 +35,7 @@ public class AccountRepositoryTest {
 
         //When
         when(accountService.getAccountDetails(anyString())).thenReturn(call);
-        MutableLiveData<Account> result = accountRepository.getMutableLiveData("Some email");
+        MutableLiveData<Account> result = accountRepository.getAccount("Some email");
 
         //Then
         assertNotNull(result);

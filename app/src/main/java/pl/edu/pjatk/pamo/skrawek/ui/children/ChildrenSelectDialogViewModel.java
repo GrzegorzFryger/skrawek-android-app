@@ -27,7 +27,7 @@ public class ChildrenSelectDialogViewModel extends ViewModel {
 
 
     public LiveData<Guardian> getGuardianLiveData() {
-        return Transformations.switchMap(guardianIdPublisher, s -> this.guardianRepository.getMutableLiveData(s));
+        return Transformations.switchMap(guardianIdPublisher, s -> this.guardianRepository.getGuardian(s));
     }
 
 }

@@ -39,7 +39,15 @@
         android:id="@+id/incomingPaymentsDetailsFragment"
         android:name="pl.edu.pjatk.pamo.skrawek.ui.finances.IncomingPaymentsDetailsFragment"
         android:label="incoming_payments_details_fragment"
-        tools:layout="@layout/incoming_payments_details_fragment" />
+        tools:layout="@layout/incoming_payments_details_fragment">
+        <action
+            android:id="@+id/action_incomingPaymentsDetailsFragment_to_navigation_finances2"
+            app:destination="@id/navigation_finances"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_in_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_in_right" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_absence"
         android:name="pl.edu.pjatk.pamo.skrawek.ui.absence.AbsenceFragment"

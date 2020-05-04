@@ -20,7 +20,6 @@ import javax.inject.Inject;
 import pl.edu.pjatk.pamo.skrawek.repository.AccountRepository;
 import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
 import pl.edu.pjatk.pamo.skrawek.ui.absence.DayOffWorkViewModel;
-import pl.edu.pjatk.pamo.skrawek.ui.account.AccountViewModel;
 import pl.edu.pjatk.pamo.skrawek.ui.snackbar.SnackbarFactory;
 
 import static pl.edu.pjatk.pamo.skrawek.MyApplication.getStringFromRes;
@@ -39,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
     @Inject
     AccountRepository accountRepository;
 
-    AccountViewModel accountViewModel;
     DayOffWorkViewModel dayOffWorkViewModel;
     SharedViewModel sharedViewModel;
 
@@ -82,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
         sharedViewModel = new ViewModelProvider(this, viewModelFactory).get(SharedViewModel.class);
 
-        this.accountRepository.getMutableLiveData(getEmail()).observe(this, s -> {
+        this.accountRepository.getAccount(getEmail()).observe(this, s -> {
             this.sharedViewModel.setLoggedAccount(s);
         });
 

@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import pl.edu.pjatk.pamo.skrawek.R;
@@ -15,7 +17,6 @@ import pl.edu.pjatk.pamo.skrawek.rest.model.finances.IncomingPayment;
 /**
  * {@link RecyclerView.Adapter} that can display a {} and makes a call to the
  * specified {@link }.
- * TODO: Replace the implementation with code for your data type.
  */
 public class IncomingPaymentRecyclerViewAdapter extends RecyclerView.Adapter<IncomingPaymentRecyclerViewAdapter.ViewHolder> {
 
@@ -28,6 +29,7 @@ public class IncomingPaymentRecyclerViewAdapter extends RecyclerView.Adapter<Inc
         mListener = listener;
     }
 
+    @NotNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -62,11 +64,6 @@ public class IncomingPaymentRecyclerViewAdapter extends RecyclerView.Adapter<Inc
             mView = view;
             mDate = view.findViewById(R.id.datePayment);
             mValue = view.findViewById(R.id.valuePayment);
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '";
         }
     }
 }

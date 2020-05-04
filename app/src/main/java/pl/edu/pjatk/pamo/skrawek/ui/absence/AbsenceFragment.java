@@ -19,8 +19,6 @@ import pl.edu.pjatk.pamo.skrawek.SharedViewModel;
 import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
 
 public class AbsenceFragment extends Fragment {
-    private static final String TAG = "AbsenceFragment";
-
     @Inject
     DaggerViewModelFactory viewModelFactory;
 

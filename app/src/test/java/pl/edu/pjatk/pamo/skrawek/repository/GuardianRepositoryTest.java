@@ -38,7 +38,7 @@ public class GuardianRepositoryTest {
 
         //When
         when(guardianService.getGuardian(any(UUID.class))).thenReturn(call);
-        MutableLiveData<Guardian> result = guardianRepository.getMutableLiveData(UUID.randomUUID());
+        MutableLiveData<Guardian> result = guardianRepository.getGuardian(UUID.randomUUID());
 
         //Then
         assertNotNull(result);
