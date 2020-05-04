@@ -22,7 +22,9 @@ import pl.edu.pjatk.pamo.skrawek.SharedViewModel;
 import pl.edu.pjatk.pamo.skrawek.rest.model.finances.IncomingPayment;
 import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
 
-
+/**
+ * This fragment is responsible for showing panel with financial information for children
+ */
 public class FinancesFragment extends Fragment {
     @Inject
     DaggerViewModelFactory viewModelFactory;

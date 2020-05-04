@@ -9,6 +9,9 @@ import javax.inject.Inject;
 
 import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Child;
 
+/**
+ * This view model stores info about currently selected child
+ */
 public class ChildrenSelectViewModel extends ViewModel {
     private String NAME_SURNAME_TEMPLATE = "%s  %s";
     private String DEFAULT_MESSAGE = "Select children";

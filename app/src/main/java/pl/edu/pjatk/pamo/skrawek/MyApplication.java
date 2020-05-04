@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 
+/**
+ * This class contains base global state of application
+ */
 public class MyApplication extends Application {
     public ApplicationComponent appComponent = DaggerApplicationComponent.create();
 

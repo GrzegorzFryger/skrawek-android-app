@@ -10,6 +10,9 @@ import javax.inject.Inject;
 import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Account;
 import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Guardian;
 
+/**
+ * This view model stores info user account details
+ */
 public class AccountViewModel extends ViewModel {
     private String NAME_SURNAME_TEMPLATE = "%s %s";
     private MutableLiveData<Account> selectedAccount = new MutableLiveData<>();

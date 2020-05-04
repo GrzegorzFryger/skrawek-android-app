@@ -15,6 +15,9 @@ import pl.edu.pjatk.pamo.skrawek.rest.model.calendar.DayOffWork;
 import pl.edu.pjatk.pamo.skrawek.rest.model.calendar.EventType;
 import pl.edu.pjatk.pamo.skrawek.ui.absence.AbsenceEventDay;
 
+/**
+ * This util class provides methods that are used during creation of events in calendar
+ */
 public class DateUtils {
     private static final String TAG = "DateUtils";
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

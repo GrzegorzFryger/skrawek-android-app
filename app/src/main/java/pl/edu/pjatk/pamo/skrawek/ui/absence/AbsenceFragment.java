@@ -18,6 +18,9 @@ import pl.edu.pjatk.pamo.skrawek.R;
 import pl.edu.pjatk.pamo.skrawek.SharedViewModel;
 import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
 
+/**
+ * This fragment is responsible for showing absences panel
+ */
 public class AbsenceFragment extends Fragment {
     private static final String TAG = "AbsenceFragment";
 

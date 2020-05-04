@@ -12,6 +12,9 @@ import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Account;
 import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Child;
 import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Guardian;
 
+/**
+ * This view model contains information, that should be shared between different fragments within MainActivity
+ */
 public class SharedViewModel extends ViewModel {
     private MutableLiveData<Child> selectedChild = new MutableLiveData<>();
     private MutableLiveData<Account> accountLiveData = new MutableLiveData<>();
