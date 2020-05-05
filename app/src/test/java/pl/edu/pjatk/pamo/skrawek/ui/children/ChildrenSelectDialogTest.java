@@ -11,7 +11,7 @@ public class ChildrenSelectDialogTest {
         //Given
 
         //When
-        ChildrenSelectDialog childrenSelectDialog = ChildrenSelectDialog.newInstance();
+        ChildrenSelectDialogFragment childrenSelectDialog = ChildrenSelectDialogFragment.newInstance();
 
         //Then
         assertNotNull(childrenSelectDialog);
