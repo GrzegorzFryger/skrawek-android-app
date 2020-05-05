@@ -11,6 +11,7 @@ import org.junit.rules.TestRule;
 import org.mockito.Mock;
 
 import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Child;
+import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Gender;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -35,6 +36,14 @@ public class ChildrenSelectViewModelTest {
         child = new Child();
         child.setName("Adam");
         child.setSurname("Michalczak");
+        child.setCity("Some city");
+        child.setGender(Gender.FEMALE);
+        child.setDateOfBirth("2015-05-05");
+        child.setPesel("10235234123");
+        child.setPostalCode("10-111");
+        child.setStartDate("2020-05-10");
+        child.setEndDate("2022-05-10");
+        child.setStreetNumber("Some street number");
     }
 
     @Test
