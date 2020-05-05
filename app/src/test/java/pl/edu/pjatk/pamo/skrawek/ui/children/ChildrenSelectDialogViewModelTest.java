@@ -51,7 +51,7 @@ public class ChildrenSelectDialogViewModelTest {
         MutableLiveData<Guardian> data = new MutableLiveData<>();
         data.setValue(guardian);
 
-        when(guardianRepository.getMutableLiveData(any(UUID.class))).thenReturn(data);
+        when(guardianRepository.getGuardian(any(UUID.class))).thenReturn(data);
 
         selectDialogViewModel = new ChildrenSelectDialogViewModel(guardianRepository);
         selectDialogViewModel.getGuardianIdPublisher().setValue(UUID.randomUUID());
