@@ -7,43 +7,44 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import javax.inject.Inject;
 
 import pl.edu.pjatk.pamo.skrawek.MyApplication;
-import pl.edu.pjatk.pamo.skrawek.R;
 import pl.edu.pjatk.pamo.skrawek.SharedViewModel;
-import pl.edu.pjatk.pamo.skrawek.databinding.ChildrenSelectFragmentBinding;
+import pl.edu.pjatk.pamo.skrawek.databinding.FragmentChildrenSelectBinding;
 import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
 
-public class ChildrenSelect extends Fragment {
+public class ChildrenSelectFragment extends Fragment {
+    private static final String TAG = "missiles";
     @Inject
     DaggerViewModelFactory viewModelFactory;
 
     private ChildrenSelectViewModel childrenSelectViewModel;
-    private ChildrenSelectFragmentBinding childrenSelectFragmentBinding;
+    private FragmentChildrenSelectBinding childrenSelectFragmentBinding;
     private SharedViewModel sharedViewModel;
 
-    public static ChildrenSelect newInstance() {
-        return new ChildrenSelect();
+    public static ChildrenSelectFragment newInstance() {
+        return new ChildrenSelectFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
-        ((MyApplication) getActivity().getApplication()).getAppComponent().inject(this);
-        childrenSelectViewModel = new ViewModelProvider(requireActivity(), viewModelFactory).get(ChildrenSelectViewModel.class);
-        sharedViewModel = new ViewModelProvider(requireActivity(), viewModelFactory).get(SharedViewModel.class);
-
-        childrenSelectFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.children_select_fragment, container, false);
+        initializeViewModels();
+        childrenSelectFragmentBinding = FragmentChildrenSelectBinding.inflate(inflater, container, false);
         childrenSelectFragmentBinding.setVm(childrenSelectViewModel);
         childrenSelectFragmentBinding.setLifecycleOwner(this);
 
         return childrenSelectFragmentBinding.getRoot();
+    }
+
+    private void initializeViewModels() {
+        ((MyApplication) getActivity().getApplication()).getAppComponent().inject(this);
+        childrenSelectViewModel = new ViewModelProvider(requireActivity(), viewModelFactory).get(ChildrenSelectViewModel.class);
+        sharedViewModel = new ViewModelProvider(requireActivity(), viewModelFactory).get(SharedViewModel.class);
     }
 
     @Override
@@ -58,13 +59,14 @@ public class ChildrenSelect extends Fragment {
     }
 
     public void openChildrenSelectDialog() {
-        ChildrenSelectDialog newFragment = ChildrenSelectDialog.newInstance();
+        ChildrenSelectDialogFragment newFragment = ChildrenSelectDialogFragment.newInstance();
         newFragment.setListener(item -> {
             this.childrenSelectViewModel.getSelectedChild().setValue(item);
             this.sharedViewModel.selectChild(item);
             newFragment.dismiss();
         });
-        newFragment.show(getFragmentManager(), "missiles");
+
+        newFragment.show(getFragmentManager(), TAG);
     }
 
 }

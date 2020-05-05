@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,8 +18,10 @@ import javax.inject.Inject;
 import pl.edu.pjatk.pamo.skrawek.MyApplication;
 import pl.edu.pjatk.pamo.skrawek.R;
 import pl.edu.pjatk.pamo.skrawek.SharedViewModel;
+import pl.edu.pjatk.pamo.skrawek.databinding.FragmentFinancesBinding;
 import pl.edu.pjatk.pamo.skrawek.rest.model.finances.IncomingPayment;
 import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
+
 
 /**
  * This fragment is responsible for showing panel with financial information for children
@@ -32,7 +33,8 @@ public class FinancesFragment extends Fragment {
     private FinancesViewModel mViewModel;
     private SharedViewModel sharedViewModel;
     private RecyclerView recyclerView;
-    private View view;
+
+    private FragmentFinancesBinding financesFragmentBinding;
 
     public static FinancesFragment newInstance() {
         return new FinancesFragment();
@@ -41,10 +43,12 @@ public class FinancesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
         this.initializeViewModels();
-        this.view = inflater.inflate(R.layout.finances_fragment, container, false);
-        return view;
+        financesFragmentBinding = FragmentFinancesBinding.inflate(inflater, container, false);
+        financesFragmentBinding.setVm(mViewModel);
+        financesFragmentBinding.setLifecycleOwner(this);
+
+        return financesFragmentBinding.getRoot();
     }
 
     @Override
@@ -55,22 +59,15 @@ public class FinancesFragment extends Fragment {
             this.mViewModel.selectChild(s);
         });
 
-        mViewModel.getIncomingPayments().observe(getViewLifecycleOwner(), s -> {
-            this.recyclerView = view.findViewById(R.id.listIncomingPayments);
-            recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-            recyclerView.setAdapter(new IncomingPaymentRecyclerViewAdapter(s, onSelectPayment()));
+        mViewModel.getIncomingPayments().observe(getViewLifecycleOwner(), incomingPayments -> {
+            this.recyclerView = this.financesFragmentBinding.listIncomingPayments;
+            recyclerView.setLayoutManager(
+                    new LinearLayoutManager(this.financesFragmentBinding.getRoot().getContext())
+            );
+            recyclerView.setAdapter(
+                    new IncomingPaymentRecyclerViewAdapter(incomingPayments, onSelectPayment())
+            );
         });
-
-        mViewModel.getBalance().observe(getViewLifecycleOwner(), balance -> {
-            TextView vBalance = view.findViewById(R.id.valueBalance);
-            TextView vReceivables = view.findViewById(R.id.valueReceivables);
-            TextView vLiabilities = view.findViewById(R.id.valueLiabilities);
-
-            vBalance.setText(String.valueOf(balance.getReceivables()));
-            vReceivables.setText(String.valueOf(balance.getReceivables()));
-            vLiabilities.setText(String.valueOf(balance.getLiabilities()));
-        });
-
     }
 
     @Override
@@ -87,10 +84,10 @@ public class FinancesFragment extends Fragment {
     private OnListFragmentInteractionListener onSelectPayment() {
         return item -> {
             mViewModel.selectIncomingPayment(item);
-            Navigation.findNavController(view).navigate(R.id.action_navigation_finances_to_incomingPaymentsDetailsFragment);
+            Navigation.findNavController(this.financesFragmentBinding.getRoot())
+                    .navigate(R.id.action_navigation_finances_to_incomingPaymentsDetailsFragment);
         };
     }
-
 
     public interface OnListFragmentInteractionListener {
         void onSelectPayment(IncomingPayment item);

@@ -16,7 +16,7 @@ import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Gender;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-public class ChildrenSelectViewModelTest {
+public class ChildrenSelectFragmentViewModelTest {
     @Rule
     public TestRule rule = new InstantTaskExecutorRule();
 

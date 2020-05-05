@@ -22,9 +22,22 @@ public class FinancesViewModel extends ViewModel {
     private MutableLiveData<Child> selectedChild = new MutableLiveData<>();
     private MutableLiveData<IncomingPayment> selectedIncomingPayment = new MutableLiveData<>();
 
+    private LiveData<Balance> balanceLiveData;
+    private LiveData<List<IncomingPayment>> incomingPaymentLiveData;
+
     @Inject
     public FinancesViewModel(FinancesRepository financesRepository) {
         this.financesRepository = financesRepository;
+
+        this.balanceLiveData = Transformations.switchMap(
+                selectedChild,
+                s -> this.financesRepository.getBalance(s.getId())
+        );
+
+        incomingPaymentLiveData = Transformations.switchMap(
+                selectedChild,
+                s -> this.financesRepository.getIncomingPaymentsForChildren(s.getId())
+        );
     }
 
     public void selectChild(Child child) {
@@ -36,7 +49,7 @@ public class FinancesViewModel extends ViewModel {
     }
 
     public LiveData<List<IncomingPayment>> getIncomingPayments() {
-        return Transformations.switchMap(selectedChild, s -> this.financesRepository.getIncomingPaymentsForChildren(s.getId()));
+        return incomingPaymentLiveData;
     }
 
     public LiveData<IncomingPayment> getSelectedIncomingPayment() {
@@ -44,6 +57,6 @@ public class FinancesViewModel extends ViewModel {
     }
 
     public LiveData<Balance> getBalance() {
-        return Transformations.switchMap(selectedChild, s -> this.financesRepository.getBalance(s.getId()));
+        return balanceLiveData;
     }
 }

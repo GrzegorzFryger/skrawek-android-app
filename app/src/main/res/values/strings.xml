@@ -48,4 +48,8 @@
     <string name="history_payments">History payments</string>
     <string name="none">None</string>
     <string name="list_absences">List absences</string>
+    <string name="account_profile">Account Profile</string>
+    <string name="date_absence_item">Date</string>
+    <string name="reason_absence_item">Reason</string>
+    <string name="currency_icon">Currency icon</string>
 </resources>

@@ -72,7 +72,7 @@ public class AccountViewModelTest {
         data = new MutableLiveData<>();
         data.setValue(guardian);
 
-        when(accountRepository.getMutableLiveData(anyString())).thenReturn(data);
+        when(accountRepository.getAccount(anyString())).thenReturn(data);
     }
 
     @Test
