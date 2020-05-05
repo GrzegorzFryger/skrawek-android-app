@@ -14,6 +14,13 @@ import static pl.edu.pjatk.pamo.skrawek.rest.config.RequestMappings.API_ACCOUNT;
  */
 public interface GuardianService {
 
+
+    /**
+     * Prepare call rest Api to fetch {@link Guardian} data
+     *
+     * @param guardianId the guardian id
+     * @return the guardian
+     */
     @GET(API_ACCOUNT + "guardian/{guardianId}")
     Call<Guardian> getGuardian(@Path("guardianId") UUID guardianId);
 

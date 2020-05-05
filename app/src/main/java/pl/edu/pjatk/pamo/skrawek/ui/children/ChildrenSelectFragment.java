@@ -17,8 +17,15 @@ import pl.edu.pjatk.pamo.skrawek.SharedViewModel;
 import pl.edu.pjatk.pamo.skrawek.databinding.FragmentChildrenSelectBinding;
 import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
 
+
+/**
+ * The type Children select fragment.
+ */
 public class ChildrenSelectFragment extends Fragment {
     private static final String TAG = "missiles";
+    /**
+     * The View model factory.
+     */
     @Inject
     DaggerViewModelFactory viewModelFactory;
 
@@ -26,6 +33,11 @@ public class ChildrenSelectFragment extends Fragment {
     private FragmentChildrenSelectBinding childrenSelectFragmentBinding;
     private SharedViewModel sharedViewModel;
 
+    /**
+     * New instance children select fragment.
+     *
+     * @return the children select fragment
+     */
     public static ChildrenSelectFragment newInstance() {
         return new ChildrenSelectFragment();
     }
@@ -58,6 +70,9 @@ public class ChildrenSelectFragment extends Fragment {
         childrenSelectFragmentBinding.iconMenuButton.setOnClickListener(v -> openChildrenSelectDialog());
     }
 
+    /**
+     * Open children select dialog.
+     */
     public void openChildrenSelectDialog() {
         ChildrenSelectDialogFragment newFragment = ChildrenSelectDialogFragment.newInstance();
         newFragment.setListener(item -> {

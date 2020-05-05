@@ -28,11 +28,24 @@ public class CalendarRepository {
     private final MutableLiveData<List<DayOffWork>> daysOffWorkLiveData = new MutableLiveData<>();
     private final MutableLiveData<List<Absence>> absenceLiveData = new MutableLiveData<>();
 
+
+    /**
+     * Instantiates a new Calendar repository.
+     *
+     * @param calendarService the calendar service
+     */
     @Inject
     public CalendarRepository(CalendarService calendarService) {
         this.calendarService = calendarService;
     }
 
+
+    /**
+     * Returns the MutableLiveData <List<DayOffWork>> list of object based on the account data obtained from
+     * {@link CalendarService}. Otherwise, return an empty MutableLiveData <List<DayOffWork>> object.
+     *
+     * @return the list {@link DayOffWork}
+     */
     public MutableLiveData<List<DayOffWork>> getListDayOff() {
         Call<List<DayOffWork>> call = calendarService.getAllDaysOffWork();
         call.enqueue(new Callback<List<DayOffWork>>() {
@@ -53,6 +66,13 @@ public class CalendarRepository {
         return daysOffWorkLiveData;
     }
 
+    /**
+     * Returns the MutableLiveData <List<Absence>> list of object based on the account data obtained from
+     * {@link CalendarService}. Otherwise, return an empty MutableLiveData <List<Absence>> object.
+     *
+     * @param childId the child id
+     * @return the list  {@link Absence}
+     */
     public MutableLiveData<List<Absence>> fetchAbsencesForChild(UUID childId) {
         Call<List<Absence>> call = calendarService.getAllChildAbsences(childId);
         call.enqueue(new Callback<List<Absence>>() {

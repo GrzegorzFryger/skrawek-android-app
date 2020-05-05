@@ -15,8 +15,8 @@ import pl.edu.pjatk.pamo.skrawek.R;
 import pl.edu.pjatk.pamo.skrawek.rest.model.finances.IncomingPayment;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {} and makes a call to the
- * specified {@link }.
+ * {@link RecyclerView.Adapter} that can display a {@link IncomingPayment} and makes a call to the
+ * specified {@link FinancesFragment.OnListFragmentInteractionListener }.
  */
 public class IncomingPaymentRecyclerViewAdapter extends RecyclerView.Adapter<IncomingPaymentRecyclerViewAdapter.ViewHolder> {
 

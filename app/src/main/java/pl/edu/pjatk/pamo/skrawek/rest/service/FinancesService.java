@@ -17,9 +17,23 @@ import static pl.edu.pjatk.pamo.skrawek.rest.config.RequestMappings.API_RECEIVAB
  */
 public interface FinancesService {
 
+
+    /**
+     * Prepare call rest Api to fetch {@link Balance} data
+     *
+     * @param childId the child id
+     * @return the balance for child
+     */
     @GET(API_FINANCES + "balance/{childId}")
     Call<Balance> getBalanceForChild(@Path("childId") UUID childId);
 
+
+    /**
+     * Prepare call rest Api to fetch {@link IncomingPayment} data
+     *
+     * @param childId the child id
+     * @return the all incoming payments for child
+     */
     @GET(API_RECEIVABLES + "payments/child/{childId}")
     Call<List<IncomingPayment>> getAllIncomingPaymentsForChild(@Path("childId") UUID childId);
 }

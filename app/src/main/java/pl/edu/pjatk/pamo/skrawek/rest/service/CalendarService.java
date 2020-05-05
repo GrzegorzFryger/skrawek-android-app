@@ -16,9 +16,22 @@ import static pl.edu.pjatk.pamo.skrawek.rest.config.RequestMappings.API_CALENDAR
  */
 public interface CalendarService {
 
+
+    /**
+     * Prepare call rest Api to fetch {@link DayOffWork} data
+     *
+     * @return the all {@link DayOffWork}
+     */
     @GET(API_CALENDAR + "daysoff")
     Call<List<DayOffWork>> getAllDaysOffWork();
 
+
+    /**
+     * Prepare call rest Api to fetch {@link Absence} data
+     *
+     * @param childId the child id
+     * @return the all child absences
+     */
     @GET(API_CALENDAR + "absence/childById/{childId}")
     Call<List<Absence>> getAllChildAbsences(@Path("childId") UUID childId);
 }

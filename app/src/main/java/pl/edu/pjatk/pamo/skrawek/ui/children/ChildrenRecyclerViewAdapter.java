@@ -14,9 +14,9 @@ import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Child;
 import pl.edu.pjatk.pamo.skrawek.ui.children.ChildrenSelectDialogFragment.OnSelectChildrenFromList;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {} and makes a call to the
- * specified {@link OnSelectChildrenFromList}.
- * TODO: Replace the implementation with code for your data type.
+ * Feed all your data to the list.
+ * This object creates views for {@link Child}, and replaces the content of some of the views with new data
+ * items when the original item is no longer visible.
  */
 public class ChildrenRecyclerViewAdapter extends RecyclerView.Adapter<ChildrenRecyclerViewAdapter.ViewHolder> {
 

@@ -23,6 +23,7 @@ import pl.edu.pjatk.pamo.skrawek.SharedViewModel;
 import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Child;
 import pl.edu.pjatk.pamo.skrawek.ui.DaggerViewModelFactory;
 
+
 public class ChildrenSelectDialogFragment extends DialogFragment {
 
     @Inject

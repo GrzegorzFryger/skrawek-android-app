@@ -28,6 +28,14 @@ public class AccountRepository {
         this.accountService = accountService;
     }
 
+
+    /**
+     * Returns the MutableLiveData <Account> object based on the account data obtained from
+     * {@link AccountService}. Otherwise, return an empty MutableLiveData <Account> object.
+     *
+     * @param email the email account
+     * @return the account
+     */
     public MutableLiveData<Account> getAccount(String email) {
         Call<Account> call = accountService.getAccountDetails(email);
         call.enqueue(new Callback<Account>() {

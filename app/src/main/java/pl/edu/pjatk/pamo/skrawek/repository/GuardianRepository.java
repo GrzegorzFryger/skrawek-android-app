@@ -25,11 +25,24 @@ public class GuardianRepository {
     private final GuardianService guardianService;
     private final MutableLiveData<Guardian> mutableLiveData = new MutableLiveData<>();
 
+    /**
+     * Instantiates a new Guardian repository.
+     *
+     * @param guardianService the guardian service
+     */
     @Inject
     public GuardianRepository(GuardianService guardianService) {
         this.guardianService = guardianService;
     }
 
+
+    /**
+     * Returns the MutableLiveData <Guardian> list of object based on the account data obtained from
+     * {@link  GuardianService}. Otherwise, return an empty MutableLiveData <Guardian> object.
+     *
+     * @param guardianId the guardian id
+     * @return the {@link java.security.Guard}
+     */
     public MutableLiveData<Guardian> getGuardian(UUID guardianId) {
         Call<Guardian> call = guardianService.getGuardian(guardianId);
 
