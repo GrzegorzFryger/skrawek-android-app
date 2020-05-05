@@ -9,8 +9,8 @@ import pl.edu.pjatk.pamo.skrawek.module.ViewModelModule;
 import pl.edu.pjatk.pamo.skrawek.module.ViewModule;
 import pl.edu.pjatk.pamo.skrawek.ui.absence.AbsenceFragment;
 import pl.edu.pjatk.pamo.skrawek.ui.account.AccountFragment;
-import pl.edu.pjatk.pamo.skrawek.ui.children.ChildrenSelect;
-import pl.edu.pjatk.pamo.skrawek.ui.children.ChildrenSelectDialog;
+import pl.edu.pjatk.pamo.skrawek.ui.children.ChildrenSelectDialogFragment;
+import pl.edu.pjatk.pamo.skrawek.ui.children.ChildrenSelectFragment;
 import pl.edu.pjatk.pamo.skrawek.ui.finances.FinancesFragment;
 import pl.edu.pjatk.pamo.skrawek.ui.finances.IncomingPaymentsDetailsFragment;
 import pl.edu.pjatk.pamo.skrawek.ui.home.HomeFragment;
@@ -24,7 +24,7 @@ public interface ApplicationComponent {
 
     void inject(LoginActivity loginActivity);
 
-    void inject(ChildrenSelectDialog childrenSelectDialog);
+    void inject(ChildrenSelectDialogFragment childrenSelectDialogFragment);
 
     void inject(FinancesFragment financesFragment);
 
@@ -36,7 +36,7 @@ public interface ApplicationComponent {
 
     void inject(MainActivity mainActivity);
 
-    void inject(ChildrenSelect childrenSelect);
+    void inject(ChildrenSelectFragment childrenSelectFragment);
 
     void inject(AbsenceFragment absenceFragment);
 

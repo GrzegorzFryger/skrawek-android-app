@@ -55,7 +55,7 @@ public class AccountViewModelTest {
         data = new MutableLiveData<>();
         data.setValue(account);
 
-        when(accountRepository.getMutableLiveData(anyString())).thenReturn(data);
+        when(accountRepository.getAccount(anyString())).thenReturn(data);
     }
 
     @Test

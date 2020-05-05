@@ -30,7 +30,7 @@ public class GuardianRepository {
         this.guardianService = guardianService;
     }
 
-    public MutableLiveData<Guardian> getMutableLiveData(UUID guardianId) {
+    public MutableLiveData<Guardian> getGuardian(UUID guardianId) {
         Call<Guardian> call = guardianService.getGuardian(guardianId);
 
         call.enqueue(new Callback<Guardian>() {

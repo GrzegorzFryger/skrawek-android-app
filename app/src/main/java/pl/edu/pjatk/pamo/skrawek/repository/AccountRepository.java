@@ -28,7 +28,7 @@ public class AccountRepository {
         this.accountService = accountService;
     }
 
-    public MutableLiveData<Account> getMutableLiveData(String email) {
+    public MutableLiveData<Account> getAccount(String email) {
         Call<Account> call = accountService.getAccountDetails(email);
         call.enqueue(new Callback<Account>() {
             @Override

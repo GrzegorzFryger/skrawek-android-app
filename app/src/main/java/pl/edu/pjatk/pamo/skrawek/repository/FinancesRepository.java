@@ -39,9 +39,9 @@ public class FinancesRepository {
         call.enqueue(new Callback<List<IncomingPayment>>() {
             @Override
             public void onResponse(@NotNull Call<List<IncomingPayment>> call, @NotNull Response<List<IncomingPayment>> response) {
-                List<IncomingPayment> mBlogWrapper = response.body();
-                if (mBlogWrapper != null) {
-                    listMutableLiveData.setValue(mBlogWrapper);
+                List<IncomingPayment> incomingPayments = response.body();
+                if (incomingPayments != null) {
+                    listMutableLiveData.setValue(incomingPayments);
                 }
             }
 
@@ -59,9 +59,9 @@ public class FinancesRepository {
         call.enqueue(new Callback<Balance>() {
             @Override
             public void onResponse(@NotNull Call<Balance> call, @NotNull Response<Balance> response) {
-                Balance mBlogWrapper = response.body();
-                if (mBlogWrapper != null) {
-                    balance.setValue(mBlogWrapper);
+                Balance balance = response.body();
+                if (balance != null) {
+                    FinancesRepository.this.balance.setValue(balance);
                 }
             }
 

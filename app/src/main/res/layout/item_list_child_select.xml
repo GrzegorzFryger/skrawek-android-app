@@ -24,7 +24,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/img_girl" />
+            app:srcCompat="@drawable/img_girl"
+            android:contentDescription="@string/children_image" />
 
         <TextView
             android:id="@+id/child_name"

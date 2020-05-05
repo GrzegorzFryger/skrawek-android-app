@@ -39,7 +39,7 @@ public class CalendarRepositoryTest {
 
         //When
         when(calendarService.getAllDaysOffWork()).thenReturn(call);
-        MutableLiveData<List<DayOffWork>> result = calendarRepository.getMutableLiveData();
+        MutableLiveData<List<DayOffWork>> result = calendarRepository.getListDayOff();
 
         //Then
         assertNotNull(result);

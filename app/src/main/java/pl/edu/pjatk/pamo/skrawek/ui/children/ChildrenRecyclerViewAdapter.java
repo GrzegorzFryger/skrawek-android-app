@@ -11,7 +11,7 @@ import java.util.List;
 
 import pl.edu.pjatk.pamo.skrawek.R;
 import pl.edu.pjatk.pamo.skrawek.rest.model.accounts.Child;
-import pl.edu.pjatk.pamo.skrawek.ui.children.ChildrenSelectDialog.OnSelectChildrenFromList;
+import pl.edu.pjatk.pamo.skrawek.ui.children.ChildrenSelectDialogFragment.OnSelectChildrenFromList;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {} and makes a call to the
@@ -31,7 +31,7 @@ public class ChildrenRecyclerViewAdapter extends RecyclerView.Adapter<ChildrenRe
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.child_select_item, parent, false);
+                .inflate(R.layout.item_list_child_select, parent, false);
         return new ViewHolder(view);
     }
 
@@ -63,8 +63,8 @@ public class ChildrenRecyclerViewAdapter extends RecyclerView.Adapter<ChildrenRe
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            nameAndSurname = (TextView) view.findViewById(R.id.child_name);
-            peselNumber = (TextView) view.findViewById(R.id.child_pesel);
+            nameAndSurname = view.findViewById(R.id.child_name);
+            peselNumber = view.findViewById(R.id.child_pesel);
         }
 
         @Override

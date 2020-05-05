@@ -11,7 +11,6 @@ import org.junit.Test;
 import org.junit.rules.TestRule;
 import org.mockito.Mock;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +58,7 @@ public class DayOffWorkViewModelTest {
         data = new MutableLiveData<>();
         data.setValue(dayOffWorkList);
 
-        when(calendarRepository.getMutableLiveData()).thenReturn(data);
+        when(calendarRepository.getListDayOff()).thenReturn(data);
     }
 
     @Test
@@ -73,7 +72,7 @@ public class DayOffWorkViewModelTest {
         daysOffWork.observeForever(daysOfWorkObserver);
 
         //Then
-        verify(calendarRepository, only()).getMutableLiveData();
+        verify(calendarRepository, only()).getListDayOff();
         assertEquals(1, daysOffWork.getValue().size());
 
         assertEquals(new Long(1), result.getId());

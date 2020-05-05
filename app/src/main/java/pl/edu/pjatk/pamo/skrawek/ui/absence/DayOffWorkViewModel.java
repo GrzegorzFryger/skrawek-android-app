@@ -21,7 +21,7 @@ public class DayOffWorkViewModel extends ViewModel {
     }
 
     public void initializeData() {
-        daysOffWorkLiveData = calendarRepository.getMutableLiveData();
+        daysOffWorkLiveData = calendarRepository.getListDayOff();
     }
 
     public LiveData<List<DayOffWork>> getDaysOffWork() {
